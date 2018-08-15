@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyparsing.pyparsing_common</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyparsing-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >pyparsing</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyparsing-module.html">Module&nbsp;pyparsing</a> ::
+        Class&nbsp;pyparsing_common
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyparsing.pyparsing_common-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class pyparsing_common</h1><p class="nomargin-top"><span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common">source&nbsp;code</a></span></p>
+<p>Here are some common low-level expressions that may be useful in 
+  jump-starting parser development:</p>
+  <ul>
+    <li>
+      numeric forms (<a 
+      href="pyparsing.pyparsing_common-class.html#integer" 
+      class="link">integers</a>, <a 
+      href="pyparsing.pyparsing_common-class.html#real" 
+      class="link">reals</a>, <a 
+      href="pyparsing.pyparsing_common-class.html#sci_real" 
+      class="link">scientific notation</a>)
+    </li>
+    <li>
+      common <a href="pyparsing.pyparsing_common-class.html#identifier" 
+      class="link">programming identifiers</a>
+    </li>
+    <li>
+      network addresses (<a 
+      href="pyparsing.pyparsing_common-class.html#mac_address" 
+      class="link">MAC</a>, <a 
+      href="pyparsing.pyparsing_common-class.html#ipv4_address" 
+      class="link">IPv4</a>, <a 
+      href="pyparsing.pyparsing_common-class.html#ipv6_address" 
+      class="link">IPv6</a>)
+    </li>
+    <li>
+      ISO8601 <a href="pyparsing.pyparsing_common-class.html#iso8601_date" 
+      class="link">dates</a> and <a 
+      href="pyparsing.pyparsing_common-class.html#iso8601_datetime" 
+      class="link">datetime</a>
+    </li>
+    <li>
+      <a href="pyparsing.pyparsing_common-class.html#uuid" 
+      class="link">UUID</a>
+    </li>
+    <li>
+      <a href="pyparsing.pyparsing_common-class.html#comma_separated_list" 
+      class="link">comma-separated list</a>
+    </li>
+  </ul>
+  <p>Parse actions:</p>
+  <ul>
+    <li>
+      <code><a 
+      href="pyparsing.pyparsing_common-class.html#convertToInteger" 
+      class="link">convertToInteger</a></code>
+    </li>
+    <li>
+      <code><a href="pyparsing.pyparsing_common-class.html#convertToFloat" 
+      class="link">convertToFloat</a></code>
+    </li>
+    <li>
+      <code><a href="pyparsing.pyparsing_common-class.html#convertToDate" 
+      class="link">convertToDate</a></code>
+    </li>
+    <li>
+      <code><a 
+      href="pyparsing.pyparsing_common-class.html#convertToDatetime" 
+      class="link">convertToDatetime</a></code>
+    </li>
+    <li>
+      <code><a href="pyparsing.pyparsing_common-class.html#stripHTMLTags" 
+      class="link">stripHTMLTags</a></code>
+    </li>
+    <li>
+      <code><a href="pyparsing.pyparsing_common-class.html#upcaseTokens" 
+      class="link">upcaseTokens</a></code>
+    </li>
+    <li>
+      <code><a href="pyparsing.pyparsing_common-class.html#downcaseTokens" 
+      class="link">downcaseTokens</a></code>
+    </li>
+  </ul>
+  <p>Example:</p>
+<pre class="literalblock">
+   pyparsing_common.number.runTests('''
+       # any int or real number, returned as the appropriate type
+       100
+       -100
+       +100
+       3.14159
+       6.02e23
+       1e-12
+       ''')
+
+   pyparsing_common.fnumber.runTests('''
+       # any int or real number, returned as float
+       100
+       -100
+       +100
+       3.14159
+       6.02e23
+       1e-12
+       ''')
+
+   pyparsing_common.hex_integer.runTests('''
+       # hex numbers
+       100
+       FF
+       ''')
+
+   pyparsing_common.fraction.runTests('''
+       # fractions
+       1/2
+       -3/4
+       ''')
+
+   pyparsing_common.mixed_integer.runTests('''
+       # mixed fractions
+       1
+       1/2
+       -3/4
+       1-3/4
+       ''')
+
+   import uuid
+   pyparsing_common.uuid.setParseAction(tokenMap(uuid.UUID))
+   pyparsing_common.uuid.runTests('''
+       # uuid
+       12345678-1234-5678-1234-567812345678
+       ''')
+</pre>
+  <p>prints:</p>
+<pre class="literalblock">
+   # any int or real number, returned as the appropriate type
+   100
+   [100]
+
+   -100
+   [-100]
+
+   +100
+   [100]
+
+   3.14159
+   [3.14159]
+
+   6.02e23
+   [6.02e+23]
+
+   1e-12
+   [1e-12]
+
+   # any int or real number, returned as float
+   100
+   [100.0]
+
+   -100
+   [-100.0]
+
+   +100
+   [100.0]
+
+   3.14159
+   [3.14159]
+
+   6.02e23
+   [6.02e+23]
+
+   1e-12
+   [1e-12]
+
+   # hex numbers
+   100
+   [256]
+
+   FF
+   [255]
+
+   # fractions
+   1/2
+   [0.5]
+
+   -3/4
+   [-0.75]
+
+   # mixed fractions
+   1
+   [1]
+
+   1/2
+   [0.5]
+
+   -3/4
+   [-0.75]
+
+   1-3/4
+   [1.75]
+
+   # uuid
+   12345678-1234-5678-1234-567812345678
+   [UUID('12345678-1234-5678-1234-567812345678')]
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="convertToInteger"></a><span class="summary-sig-name">convertToInteger</span>(<span class="summary-sig-arg">s</span>,
+        <span class="summary-sig-arg">l</span>,
+        <span class="summary-sig-arg">t</span>)</span><br />
+      Parse action for converting parsed integers to Python int</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.convertToInteger">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="convertToFloat"></a><span class="summary-sig-name">convertToFloat</span>(<span class="summary-sig-arg">s</span>,
+        <span class="summary-sig-arg">l</span>,
+        <span class="summary-sig-arg">t</span>)</span><br />
+      Parse action for converting parsed numbers to Python float</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.convertToFloat">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyparsing.pyparsing_common-class.html#convertToDate" class="summary-sig-name">convertToDate</a>(<span class="summary-sig-arg">fmt</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">%Y-%m-%d</code><code class="variable-quote">'</code></span>)</span><br />
+      Helper to create a parse action for converting parsed date string to 
+      Python datetime.date</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.convertToDate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyparsing.pyparsing_common-class.html#convertToDatetime" class="summary-sig-name">convertToDatetime</a>(<span class="summary-sig-arg">fmt</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">%Y-%m-%dT%H:%M:%S.%f</code><code class="variable-quote">'</code></span>)</span><br />
+      Helper to create a parse action for converting parsed datetime string
+      to Python datetime.datetime</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.convertToDatetime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyparsing.pyparsing_common-class.html#stripHTMLTags" class="summary-sig-name">stripHTMLTags</a>(<span class="summary-sig-arg">s</span>,
+        <span class="summary-sig-arg">l</span>,
+        <span class="summary-sig-arg">tokens</span>)</span><br />
+      Parse action to remove HTML tags from web page HTML source</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.stripHTMLTags">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="upcaseTokens"></a><span class="summary-sig-name">upcaseTokens</span>(<span class="summary-sig-arg">s</span>,
+        <span class="summary-sig-arg">l</span>,
+        <span class="summary-sig-arg">t</span>)</span><br />
+      Parse action to convert tokens to upper case.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.upcaseTokens">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="downcaseTokens"></a><span class="summary-sig-name">downcaseTokens</span>(<span class="summary-sig-arg">s</span>,
+        <span class="summary-sig-arg">l</span>,
+        <span class="summary-sig-arg">t</span>)</span><br />
+      Parse action to convert tokens to lower case.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.downcaseTokens">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="integer"></a><span class="summary-name">integer</span> = <code title="integer">integer</code><br />
+      expression that parses an unsigned integer, returns an int
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="hex_integer"></a><span class="summary-name">hex_integer</span> = <code title="hex integer">hex integer</code><br />
+      expression that parses a hexadecimal integer, returns an int
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="signed_integer"></a><span class="summary-name">signed_integer</span> = <code title="signed integer">signed integer</code><br />
+      expression that parses an integer with optional leading sign, returns
+      an int
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="fraction"></a><span class="summary-name">fraction</span> = <code title="fraction">fraction</code><br />
+      fractional expression of an integer divided by an integer, returns a 
+      float
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="mixed_integer"></a><span class="summary-name">mixed_integer</span> = <code title="fraction or mixed integer-fraction">fraction or mixed integer-fraction</code><br />
+      mixed integer of the form 'integer - fraction', with optional leading
+      integer, returns float
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="real"></a><span class="summary-name">real</span> = <code title="real number">real number</code><br />
+      expression that parses a floating point number and returns a float
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sci_real"></a><span class="summary-name">sci_real</span> = <code title="real number with scientific notation">real number with scientific notation</code><br />
+      expression that parses a floating point number with optional 
+      scientific notation and returns a float
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyparsing.pyparsing_common-class.html#number" class="summary-name">number</a> = <code title="{real number with scientific notation | real number | signed integer}">{real number with scientific notation | real number |<code class="variable-ellipsis">...</code></code><br />
+      any numeric expression, returns the corresponding Python type
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="fnumber"></a><span class="summary-name">fnumber</span> = <code title="fnumber">fnumber</code><br />
+      any int or real number, returned as float
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="identifier"></a><span class="summary-name">identifier</span> = <code title="identifier">identifier</code><br />
+      typical code identifier (leading alpha or '_', followed by 0 or more 
+      alphas, nums, or '_')
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ipv4_address"></a><span class="summary-name">ipv4_address</span> = <code title="IPv4 address">IPv4 address</code><br />
+      IPv4 address (<code>0.0.0.0 - 255.255.255.255</code>)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ipv6_address"></a><span class="summary-name">ipv6_address</span> = <code title="IPv6 address">IPv6 address</code><br />
+      IPv6 address (long, short, or mixed form)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="mac_address"></a><span class="summary-name">mac_address</span> = <code title="MAC address">MAC address</code><br />
+      MAC address xx:xx:xx:xx:xx (may also have '-' or '.' delimiters)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="iso8601_date"></a><span class="summary-name">iso8601_date</span> = <code title="ISO8601 date">ISO8601 date</code><br />
+      ISO8601 date (<code>yyyy-mm-dd</code>)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="iso8601_datetime"></a><span class="summary-name">iso8601_datetime</span> = <code title="ISO8601 datetime">ISO8601 datetime</code><br />
+      ISO8601 datetime (<code>yyyy-mm-ddThh:mm:ss.s(Z|+-00:00)</code>) - 
+      trailing seconds, milliseconds, and timezone optional; accepts 
+      separating <code>'T'</code> or <code>' '</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="uuid"></a><span class="summary-name">uuid</span> = <code title="UUID">UUID</code><br />
+      UUID (<code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="comma_separated_list"></a><span class="summary-name">comma_separated_list</span> = <code title="comma separated list">comma separated list</code><br />
+      Predefined expression of 1 or more printable words or quoted strings,
+      separated by commas.
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="convertToDate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">convertToDate</span>(<span class="sig-arg">fmt</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">%Y-%m-%d</code><code class="variable-quote">'</code></span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.convertToDate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a parse action for converting parsed date string to 
+  Python datetime.date</p>
+  <p>Params -</p>
+  <ul>
+    <li>
+      fmt - format to be passed to datetime.strptime 
+      (default=<code>&quot;%Y-%m-%d&quot;</code>)
+    </li>
+  </ul>
+  <p>Example:</p>
+<pre class="literalblock">
+   date_expr = pyparsing_common.iso8601_date.copy()
+   date_expr.setParseAction(pyparsing_common.convertToDate())
+   print(date_expr.parseString(&quot;1999-12-31&quot;))
+</pre>
+  <p>prints:</p>
+<pre class="literalblock">
+   [datetime.date(1999, 12, 31)]
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="convertToDatetime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">convertToDatetime</span>(<span class="sig-arg">fmt</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">%Y-%m-%dT%H:%M:%S.%f</code><code class="variable-quote">'</code></span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.convertToDatetime">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a parse action for converting parsed datetime string 
+  to Python datetime.datetime</p>
+  <p>Params -</p>
+  <ul>
+    <li>
+      fmt - format to be passed to datetime.strptime 
+      (default=<code>&quot;%Y-%m-%dT%H:%M:%S.%f&quot;</code>)
+    </li>
+  </ul>
+  <p>Example:</p>
+<pre class="literalblock">
+   dt_expr = pyparsing_common.iso8601_datetime.copy()
+   dt_expr.setParseAction(pyparsing_common.convertToDatetime())
+   print(dt_expr.parseString(&quot;1999-12-31T23:59:59.999&quot;))
+</pre>
+  <p>prints:</p>
+<pre class="literalblock">
+   [datetime.datetime(1999, 12, 31, 23, 59, 59, 999000)]
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="stripHTMLTags"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stripHTMLTags</span>(<span class="sig-arg">s</span>,
+        <span class="sig-arg">l</span>,
+        <span class="sig-arg">tokens</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pyparsing-pysrc.html#pyparsing_common.stripHTMLTags">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parse action to remove HTML tags from web page HTML source</p>
+  <p>Example:</p>
+<pre class="literalblock">
+   # strip HTML links from normal text 
+   text = '&lt;td&gt;More info at the &lt;a href=&quot;http://pyparsing.wikispaces.com&quot;&gt;pyparsing&lt;/a&gt; wiki page&lt;/td&gt;'
+   td,td_end = makeHTMLTags(&quot;TD&quot;)
+   table_text = td + SkipTo(td_end).setParseAction(pyparsing_common.stripHTMLTags)(&quot;body&quot;) + td_end
+   
+   print(table_text.parseString(text).body) # -&gt; 'More info at the pyparsing wiki page'
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="number"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">number</h3>
+  <p>any numeric expression, returns the corresponding Python type</p>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{real number with scientific notation | real number | signed integer}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyparsing-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >pyparsing</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun Mar 05 20:19:56 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

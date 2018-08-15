@@ -1,0 +1,114 @@
+VIAP contains third party software :
+
+1.Z3
+
+  1.1 Source Code available in the following URL-
+
+      https://github.com/Z3Prover/z3
+
+  1.2 License of Z3
+
+      https://github.com/Z3Prover/z3/blob/master/LICENSE.txt
+
+2.SYMPY 
+  
+  2.1 Source Code available in the following URL-
+
+     https://github.com/sympy/sympy
+
+  2.2.License of SYMPY
+
+     https://github.com/sympy/sympy/blob/master/LICENSE
+
+3.PLY
+
+  3.1 Source Code available in the following URL-
+
+      https://github.com/dabeaz/ply
+
+  3.2 License of PLY
+ 
+     https://github.com/dabeaz/ply/blob/master/ANNOUNCE
+
+
+3.PLYJ
+
+  3.1 Source Code available in the following URL-
+
+      https://github.com/musiKk/plyj
+
+  3.2 License of PLYJ
+ 
+     https://github.com/musiKk/plyj/blob/master/COPYING
+
+4.PYCPARSER
+
+  4.1 Source Code available in the following URL-
+
+      http://pyparsing.wikispaces.com/
+
+  4.2 License of PYCPARSER
+ 
+     http://pyparsing.wikispaces.com/
+
+5.MPMATH
+
+  5.1 Source Code available in the following URL-
+
+      https://github.com/fredrik-johansson/mpmath
+
+  5.2 License of MPMATH
+ 
+     https://github.com/fredrik-johansson/mpmath/blob/master/LICENSE
+
+6.REGEX
+
+  6.1 Source Code available in the following URL-
+
+      https://github.com/rust-lang/regex
+
+  6.2 License of REGEX
+ 
+     https://github.com/rust-lang/regex/blob/master/LICENSE-MIT
+     https://github.com/rust-lang/regex/blob/master/LICENSE-APACHE
+
+
+7.SETUPTOOLS
+
+  7.1 Source Code available in the following URL-
+
+      https://github.com/pypa/setuptools
+
+  7.2 License of SETUPTOOLS
+ 
+     https://github.com/rust-lang/regex/blob/master/LICENSE-MIT
+     https://github.com/rust-lang/regex/blob/master/LICENSE-APACHE
+
+
+8. PYPARSING 
+
+  8.1 Source Code available in the following URL-
+
+      http://pyparsing.wikispaces.com/
+
+  8.2 License of PYPARSING
+ 
+      http://pyparsing.wikispaces.com/
+
+
+9.PYCPARSEREXT
+
+  9.1 Source Code available in the following URL-
+
+      https://github.com/inducer/pycparserext
+
+  
+
+
+
+
+
+
+
+
+
