@@ -117,6 +117,7 @@ ADDITIONAL AXOIMS
 No Additional Axoims
 
 ```
+<<<<<<< HEAD
 #### Example 4 
 
 ```python
@@ -139,5 +140,7 @@ No Additional Axoims
 
 
 ```
+=======
+>>>>>>> 253eb770bfcaca99debcfa25f7dc3cf15567fc83
 
 
