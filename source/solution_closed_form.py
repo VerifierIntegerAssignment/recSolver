@@ -1331,7 +1331,7 @@ def solveCounterType(e, equations_map, basecase_map, list_equations):
                         return None,None
             else:
                 
-                none_cond = constructNoneCondition(e)
+                none_cond,list_seq = constructNoneCondition(e)
                 
                 soln=None
                 
@@ -1509,6 +1509,7 @@ def solveCounterType(e, equations_map, basecase_map, list_equations):
                                     cond = copy.deepcopy(none_cond)
                                     
                                     
+                                
                                 cond = fun_utiles.expr_replace(cond,eval("['"+e[6][x[i]][3][1][2]+"']"),eval("['-',['"+e[6][x[i]][3][1][2]+"'],['1']]"))
                                     
                                 stmt = copy.deepcopy(e[6][x[i]][3][1][4])
