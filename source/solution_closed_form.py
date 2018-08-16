@@ -61,6 +61,8 @@ ConstraintCount=0
 
 
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+Y(_n1),X(_n1)))"
+rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,Y(_n1)+1,ite(C>0,X(_n1)+Y(_n1),Y(_n1)))"
+
 
 
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=X(_n1)+1;Y(_n1+1)=X(_n1)+Y(_n1)+1"
@@ -69,7 +71,7 @@ ConstraintCount=0
 #rec_equ="X(0)=A;X(_n1+1)=X(_n1)+1"
 
 
-#var = "_n1"
+var = "_n1"
 
 def solve_recurrence(rec_equ,var):
     
@@ -679,7 +681,91 @@ def rec_solve_conditional(group_list, equations_map,basecase_map, list_equations
                 if soln is not None:
                     
                     solution_list.append(soln)
+    else:
+        
+        solution_type=None
+        
+        for x in group_list:
+
+            for y in x[6]:
+                
+                z = x[6][y]
+                                
+                if z[0] is not None:
+                    
+                    
+                    if fun_utiles.isFunctionPresent(z[0])==True:
+                        
+                        if solution_type==None:
+                            
+                           solution_type='Function'
+                           
+                        elif solution_type=='Counter' or solution_type=='Constant' or solution_type=='Base Case':
+                            
+                            solution_type='Function'
+                            
+                        else:
+                            solution_type='Function'
+                            
+                        z.append(solution_type)
+                        
+                    elif fun_utiles.isVariablePresent(z[0])==True and fun_utiles.isFunctionPresent(z[0])!=True:
+                        
+                        if solution_type==None:
+                            
+                            if z[0][0]=='==' and fun_utiles.isFunctionPresent(x[6][y][1])==None and fun_utiles.isVariablePresent(x[6][y][1])==None :
+                                
+                                solution_type='Base Case'
+                                
+                            elif (z[0][0]=='==' or z[0][0]=='!=') and z[0][1][0]=='%' and z[0][1][1][0]==var and fun_utiles.is_number(z[0][1][2][0])==True:
+                                
+                                
+                                solution_type='Periodic'
+                                
+                            else:
+                                
+                                solution_type='Counter'
+                                
+                        elif solution_type!='Function':
+                            
+                            solution_type='Counter'
+                            
+                        z.append(solution_type)
+                        
+                        if solution_type=='Periodic':
+                            
+                            z.append(z[0][1][2][0])
+                            
+                            z.append(z[0][0])
+                    else:
+                        
+                        if solution_type==None:
+                            
+                            solution_type='Constant'
+                            
+                        elif solution_type!='Function' and solution_type!='Counter' and solution_type!='Base Case':
+                            
+                            solution_type='Constant'
+                            
+                        z.append(solution_type)                        
+                else:
+                    
+                    z.append(None)
+
+        if  solution_type=='Constant':
+                
+            soln = solveGroupConstantType(group_list, equations_map, basecase_map, list_equations)
             
+            if soln is not None:
+                    
+                if solution_list is not None:
+                    
+                    solution_list+=soln
+                    
+                else:
+                    
+                    solution_list=soln
+                            
     
     return solution_list,additional_axoims
                 
@@ -3033,6 +3119,170 @@ def solveConstantType(e, equations_map, basecase_map, list_equations):
 
 
 
+
+
+
+def solveGroupConstantType(group_list, equations_map, basecase_map, list_equations):
+        
+    
+    soln_map = {}
+    
+    final_soln_list = []
+    
+    main_map = {}
+    
+    var=None
+    
+    for x in group_list:
+        
+        
+        for y in x[6]:
+            
+            if y in main_map.keys():
+                
+                list = main_map[y]
+                
+                x[6][y].append(x[1])
+                
+                list.append(x[6][y])
+                
+            else:
+                
+                list=[]
+                
+                x[6][y].append(x[1])
+                
+                list.append(x[6][y])
+                
+                main_map[y] = list
+                 
+    
+    for x in main_map:
+        
+        list = main_map[x]
+        
+        a_list=[]
+        
+        
+        for y in list:
+            
+            new_e=copy.deepcopy(y[-1])
+            
+            equation_base = str(simplify(FOL_translation.expr2string1(new_e[3])).subs(simplify(str(new_e[2])+"+1"),0))
+    
+            e_base = basecase_map[equation_base]
+            
+            new_e[4]= y[1]
+
+            a_list.append(e_base)
+            
+            a_list.append(new_e)
+    
+        soln = rec_solver_group(a_list)
+                
+        list.append(soln)
+        
+        
+    
+    for x in main_map:
+        
+        list = main_map[x]
+        
+        for y in list[-1]:
+            
+            if y in soln_map.keys():
+                
+                soln_list=soln_map[y]
+                
+                if list[0][0] is not None:
+            
+                    soln_list.append("['ite',"+str(list[0][0])+","+str(list[-1][y][-1]))
+
+                    
+                else:
+                
+                    soln_list.append(str(list[-1][y][-1]))
+
+            else:
+                soln_list=[]
+                
+                soln_list.append("['"+list[-1][y][0]+"',"+list[-1][y][1]+",'"+list[-1][y][2]+"',"+str(list[-1][y][3]))
+                
+                var=list[-1][y][2]
+                
+                if list[0][0] is not None:
+            
+                    soln_list.append("['ite',"+str(list[0][0])+","+str(list[-1][y][-1]))
+                    
+                else:
+                
+                    soln_list.append(str(list[-1][y][-1]))
+                    
+                soln_map[y]=soln_list
+
+
+    for x in soln_map:
+        
+        soln=None
+        solnend=None
+        
+        for y in soln_map[x]:
+            
+            if soln is None:
+                soln=y
+                solnend="]"
+            else:
+                if "ite" in y:
+                    soln+=","+y
+                    solnend=solnend+"]"
+                else:
+                    solnend=y+solnend
+                    
+        
+        
+        soln = eval(soln+","+solnend)
+        
+        equation_base = str(simplify(x).subs(simplify(str(var)+"+1"),0))
+        
+        if equations_map[x] in list_equations:
+            
+            list_equations.remove(equations_map[x])
+            
+        if basecase_map[equation_base] in list_equations:
+            list_equations.remove(basecase_map[equation_base])
+
+                
+        del basecase_map[equation_base]
+        
+        del equations_map[x]
+        
+        for x in equations_map:
+            e = equations_map[x]
+            e[4] = fun_utiles.expr_replace(e[4],soln[3],soln[4])
+            
+        for x in basecase_map:
+            e = basecase_map[x]
+            e[3] = fun_utiles.expr_replace(e[3],soln[3],soln[4])
+        
+        if final_soln_list is None:
+            
+            soln_list=[]
+            final_soln_list.append(soln)
+            
+        else:
+            
+            final_soln_list.append(soln)
+
+    return final_soln_list
+        
+    
+
+
+
+
+
+
+
 def solvePeriodicType(e, equations_map, basecase_map, list_equations):
     
     equation_base = str(simplify(e[0]).subs(simplify(str(e[1][2])+"+1"),0))
@@ -3310,7 +3560,7 @@ def solve_rec(e1,e2):
 				result=fun_utiles.substituteValue(fun_utiles.simplify_sympy(result),simplify('n'),simplify(variable))
 				#writeLogFile( "j2llogs.logs" , "\nOriginal Axoims \n"+str(lefthandstmt)+"="+str(righthandstmt_d)+","+str(lefthandstmt_base)+"="+str(righthandstmt_base_d)+"\n Closed Form Solution\n"+str(result)+"\n" )
 				if "**" in str(result):
-					result=translatepowerToFun(str(result))
+					result=fun_utiles.translatepowerToFun(str(result))
                                         
 				expression=str(str(term2)+"="+str(result))
                                 utiles_translation.resetGlobal()
@@ -3530,10 +3780,56 @@ def rec_solver(a):
 	    e1=copy.deepcopy(e)
 	    variable=e[2]
 	    a=fun_utiles.solnsubstitution(a,e[3],e[4])
+
 	if len(equation_map)==0 or len(solution_map)==0:
             break
+        
     return a
 
 
 
-#solve_recurrence(rec_equ,var)
+def rec_solver_group(a):
+    constant_fun_map={}
+    equation_map={}
+    base_map={}
+    final_solution_map={}
+    for axiom in a:
+        if axiom[0]=='i1':
+             lefthandstmt=FOL_translation.expr2string1(axiom[3])
+	     lefthandstmt=lefthandstmt.strip()
+             equation_map[str(simplify(lefthandstmt))]=axiom
+	if axiom[0]=='i0':
+	     lefthandstmt=FOL_translation.expr2string1(axiom[2])
+	     lefthandstmt=lefthandstmt.strip()
+	     base_map[str(simplify(lefthandstmt))]=axiom
+             
+    while True:
+        solution_map={} 
+	for equation in equation_map:
+            e1=equation_map[equation]
+	    equation_base=str(simplify(equation).subs(simplify(str(e1[2])+"+1"),0))
+	    if equation_base in base_map.keys():
+                e2=base_map[equation_base]
+                result=solve_rec(e1,e2)
+                if result is not None:
+                    a.remove(base_map[equation_base])
+                    del base_map[equation_base]
+                    solution_map[equation]=result
+	for equation in solution_map:
+            a.remove(equation_map[equation])
+	    del equation_map[equation]
+	    e=solution_map[equation]
+	    e1=copy.deepcopy(e)
+	    variable=e[2]
+	    a=fun_utiles.solnsubstitution(a,e[3],e[4])
+        for xx in solution_map.keys():
+            final_solution_map[xx]=solution_map[xx]
+
+	if len(equation_map)==0 or len(solution_map)==0:
+            break
+        
+    return final_solution_map
+
+
+
+solve_recurrence(rec_equ,var)
