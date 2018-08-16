@@ -56,6 +56,26 @@ Next, we illustrate how to use recSolverto find the closed form solution of inpu
 
 #### How to run this Example 
 
+$viap/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=X(_n1)+1;Y(_n1+1)=X(_n1)+Y(_n1)"  "_n1"
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((C>0),(A+(2*_n1)),ite((B>0),(((((2*A)+((2*B)*_n1))-_n1)+(_n1**2))/2),A))
+Y(_n1) = ite((C>0),((((A*_n1)+B)+(_n1**2))-_n1),ite((B>0),(B+_n1),B))
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+```
+
+
+
+
+#### Example 2 
 
 $viap/recSolver.py  "X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"  "_n1"
 
@@ -74,7 +94,7 @@ ADDITIONAL AXOIMS
 No Additional Axoims
 ```
 
-#### Example 2 
+#### Example 3 
 
 
 $viap/recSolver.py  "X(0)=A;Y(0)=B;Z(0)=C;M(0)=j;M(_n1+1)=X(_n1)+M(_n1);X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"  "_n1"
