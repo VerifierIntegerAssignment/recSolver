@@ -66,11 +66,12 @@ NOt ABLE TO SOLVE FOLLOWING
 No Equations Left
 
 CLOSED FORM SOLUTION
-X(_n1) = ite((C>0),(A+(2*_n1)),ite((B>0),(((((2*A)+((2*B)*_n1))-_n1)+(_n1**2))/2),A))
-Y(_n1) = ite((C>0),((((A*_n1)+B)+(_n1**2))-_n1),ite((B>0),(B+_n1),B))
+X(_n1) = (A+_n1)
+Y(_n1) = ((((((2*A)*_n1)+(2*B))-_n1)+(_n1**2))/2)
 
 ADDITIONAL AXOIMS
 No Additional Axoims
+
 ```
 
 
