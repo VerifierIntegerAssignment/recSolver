@@ -117,7 +117,6 @@ ADDITIONAL AXOIMS
 No Additional Axoims
 
 ```
-<<<<<<< HEAD
 #### Example 4 
 
 ```python
@@ -140,7 +139,499 @@ No Additional Axoims
 
 
 ```
-=======
->>>>>>> 253eb770bfcaca99debcfa25f7dc3cf15567fc83
 
+
+```
+#### Example 5
+
+```python
+$viap/recSolver.py  "X(0)=A;X(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+2,X(_n1)))"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((C>0),(A+(2*_n1)),ite((B>0),(A+_n1),A))
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+
+
+```
+
+#### Example 6
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1==1,1,(_n1+1)*X(_n1))"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = factorial(_n1)
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+
+
+```
+
+#### Example 7
+
+```python
+$viap/recSolver.py  "X(0)=0;X(_n1+1)=ite(_n1==1,1,(1+X(_n1)));Y(0)=1;Y(_n1+1)=ite(_n1==1,1,(_n1+1)*Y(_n1))"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = _n1
+Y(_n1) = factorial(_n1)
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+
+
+
+```
+
+#### Example 8
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ((1+(A*(_n1-(_n1/5))))+((_n1/5)*B))
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+
+
+
+```
+
+
+
+#### Example 9
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B);Y(0)=1;Y(_n1+1)=ite(C>0,Y(_n1)+A,Y(_n1)+B)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ((1+(A*(_n1-(_n1/5))))+((_n1/5)*B))
+Y(_n1) = ite((C>0),((A*_n1)+1),((B*_n1)+1))
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+
+
+
+```
+
+
+#### Example 10
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1)+5,X(_n1))"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((((1+(5*(_n1-1)))%2)==0),(1+(5*_n1)),(1+(5*_CE1)))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE1)) -> (((1+(5*(_n1-1)))%2)==0)
+(((1+(5*(_CE1-1)))%2)!=0)
+(0<=_CE1)
+
+
+
+
+```
+
+
+#### Example 11
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)+5)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((((1+(5*_n1))%2)==0),(1+(5*_n1)),(1+(5*_CE1)))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE1)) -> (((1+(5*_n1))%2)==0)
+(((1+(5*_CE1))%2)!=0)
+(0<=_CE1)
+
+
+
+
+```
+
+
+#### Example 12
+
+```python
+$viap/recSolver.py  "X(0)=2;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)+5)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((((1+(5*_n1))%2)==0),(1+(5*_n1)),(1+(5*_CE1)))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE1)) -> (((1+(5*_n1))%2)==0)
+(((1+(5*_CE1))%2)!=0)
+(0<=_CE1)
+
+
+
+
+```
+
+#### Example 13
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1)+5,X(_n1)-5)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = (1+(5*_n1))
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+
+
+
+```
+
+
+#### Example 14
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1)-5)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite(((1+(5*_n1))<A),(1+(5*_n1)),ite(((((_n1-_CE2)+0)%2)==0),((1+(5*_CE2))-5),(1+(5*_CE2))))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE2)) -> ((1+(5*(_n1-1)))<A)
+((1+(5*(_CE2-1)))>=A)
+(0<=_CE2)
+
+
+
+
+```
+
+
+#### Example 15
+
+```python
+$viap/recSolver.py  "X(0)=10;X(_n1+1)=ite(X(_n1)>A,X(_n1)-5,X(_n1)+5)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((((10+(5*_n1))-(5*_n1))>A),(10+(5*_n1)),(10+(5*_CE1)))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE1)) -> (((10+(5*_n1))-(5*_n1))>A)
+(((10+(5*_CE1))-(5*_CE1))<=A)
+(0<=_CE1)
+
+
+
+
+
+```
+
+
+#### Example 16
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1)-15)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite(((1+(5*_n1))<A),(1+(5*_n1)),ite(((((_n1-_CE2)+0)%4)==0),((1+(5*_CE2))-15),(((1+(5*_CE2))-15)+(((_n1-_CE2)%4)*5))))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE2)) -> ((1+(5*(_n1-1)))<A)
+((1+(5*(_CE2-1)))>=A)
+(0<=_CE2)
+
+
+
+
+
+
+```
+
+
+
+
+#### Example 17
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>A,X(_n1)-5,X(_n1)+15)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((((1+(15*_n1))-(5*_n1))>A),(1+(15*_n1)),(1+(15*_CE1)))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE1)) -> (((1+(15*_n1))-(5*_n1))>A)
+(((1+(15*_CE1))-(5*_CE1))<=A)
+(0<=_CE1)
+
+
+
+
+
+
+```
+
+
+
+
+#### Example 18
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+15,X(_n1)-5)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite(((1+(15*_n1))<A),(1+(15*_n1)),ite(((((_n1-_CE2)+1)%4)!=0),((1+(15*_CE2))-((((_n1-_CE2)+1)%4)*5)),(1+(15*_CE2))))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE2)) -> ((1+(15*(_n1-1)))<A)
+((1+(15*(_CE2-1)))>=A)
+(0<=_CE2)
+
+
+
+
+
+
+```
+
+
+
+#### Example 19
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>A,X(_n1)-15,X(_n1)+5)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((((1+(5*_n1))-(15*_n1))>A),(1+(5*_n1)),(1+(5*_CE1)))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE1)) -> (((1+(5*_n1))-(15*_n1))>A)
+(((1+(5*_CE1))-(15*_CE1))<=A)
+(0<=_CE1)
+
+
+
+
+
+
+```
+
+
+#### Example 20
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1)+5,X(_n1))"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = (1+(5*_n1))
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+
+
+
+
+
+```
+
+
+#### Example 21
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1<50,X(_n1)+1,ite(_n1<70,X(_n1)+2,ite(_n1<90,X(_n1)+3,X(_n1))))"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite(((_n1-1)<50),(1+_n1),ite(((_n1-1)<70),((1+(51-1))+(2*_n1)),ite(((_n1-1)<90),(((1+(51-1))+(2*(71-1)))+(3*_n1)),(((1+(51-1))+(2*(71-1)))+(3*(91-1))))))
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+
+
+#### Example 22
+
+```python
+$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,X(_n1)+2)"  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = (ite(!(((1+(_n1-1))<A)),(1+(2*_n1)),((1+(2*(_CE1_2-1)))+_n1)) or ite(((1+(_n1-1))<A),(1+_n1),((1+(_CE2_3-1))+(2*_n1))))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE1_2)) -> !(((1+(_n1-1))<A))
+((1+(_CE1_2-1))<A)
+(0<=_CE1_2)
+((_CE1_2<=_n1) and (_n1<_CE2_2)) -> (((1+(2*(_CE1-1)))+(_n1-1))<A)
+(((1+(2*(_CE1-1)))+(_CE2_2-1))>=A)
+(0<=_CE2_2)
+(_CE1_2<_CE2_2)
+((0<=_n1) and (_n1<_CE2_3)) -> ((1+(_n1-1))<A)
+((1+(_CE2_3-1))>=A)
+(0<=_CE2_3)
+(0<_CE2_3)
+((_CE2_3<=_n1) and (_n1<_CE1_3)) -> !((((1+(_CE2_3-1))+(_n1-1))<A))
+(((1+(_CE2_3-1))+(_CE1_3-1))<A)
+(0<=_CE1_3)
+(2<=_CE1_3)
+
+```
+
+
+
+#### Example 23
+
+```python
+$viap/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,Y(_n1)+1,ite(C>0,X(_n1)+Y(_n1),Y(_n1)))"
+  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite((C>0),(A+(2*_n1)),ite((B>0),(((((2*A)+((2*B)*_n1))-_n1)+(_n1**2))/2),A))
+Y(_n1) = ite((C>0),((((A*_n1)+B)+(_n1**2))-_n1),ite((B>0),(B+_n1),B))
+
+ADDITIONAL AXOIMS
+No Additional Axoims
+
+```
 
