@@ -23,7 +23,7 @@ Recurrences Equations Solver(recSolver) is a framework that solve various kinds 
 
 ### System Requirements and Installation
 
-In practice we have run VIAP on standard Ubuntu 16.04 LTS distribution. VIAP is provided as a set of binaries and libraries for
+In practice we have run recSolver on standard Ubuntu 16.04 LTS distribution. recSolver is provided as a set of binaries and libraries for
 Ubuntu 16.04 LTS distribution. 
 
 #### Download 
@@ -33,7 +33,7 @@ Ubuntu 16.04 LTS distribution.
 
  $ git clone https://github.com/VerifierIntegerAssignment/recSolver.git
  
- #### Running VIAP
+ #### Running recSolver
 
 
 recSolver framework is run by using the `recSolver.py` tool in the recSolver directory.
@@ -56,7 +56,7 @@ Next, we illustrate how to use recSolverto find the closed form solution of inpu
 
 #### How to run this Example 
 ```python
-$viap/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=X(_n1)+1;Y(_n1+1)=X(_n1)+Y(_n1)"  "_n1"
+$recSolver/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=X(_n1)+1;Y(_n1+1)=X(_n1)+Y(_n1)"  "_n1"
 ```
 
 #### Output 
@@ -78,7 +78,7 @@ No Additional Axoims
 
 #### Example 2 
 ```python
-$viap/recSolver.py  "X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"  "_n1"
+$recSolver/recSolver.py  "X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"  "_n1"
 ```
 
 #### Output 
@@ -99,7 +99,7 @@ No Additional Axoims
 #### Example 3 
 
 ```python
-$viap/recSolver.py  "X(0)=A;Y(0)=B;Z(0)=C;M(0)=j;M(_n1+1)=X(_n1)+M(_n1);X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"  "_n1"
+$recSolver/recSolver.py  "X(0)=A;Y(0)=B;Z(0)=C;M(0)=j;M(_n1+1)=X(_n1)+M(_n1);X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"  "_n1"
 ```
 
 #### Output 
@@ -120,7 +120,7 @@ No Additional Axoims
 #### Example 4 
 
 ```python
-$viap/recSolver.py  "X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+F"  "_n1"
+$recSolver/recSolver.py  "X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+F"  "_n1"
 ```
 
 #### Output 
@@ -145,7 +145,7 @@ No Additional Axoims
 #### Example 5
 
 ```python
-$viap/recSolver.py  "X(0)=A;X(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+2,X(_n1)))"  "_n1"
+$recSolver/recSolver.py  "X(0)=A;X(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+2,X(_n1)))"  "_n1"
 ```
 
 #### Output 
@@ -167,7 +167,7 @@ No Additional Axoims
 #### Example 6
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1==1,1,(_n1+1)*X(_n1))"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1==1,1,(_n1+1)*X(_n1))"  "_n1"
 ```
 
 #### Output 
@@ -189,7 +189,7 @@ No Additional Axoims
 #### Example 7
 
 ```python
-$viap/recSolver.py  "X(0)=0;X(_n1+1)=ite(_n1==1,1,(1+X(_n1)));Y(0)=1;Y(_n1+1)=ite(_n1==1,1,(_n1+1)*Y(_n1))"  "_n1"
+$recSolver/recSolver.py  "X(0)=0;X(_n1+1)=ite(_n1==1,1,(1+X(_n1)));Y(0)=1;Y(_n1+1)=ite(_n1==1,1,(_n1+1)*Y(_n1))"  "_n1"
 ```
 
 #### Output 
@@ -213,7 +213,7 @@ No Additional Axoims
 #### Example 8
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B)"  "_n1"
 ```
 
 #### Output 
@@ -238,7 +238,7 @@ No Additional Axoims
 #### Example 9
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B);Y(0)=1;Y(_n1+1)=ite(C>0,Y(_n1)+A,Y(_n1)+B)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B);Y(0)=1;Y(_n1+1)=ite(C>0,Y(_n1)+A,Y(_n1)+B)"  "_n1"
 ```
 
 #### Output 
@@ -263,7 +263,7 @@ No Additional Axoims
 #### Example 10
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1)+5,X(_n1))"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1)+5,X(_n1))"  "_n1"
 ```
 
 #### Output 
@@ -289,7 +289,7 @@ ADDITIONAL AXOIMS
 #### Example 11
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)+5)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)+5)"  "_n1"
 ```
 
 #### Output 
@@ -315,7 +315,7 @@ ADDITIONAL AXOIMS
 #### Example 12
 
 ```python
-$viap/recSolver.py  "X(0)=2;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)+5)"  "_n1"
+$recSolver/recSolver.py  "X(0)=2;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)+5)"  "_n1"
 ```
 
 #### Output 
@@ -340,7 +340,7 @@ ADDITIONAL AXOIMS
 #### Example 13
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1)+5,X(_n1)-5)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1)+5,X(_n1)-5)"  "_n1"
 ```
 
 #### Output 
@@ -364,7 +364,7 @@ No Additional Axoims
 #### Example 14
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1)-5)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1)-5)"  "_n1"
 ```
 
 #### Output 
@@ -390,7 +390,7 @@ ADDITIONAL AXOIMS
 #### Example 15
 
 ```python
-$viap/recSolver.py  "X(0)=10;X(_n1+1)=ite(X(_n1)>A,X(_n1)-5,X(_n1)+5)"  "_n1"
+$recSolver/recSolver.py  "X(0)=10;X(_n1+1)=ite(X(_n1)>A,X(_n1)-5,X(_n1)+5)"  "_n1"
 ```
 
 #### Output 
@@ -417,7 +417,7 @@ ADDITIONAL AXOIMS
 #### Example 16
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1)-15)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1)-15)"  "_n1"
 ```
 
 #### Output 
@@ -447,7 +447,7 @@ ADDITIONAL AXOIMS
 #### Example 17
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>A,X(_n1)-5,X(_n1)+15)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>A,X(_n1)-5,X(_n1)+15)"  "_n1"
 ```
 
 #### Output 
@@ -477,7 +477,7 @@ ADDITIONAL AXOIMS
 #### Example 18
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+15,X(_n1)-5)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+15,X(_n1)-5)"  "_n1"
 ```
 
 #### Output 
@@ -506,7 +506,7 @@ ADDITIONAL AXOIMS
 #### Example 19
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>A,X(_n1)-15,X(_n1)+5)"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>A,X(_n1)-15,X(_n1)+5)"  "_n1"
 ```
 
 #### Output 
@@ -534,7 +534,7 @@ ADDITIONAL AXOIMS
 #### Example 20
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1)+5,X(_n1))"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1)+5,X(_n1))"  "_n1"
 ```
 
 #### Output 
@@ -560,7 +560,7 @@ No Additional Axoims
 #### Example 21
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1<50,X(_n1)+1,ite(_n1<70,X(_n1)+2,ite(_n1<90,X(_n1)+3,X(_n1))))"  "_n1"
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(_n1<50,X(_n1)+1,ite(_n1<70,X(_n1)+2,ite(_n1<90,X(_n1)+3,X(_n1))))"  "_n1"
 ```
 
 #### Output 
@@ -580,7 +580,9 @@ No Additional Axoims
 #### Example 22
 
 ```python
-$viap/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,X(_n1)+2)"  "_n1"
+
+$recSolver/recSolver.py  "X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,X(_n1)+2)"  "_n1"
+
 ```
 
 #### Output 
@@ -616,7 +618,7 @@ ADDITIONAL AXOIMS
 #### Example 23
 
 ```python
-$viap/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,Y(_n1)+1,ite(C>0,X(_n1)+Y(_n1),Y(_n1)))"
+$recSolver/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,Y(_n1)+1,ite(C>0,X(_n1)+Y(_n1),Y(_n1)))"
   "_n1"
 ```
 
