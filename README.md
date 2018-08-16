@@ -576,7 +576,7 @@ X(_n1) = ite(((_n1-1)<50),(1+_n1),ite(((_n1-1)<70),((1+(51-1))+(2*_n1)),ite(((_n
 
 ADDITIONAL AXOIMS
 No Additional Axoims
-
+```
 
 
 #### Example 22
