@@ -1,7 +1,7 @@
 # recSolver
 
-Verifier Integer Assignment Program(VIAP) translates a program to first-order logic with
-quantifiers on natural numbers following the method proposed recently by [Professor Fangzhen Lin](http://www.cs.ust.hk/~flin/). Once translated to a first-order theory, properties of the program can then be proved using induction (because of the quantifiers on natural numbers) and other methods.
+Recurrences Equations Solver(recSolver) is a framework that solve various kinds of recurrences relations. recSolver has the power to solve various kinds of recurrences like linear or non-linear, homogeneous or non-homogeneous, conditional and mutually recursive.
+
 
 ### Awards & Achievements
 
@@ -32,7 +32,7 @@ Ubuntu 16.04 LTS distribution.
 
 ##### Clone over HTTPS:
 
- $ git clone https://github.com/VerifierIntegerAssignment/VIAP_ARRAY.git
+ $ git clone https://github.com/VerifierIntegerAssignment/recSolver.git
  
  #### Running VIAP
 
@@ -43,17 +43,13 @@ assertions.
 
 #### Running Command
 
-PATH_TO_VIAP/viap_tool.py [OPTIONS] file
+PATH_TO_recSolver/recSolver.py equation/equations variable
+
+
 
 #### Output contains the string:
 ```
--Result TRUE when the program is safe
-```
-```
--Result FALSE when a counterexample is found and a file named errorWitness.graphml that contains the witness of error-path is generated in the VIAP root folder
-```
-```
--Result UNKNOWN otherwise.
+-DISPLAY CLOSED FORM SOLUTION IF FRAMAEWORK ABLE TO FIND CLOSED FORM SOLUTION OF INPUT EQUATION(S)
 ```
 
 
@@ -61,10 +57,9 @@ PATH_TO_VIAP/viap_tool.py [OPTIONS] file
 
 
 
-### Using The VIAP Verifier
+### Using The recSolver
 
-Next, we illustrate how to verify the following simple C program using the VIAP
-verifier:
+Next, we illustrate how to use recSolverto find the closed form solution of input equation(s)
 
 ```C
 // benchmarks/multidimensional/transpose.c
