@@ -23,14 +23,14 @@ from itertools import permutations
 ConstraintCount=0
 
 
-
+#rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=X(_n1)+1;Y(_n1+1)=X(_n1)+Y(_n1)"
 #rec_equ="X(0)=A;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,ite(X(_n1)<B,X(_n1)+2,X(_n1)))"
 #rec_equ="X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+F"
 #rec_equ="X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"
 #rec_equ="X(0)=A;Y(0)=B;Z(0)=C;M(0)=j;M(_n1+1)=X(_n1)+M(_n1);X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"
 #rec_equ="X(0)=A;X(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+2,X(_n1)))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1==1,1,(_n1+1)*X(_n1))"
-#rec_equ="X(0)=0;X(_n1+1)=ite(_n1==1,1,(1+X(_n1)))"
+#rec_equ="X(0)=0;X(_n1+1)=ite(_n1==1,1,(1+X(_n1)));Y(0)=1;Y(_n1+1)=ite(_n1==1,1,(_n1+1)*Y(_n1))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1==1,1,(_n1+1)*X(_n1));Y(0)=1;Y(_n1+1)=ite(_n1==1,1,(_n1+1)*Y(_n1))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B)"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B);Y(0)=1;Y(_n1+1)=ite(C>0,Y(_n1)+A,Y(_n1)+B)"
@@ -61,7 +61,7 @@ ConstraintCount=0
 
 
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+Y(_n1),X(_n1)))"
-rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,Y(_n1)+1,ite(C>0,X(_n1)+Y(_n1),Y(_n1)))"
+#rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,Y(_n1)+1,ite(C>0,X(_n1)+Y(_n1),Y(_n1)))"
 
 
 
@@ -71,7 +71,7 @@ rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));
 #rec_equ="X(0)=A;X(_n1+1)=X(_n1)+1"
 
 
-var = "_n1"
+#var = "_n1"
 
 def solve_recurrence(rec_equ,var):
     
@@ -80,6 +80,9 @@ def solve_recurrence(rec_equ,var):
     list_equations=[]
     
     list_solutions = []
+    
+    axoims=None
+    
     
     for rec_eq in rec_list:
         
@@ -117,7 +120,11 @@ def solve_recurrence(rec_equ,var):
         list_equations.append(expression)
     
     
-    results = rec_solver(list_equations)
+    results,soln_map = rec_solver_group(list_equations)
+    
+    for x in soln_map:
+        
+        results.append(soln_map[x])
     
     
     list_equations=[]
@@ -143,14 +150,16 @@ def solve_recurrence(rec_equ,var):
     #    print FOL_translation.wff2z3_update(x)
     #print var_map
     #print '-----------------'
+    #print list_equations
+    #print '-----------------'
+    if len(list_equations)>0:
+        
+        results, axoims = solve_conditional_rec(equations_map, basecase_map, list_equations, var)
     
+        if results is not None:
     
-    results, axoims = solve_conditional_rec(equations_map, basecase_map, list_equations, var)
-    
-    if results is not None:
-    
-        for result in results:
-            closed_formed.append(result)
+            for result in results:
+                closed_formed.append(result)
 
 
     print 'NOt ABLE TO SOLVE FOLLOWING'
@@ -3178,9 +3187,13 @@ def solveGroupConstantType(group_list, equations_map, basecase_map, list_equatio
             
             a_list.append(new_e)
     
-        soln = rec_solver_group(a_list)
+        res_equ,soln = rec_solver_group(a_list)
                 
         list.append(soln)
+        
+        if len(res_equ)>0:
+            
+            return None
         
         
     
@@ -3828,8 +3841,8 @@ def rec_solver_group(a):
 	if len(equation_map)==0 or len(solution_map)==0:
             break
         
-    return final_solution_map
+    return a,final_solution_map
 
 
 
-solve_recurrence(rec_equ,var)
+#solve_recurrence(rec_equ,var)
