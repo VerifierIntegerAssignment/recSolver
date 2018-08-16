@@ -273,12 +273,13 @@ NOt ABLE TO SOLVE FOLLOWING
 No Equations Left
 
 CLOSED FORM SOLUTION
-X(_n1) = ite((((1+(5*(_n1-1)))%2)==0),(1+(5*_n1)),(1+(5*_CE1)))
+X(_n1) = ite((((1+(5*_n1))%2)!=0),(1+(5*_n1)),(1+(5*_CE1)))
 
 ADDITIONAL AXOIMS
-((0<=_n1) and (_n1<_CE1)) -> (((1+(5*(_n1-1)))%2)==0)
-(((1+(5*(_CE1-1)))%2)!=0)
+((0<=_n1) and (_n1<_CE1)) -> (((1+(5*_n1))%2)!=0)
+(((1+(5*_CE1))%2)==0)
 (0<=_CE1)
+
 
 
 

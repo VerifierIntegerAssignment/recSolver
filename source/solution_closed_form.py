@@ -1842,7 +1842,6 @@ def solveFunctionMontonic(new_e, e, equations_map, basecase_map, list_equations)
             elif type_in=='undefined' and (type_in_in=='increasing' or type_in_in=='decreasing') :
                 
                 if len(new_e[6])==2:
-                
                     #soln,additional_axoims = getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations)
                     soln,additional_axoims = getFunction2ConstantRev(new_e, e, equations_map, basecase_map, list_equations)
                     
@@ -2723,6 +2722,8 @@ def getFunction2ConstantRev(new_e, e, equations_map, basecase_map, list_equation
             
             
             cond_else = copy.deepcopy(new_e[6][x][0])
+            
+            cond_else = fun_utiles.expr_complement(cond_else)
             
             value_else = fun_utiles.expr_replace(value_else,eval("['"+'_CV'+str(counter_else)+"']"),e_base[3])
             
