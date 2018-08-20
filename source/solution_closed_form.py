@@ -27,18 +27,29 @@ ConstraintCount=0
 #rec_equ="X(0)=A;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,ite(X(_n1)<B,X(_n1)+2,X(_n1)))"
 #rec_equ="X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+m*Y(_n1)+n*Z(_n1)+F"
 #rec_equ="X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"
+#rec_equ="X(0)=A;Y(0)=B;Z(0)=C;X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"
 #rec_equ="X(0)=A;Y(0)=B;Z(0)=C;M(0)=j;M(_n1+1)=X(_n1)+M(_n1);X(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+D;Y(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+H;Z(_n1+1)=l*X(_n1)+l*Y(_n1)+l*Z(_n1)+F"
 #rec_equ="X(0)=A;X(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+2,X(_n1)))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1==1,1,(_n1+1)*X(_n1))"
+#rec_equ="X(0)=0;X(_n1+1)=ite(_n1==1,1,1+X(_n1))"
 #rec_equ="X(0)=0;X(_n1+1)=ite(_n1==1,1,(1+X(_n1)));Y(0)=1;Y(_n1+1)=ite(_n1==1,1,(_n1+1)*Y(_n1))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1==1,1,(_n1+1)*X(_n1));Y(0)=1;Y(_n1+1)=ite(_n1==1,1,(_n1+1)*Y(_n1))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B)"
+#rec_equ="X(0)=1;X(_n1+1)=ite(_n1%5!=0,X(_n1)+A,X(_n1)+B)"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1%5==0,X(_n1)+A,X(_n1)+B);Y(0)=1;Y(_n1+1)=ite(C>0,Y(_n1)+A,Y(_n1)+B)"
 #rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1)+5,X(_n1))"
+#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1)-5,X(_n1))"
+#rec_equ="X(0)=2;X(_n1+1)=ite(X(_n1)%2==0,X(_n1)-5,X(_n1))"
+
+
+
 #rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)+5)"
+#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)-5)"
+
 #rec_equ="X(0)=2;X(_n1+1)=ite(X(_n1)%2==0,X(_n1),X(_n1)+5)"
 
 #rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1)+5,X(_n1)-5)"
+#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)>A,X(_n1)-5,X(_n1)+5)"
 #rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1)-5)"
 #rec_equ="X(0)=10;X(_n1+1)=ite(X(_n1)>A,X(_n1)-5,X(_n1)+5)"
 #rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1)-15)"
@@ -47,12 +58,14 @@ ConstraintCount=0
 #rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+15,X(_n1)-5)"
 #rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)>A,X(_n1)-15,X(_n1)+5)"
 
-#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1)+5,X(_n1))"
+#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)>0,X(_n1),X(_n1)+5)"
+#rec_equ="X(0)=0;X(_n1+1)=ite(X(_n1)>0,X(_n1),X(_n1)+5)"
+
 #rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+5,X(_n1))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1<50,X(_n1)+1,ite(_n1<70,X(_n1)+2,ite(_n1<90,X(_n1)+3,X(_n1))))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1<A,X(_n1)+1,ite(_n1<B,X(_n1)+2,ite(_n1<C,X(_n1)+3,X(_n1))))"
 
-#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,X(_n1)+2)"
+rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,X(_n1)+2)"
 
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1<A,X(_n1)+1,X(_n1)+2)"
 
@@ -63,6 +76,19 @@ ConstraintCount=0
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+Y(_n1),X(_n1)))"
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,Y(_n1)+1,ite(C>0,X(_n1)+Y(_n1),Y(_n1)))"
 
+#rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(0<50,X(_n1)+Y(_n1),ite(0<70,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(0<90,X(_n1)+1,ite(C>0,X(_n1)+Y(_n1),X(_n1)))"
+#rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(_n1<50,X(_n1)+Y(_n1),ite(_n1<70,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(_n1<50,Y(_n1)+1,ite(_n1<70,X(_n1)+Y(_n1),Y(_n1)))"
+#rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(_n1<C,X(_n1)+Y(_n1),ite(_n1<D,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(_n1<C,Y(_n1)+1,ite(_n1<D,X(_n1)+Y(_n1),Y(_n1)))"
+#rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(_n1<C,X(_n1)+Y(_n1),X(_n1)+2);Y(_n1+1)=ite(_n1<C,Y(_n1)+1,X(_n1)+Y(_n1))"
+
+#rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(X(_n1)+Y(_n1)<C,X(_n1)+Y(_n1),X(_n1)+2);Y(_n1+1)=ite(X(_n1)+Y(_n1)<C,Y(_n1)+1,X(_n1)+Y(_n1))"
+
+
+#rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(X(_n1)+Y(_n1)<C,X(_n1)+Y(_n1),X(_n1)-1);Y(_n1+1)=ite(X(_n1)+Y(_n1)<C,Y(_n1)-1,X(_n1)+Y(_n1))"
+
+
+
+
 
 
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=X(_n1)+1;Y(_n1+1)=X(_n1)+Y(_n1)+1"
@@ -71,7 +97,7 @@ ConstraintCount=0
 #rec_equ="X(0)=A;X(_n1+1)=X(_n1)+1"
 
 
-#var = "_n1"
+var = "_n1"
 
 def solve_recurrence(rec_equ,var):
     
@@ -409,7 +435,7 @@ def solve_mutual_rec(group_list, new_coeff_map, equation_map, base_map, var):
 
 def iscofficentEqual(new_coeff,var):
     status=True
-    list=new_coeff.keys()
+    list1=new_coeff.keys()
     temp_map={}
     non_coeff=None
     for x in new_coeff.keys():
@@ -761,6 +787,7 @@ def rec_solve_conditional(group_list, equations_map,basecase_map, list_equations
                     
                     z.append(None)
 
+        
         if  solution_type=='Constant':
                 
             soln = solveGroupConstantType(group_list, equations_map, basecase_map, list_equations)
@@ -774,7 +801,57 @@ def rec_solve_conditional(group_list, equations_map,basecase_map, list_equations
                 else:
                     
                     solution_list=soln
-                            
+                    
+        elif solution_type=='Counter':
+            
+            soln,add_axm = solveGroupCounterType(group_list, equations_map, basecase_map, list_equations)
+                        
+            if soln is not None:
+                    
+                if solution_list is not None:
+                    
+                    solution_list+=soln
+                    
+                else:
+                    
+                    solution_list=soln
+                    
+            if add_axm is not None:
+                
+                if  additional_axoims is not None:
+                    
+                    additional_axoims+=add_axm
+                    
+                else:
+                    
+                    additional_axoims =add_axm
+                    
+        elif solution_type=='Function':
+            
+            soln,add_axm = solveGroupFunctionType(group_list, equations_map, basecase_map, list_equations)
+                        
+            if soln is not None:
+                    
+                if solution_list is not None:
+                    
+                    solution_list+=soln
+                    
+                else:
+                    
+                    solution_list=soln
+                    
+            if add_axm is not None:
+                
+                if  additional_axoims is not None:
+                    
+                    additional_axoims+=add_axm
+                    
+                else:
+                    
+                    additional_axoims =add_axm
+            
+            print solution_type
+
     
     return solution_list,additional_axoims
                 
@@ -798,7 +875,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
     
     for x in e[6]:
         
-        list=[]
+        list1=[]
         
         new_e=eval("['"+e[1][0]+"','"+e[1][1]+"','"+e[1][2]+"',"+str(e[1][3])+","+str(e[6][x][1])+"]")
         
@@ -814,7 +891,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                 
         if sol is not None:
             
-            list.append(e[6][x][2])
+            list1.append(e[6][x][2])
                     
             if e[6][x][0] is not None:
                 
@@ -828,9 +905,9 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                 
                 e_new=None
                 
-            list.append(sol)
+            list1.append(sol)
             
-            list.append(e_new)
+            list1.append(e_new)
             
                         
             if e_new is not None:
@@ -850,7 +927,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                 
                 if e_new1==e_new1_in:
                     
-                    list.append('constant')
+                    list1.append('constant')
                 
                 else:
                 
@@ -875,7 +952,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
 
                     if 'Counter Example' in status:
                     
-                        list.append('increasing')
+                        list1.append('increasing')
                     
                     else:
                     
@@ -904,7 +981,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                                             
                         if 'Counter Example' in status:
                         
-                            list.append('decreasing')
+                            list1.append('decreasing')
 
         
                 
@@ -936,13 +1013,13 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                 constraint2 = eval("['a',['<',['_CS"+str(ConstraintCount)+"'],['_CE"+str(ConstraintCount)+"']]]")
                 
                 
-                list.append(ConstraintCount)
+                list1.append(ConstraintCount)
                 
-                list.append(equation1)
-                list.append(equation2)
-                list.append(constraint1)
-                list.append(constraint11)
-                list.append(constraint2)
+                list1.append(equation1)
+                list1.append(equation2)
+                list1.append(constraint1)
+                list1.append(constraint11)
+                list1.append(constraint2)
                 
                 #print FOL_translation.wff2z3_update(equation1)
                 constraint_list.append(FOL_translation.wff2z3_update(equation1))
@@ -975,7 +1052,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                 
                 if 'Successfully Proved' in status:
                     
-                    list.append('Always True')
+                    list1.append('Always True')
                     
                 else:
                 
@@ -1023,7 +1100,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                     status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
                 
                     if 'Successfully Proved' in status:
-                        list.append('No Repeat')
+                        list1.append('No Repeat')
             
             if e_new is not None:
                 
@@ -1043,22 +1120,22 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                                 
                 if 'Counter Example' in status:
                     
-                    list.append('Initial')
+                    list1.append('Initial')
                                                                                 
                 elif 'Successfully Proved' in status:
                     
-                    list.append('Never Initial')
+                    list1.append('Never Initial')
                     
                 else:
                     
-                    list.append(e_cond)
+                    list1.append(e_cond)
 
             else:
                 
-                list.append(None)
-                list.append(str(ConstraintCount))
+                list1.append(None)
+                list1.append(str(ConstraintCount))
             
-            e[6][x].append(list)
+            e[6][x].append(list1)
             
                 
         else:
@@ -1066,6 +1143,1866 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
             return None
 
     return e
+
+
+
+
+
+def isGroupConditions(group_list):
+    
+    cond_map=None
+    
+    for x in group_list:
+
+        if cond_map is None:
+            
+            cond_map = x[6].keys()
+            
+        else:
+            
+            temp_cond_map = x[6].keys()
+            
+            if cond_map!=temp_cond_map:
+                
+                return False
+            
+    return True
+
+
+
+def isGroupMonotonic(condition_map):
+    
+    type=None
+    
+    for x in condition_map:
+                        
+        for y in condition_map[x]:
+            
+            if type is None:
+                                
+                if y[-1] is not None:
+                    
+                    type=y[-1]
+                
+            elif type != y[-1]:
+                
+                type=None
+                
+    return type
+
+
+
+
+
+def constructInfoSystemGroup(group_list, equations_map, basecase_map, list_equations):
+    
+    global ConstraintCount
+    
+    local_count=0
+    
+    condition_map={}
+    
+    condition_map_exp={}
+    
+    for x in group_list:
+        
+        
+        for y in x[-1]:
+                        
+            local_count+=1
+            
+            list1=[]
+            
+            list1.append(x[0])
+            
+            list1.append(x[1][2])
+            
+            list1.append(x[1][-2])
+            
+            list1.append(x[-1][y])
+            
+            list1.append(local_count)
+            
+            if y in condition_map.keys():
+                
+                main_list = condition_map[y]
+                
+                temp_list = main_list[0]
+                
+                list1.append(temp_list[-1])
+                
+                main_list = condition_map[y]
+                
+                main_list.append(list1)
+                
+                condition_map[y] = main_list
+                
+            else:
+                
+                ConstraintCount+=1
+                
+                list1.append(ConstraintCount)
+                
+                main_list=[]
+                
+                main_list.append(list1)
+                
+                condition_map[y] = main_list
+                
+                
+    for x in condition_map:
+    
+            #condition_map_exp[]        
+        a_list=[]
+        
+        for y in condition_map[x]:
+                        
+            equation_base = str(simplify(y[0]).subs(simplify(str(y[1])+"+1"),0))
+    
+            e_base = basecase_map[equation_base]
+            
+            y.append(e_base)
+            
+            e_new_base=copy.deepcopy(e_base)
+        
+            e_new_base[-1]=eval("['_CV"+str(y[4])+"']")
+                        
+            new_e=eval("['i1','"+str(0)+"','"+y[1]+"',"+str(y[2])+","+str(y[3][1])+"]")
+            
+            a_list.append(new_e)
+            
+            a_list.append(e_new_base)
+            
+            
+             
+        a_list,soln = rec_solver_group(a_list)
+        
+        
+        if len(a_list)>0:
+            
+            return None,None
+        
+        else:
+            
+            for y in condition_map[x]:
+                
+                #condition_map_exp[x]=
+                
+                if  y[0] in soln:
+                    
+                    y.append(soln[y[0]])
+                    
+                    if y[3][0] is not None:
+                                            
+                        e_new2 = copy.deepcopy(y[3][0])
+                
+                        e_new2 = fun_utiles.expr_complement(e_new2)
+
+                    
+                        equation1 = eval("['s1',['implies',"+"['and',"+"['<=',['_CS"+str(y[-3])+"'],['"+y[1]+"']],"+"['<',['"+y[1]+"'],['_CE"+str(y[-3])+"']]"+"],"+str(y[3][0])+"]]")
+            
+                        e_new2 = fun_utiles.expr_replace(e_new2,eval("['"+y[1]+"']"),eval("['_CE"+str(y[-3])+"']"))
+                        
+                        equation2 = eval("['s0',"+str(e_new2)+"]")
+                
+                        constraint1 = eval("['a',['<=',['0'],['_CE"+str(y[-3])+"']]]")
+                
+                        constraint2 = eval("['a',['<=',['0'],['_CS"+str(y[-3])+"']]]")
+                
+                        constraint3 = eval("['a',['<',['_CS"+str(y[-3])+"'],['_CE"+str(y[-3])+"']]]")
+                    
+                        list1 =[]
+                    
+                        list1.append(equation1)
+                        list1.append(equation2)
+                        list1.append(constraint1)
+                        list1.append(constraint2)
+                        list1.append(constraint3)
+                        
+                        y.append(list1)
+                        
+                    else:
+                        
+                        y.append(None)
+                        
+                    #print y[7][-1]
+                    e_new_in = copy.deepcopy(y[7][-1])
+                    
+                    e_new_in = fun_utiles.expr_replace(e_new_in,eval("['"+y[1]+"']"),eval("['-',['"+y[1]+"'],['1']]"))
+                    
+                    if e_new_in==y[7][-1]:
+                        
+                        y.append('Constant')
+                        
+                    else:
+                        
+                        equation_list=[]
+                        
+                        constraint_list=[]
+                        
+                        constraint_in =  eval("['s0',['<=',"+str(y[7][-1])+","+str(e_new_in)+"]]")
+                    
+                        equation_list.append(constraint_in)
+                    
+                        constraint_list.append(FOL_translation.wff2z3_update(constraint_in))
+                
+                
+                        var_map={}
+    
+                        FOL_translation.getEqVariFunDetails(equation_list,var_map)
+                
+                        vfacts=[]
+                
+                        for vfact in var_map:
+                            vfacts.append(var_map[vfact])
+
+                        status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
+                        
+                        if 'Counter Example' in status:
+                    
+                            y.append('increasing')
+                            
+                        elif 'Successfully Proved' in status:
+                    
+                            y.append('Always True')
+                            
+                            
+                        else:
+
+                            equation_list=[]
+                        
+                            constraint_list=[]
+                        
+                            constraint_in =  eval("['s0',['>=',"+str(y[7][-1])+","+str(e_new_in)+"]]")
+                    
+                            equation_list.append(constraint_in)
+                    
+                            constraint_list.append(FOL_translation.wff2z3_update(constraint_in))
+                
+                
+                            var_map={}
+    
+                            FOL_translation.getEqVariFunDetails(equation_list,var_map)
+                
+                            vfacts=[]
+                
+                            for vfact in var_map:
+                                vfacts.append(var_map[vfact])
+
+                            status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
+                            
+                            if 'Counter Example' in status:
+                    
+                                y.append('increasing')
+                            
+                            elif 'Successfully Proved' in status:
+                    
+                                y.append('Always True')
+                                
+                            else:
+
+                                y.append(None)
+                                
+
+    #for x in condition_map:
+        
+    #    print x #key condition
+        
+    #    for y in condition_map[x]:
+            
+    #        print y[0]  #key condition
+    #        print y[1]  #Inductive varible
+    #        print y[2]  #Left Expression
+    #        print y[3]  #List condition expression, Right Expression, Function Type
+    #        print y[4]  #Local Count
+    #        print y[5]  #Global Count
+    #        print y[6]  #Base Case
+    #        print y[7]  #Solution
+    #        print y[8]  #Constraint List
+    #        print y[9]  #Type 
+    #for x in condition_map:
+    #    print x
+    #    print 
+    return condition_map
+
+
+
+
+
+def constructInfoSystemGroupFunction(group_list, equations_map, basecase_map, list_equations):
+    
+    global ConstraintCount
+    
+    local_count=0
+    
+    condition_map={}
+    
+    condition_map_exp={}
+    
+    for x in group_list:
+                
+        for y in x[-1]:
+                        
+            local_count+=1
+            
+            list1=[]
+            
+            list1.append(x[0])
+            
+            list1.append(x[1][2])
+            
+            list1.append(x[1][-2])
+            
+            list1.append(x[-1][y])
+            
+            list1.append(local_count)
+            
+            if y in condition_map.keys():
+                
+                main_list = condition_map[y]
+                
+                temp_list = main_list[0]
+                
+                list1.append(temp_list[-1])
+                
+                main_list = condition_map[y]
+                
+                main_list.append(list1)
+                
+                condition_map[y] = main_list
+                
+            else:
+                
+                ConstraintCount+=1
+                
+                list1.append(ConstraintCount)
+                
+                main_list=[]
+                
+                main_list.append(list1)
+                
+                condition_map[y] = main_list
+                
+                
+    for x in condition_map:
+    
+            #condition_map_exp[]        
+        a_list=[]
+        
+        for y in condition_map[x]:
+                        
+            equation_base = str(simplify(y[0]).subs(simplify(str(y[1])+"+1"),0))
+    
+            e_base = basecase_map[equation_base]
+            
+            y.append(e_base)
+            
+            e_new_base=copy.deepcopy(e_base)
+        
+            e_new_base[-1]=eval("['_CV"+str(y[4])+"']")
+                        
+            new_e=eval("['i1','"+str(0)+"','"+y[1]+"',"+str(y[2])+","+str(y[3][1])+"]")
+            
+            a_list.append(new_e)
+            
+            a_list.append(e_new_base)
+            
+            
+             
+        a_list,soln = rec_solver_group(a_list)
+        
+        
+        if len(a_list)>0:
+            
+            return None
+        
+        else:
+            
+            for y in condition_map[x]:
+                
+                #condition_map_exp[x]=
+                
+                if  y[0] in soln:
+                    
+                    y.append(soln[y[0]])
+                    
+                    if y[3][0] is not None:
+                        
+                        for key in soln:
+                                                    
+                            y[3][0] = fun_utiles.expr_replace(y[3][0],soln[key][-2],soln[key][-1])
+                        
+                                            
+                        e_new2 = copy.deepcopy(y[3][0])
+                
+                        e_new2 = fun_utiles.expr_complement(e_new2)
+
+                    
+                        equation1 = eval("['s1',['implies',"+"['and',"+"['<=',['_CS"+str(y[-3])+"'],['"+y[1]+"']],"+"['<',['"+y[1]+"'],['_CE"+str(y[-3])+"']]"+"],"+str(y[3][0])+"]]")
+            
+                        e_new2 = fun_utiles.expr_replace(e_new2,eval("['"+y[1]+"']"),eval("['_CE"+str(y[-3])+"']"))
+                        
+                        equation2 = eval("['s0',"+str(e_new2)+"]")
+                
+                        constraint1 = eval("['a',['<=',['0'],['_CE"+str(y[-3])+"']]]")
+                
+                        constraint2 = eval("['a',['<=',['0'],['_CS"+str(y[-3])+"']]]")
+                
+                        constraint3 = eval("['a',['<',['_CS"+str(y[-3])+"'],['_CE"+str(y[-3])+"']]]")
+                    
+                        list1 =[]
+                    
+                        list1.append(equation1)
+                        list1.append(equation2)
+                        list1.append(constraint1)
+                        list1.append(constraint2)
+                        list1.append(constraint3)
+                        
+                        y.append(list1)
+                        
+                    else:
+                        
+                        y.append(None)
+                        
+                    #print y[7][-1]
+                    e_new_in = copy.deepcopy(y[7][-1])
+                    
+                    e_new_in = fun_utiles.expr_replace(e_new_in,eval("['"+y[1]+"']"),eval("['-',['"+y[1]+"'],['1']]"))
+                    
+                    if e_new_in==y[7][-1]:
+                        
+                        y.append('Constant')
+                        
+                    else:
+                        
+                        equation_list=[]
+                        
+                        constraint_list=[]
+                        
+                        constraint_in =  eval("['s0',['<=',"+str(y[7][-1])+","+str(e_new_in)+"]]")
+                    
+                        equation_list.append(constraint_in)
+                                            
+                        constraint_list.append(FOL_translation.wff2z3_update(constraint_in))
+                
+                
+                        var_map={}
+    
+                        FOL_translation.getEqVariFunDetails(equation_list,var_map)
+                
+                        vfacts=[]
+                
+                        for vfact in var_map:
+                            vfacts.append(var_map[vfact])
+
+                        status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
+                        
+                        if 'Counter Example' in status:
+                    
+                            y.append('increasing')
+                                                        
+                            
+                        else:
+
+                            equation_list=[]
+                        
+                            constraint_list=[]
+                        
+                            constraint_in =  eval("['s0',['>=',"+str(y[7][-1])+","+str(e_new_in)+"]]")
+                    
+                            equation_list.append(constraint_in)
+                    
+                            constraint_list.append(FOL_translation.wff2z3_update(constraint_in))
+                
+                
+                            var_map={}
+    
+                            FOL_translation.getEqVariFunDetails(equation_list,var_map)
+                
+                            vfacts=[]
+                
+                            for vfact in var_map:
+                                vfacts.append(var_map[vfact])
+
+                            status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
+                            
+                            if 'Counter Example' in status:
+                    
+                                y.append('increasing')
+                                                            
+                            else:
+                                
+                                return None
+
+                                y.append(None)
+                                
+
+    #for x in condition_map:
+        
+    #    print x #key condition
+        
+    #    for y in condition_map[x]:
+            
+    #        print y[0]  #key condition
+    #        print y[1]  #Inductive varible
+    #        print y[2]  #Left Expression
+    #        print y[3]  #List condition expression, Right Expression, Function Type
+    #        print y[4]  #Local Count
+    #        print y[5]  #Global Count
+    #        print y[6]  #Base Case
+    #        print y[7]  #Solution
+    #        print y[8]  #Constraint List
+    #        print y[9]  #Type 
+    #for x in condition_map:
+    #    print x
+    #    print 
+    return condition_map
+            
+            
+            
+            
+
+                    
+                    
+        
+
+
+def solveGroupCounterType(group_list, equations_map, basecase_map, list_equations):
+    
+    condition_map=None
+    
+    status = isGroupConditions(group_list)
+    
+    soln_cons_map={}
+    
+    soln_none_map={}
+    
+    soln_main_map={}
+    
+    soln_main_end_map={}
+    
+    soln_main_final_map={}
+    
+    main_soln_map={}
+    
+    soln_map={}
+    
+    additional_axoms = [] 
+    
+    final_soln_list= []
+    
+    if status is True:
+        
+        condition_map = constructInfoSystemGroup(group_list, equations_map, basecase_map, list_equations)
+        
+    
+    if condition_map is not None:
+        
+        constraint_list = []
+    
+        equation_list = []
+
+        for x in condition_map:
+            
+            e_list = condition_map[x][1][8]
+            
+            if e_list is not None:
+                for y in e_list:
+                
+                    constraint_list.append(FOL_translation.wff2z3_update(y))
+                
+                    equation_list.append(y)
+                
+                
+        var_map={}
+        
+        FOL_translation.getEqVariFunDetails(equation_list,var_map)
+        
+        vfacts=[]
+        
+        for vfact in var_map:
+            
+            vfacts.append(var_map[vfact])
+                            
+        status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
+        
+        if 'Counter Example' in status:
+        
+            map_counter_CE={}
+            
+            map_counter_CS={}
+            
+            map_counter_others={}
+            
+            values = status[status.index('[')+1:len(status)-1-status[::-1].index(']')].split(',')
+            
+            
+            for x in values:
+                if '_f =' not in x and '->' not in x and '[' not in x and ']' not in x:
+                    
+                    y = x.split('=')
+                    
+                    key = y[0].replace('\n','')
+                    
+                    key = key.strip()
+                    
+                    value = y[1].replace('\n','')
+                    value = value.strip()
+                    if '_CE' in key and fun_utiles.is_number(value):
+                        map_counter_CE[key]= value
+                    elif '_CS' in key and  fun_utiles.is_number(value):
+                        map_counter_CS[key] = value
+                    else:
+                        map_counter_others[key] = value
+                        
+            if len(map_counter_others)==0:
+                
+                list_values = map_counter_CE.values()
+            
+                list_values = sorted(list_values)
+        
+            
+                list_sort = []
+            
+                soln_start=None
+            
+                soln_end=None
+            
+                prv_value=None
+            
+                else_value=None
+            
+                constraints=None
+                                
+                if len(list_values)==len(condition_map)-1:
+                
+                    for x in list_values:
+                    
+                        for key,value in map_counter_CE.iteritems():
+                        
+                            if value==x:
+                            
+                                list_sort.append(key)
+                                
+                    
+                    for y in list_sort:
+                        
+                        for x in condition_map:
+                        
+                            for e in condition_map[x]:
+                                
+                                if '_CE'+str(e[5])==y:
+                                    
+                                    
+                                    if e[0] in soln_cons_map:
+                                        
+                                        list1 = soln_cons_map[e[0]]
+                                        
+                                        list1.append(e)
+                                        
+                                        soln_cons_map[e[0]]=list1
+
+                                        
+                                    else:
+                                        
+                                        list1=[]
+                                        
+                                        list1.append(e)
+                                        
+                                        soln_cons_map[e[0]]=list1
+                                        
+                                if e[3][0]==None:
+                                    
+                                    soln_none_map[e[0]] = e
+                                    
+                                    
+                    #soln_map
+                    
+                    soln_main_final_map,additional_axoms = constructSolution(soln_cons_map, soln_none_map, len(list_sort))
+                    
+                    for index in soln_main_final_map:
+                        
+                        equation_base = str(simplify(index).subs(simplify(soln[2]+"+1"),0))
+                                        
+                        if equations_map[index] in list_equations:
+                        
+                            list_equations.remove(equations_map[index])
+                        
+                        if basecase_map[equation_base] in list_equations:
+                        
+                            list_equations.remove(basecase_map[equation_base])
+                        
+                        del basecase_map[equation_base]
+                    
+                        del equations_map[index]
+                    
+                        for key in equations_map:
+                            e = equations_map[key]
+                            e[4] = fun_utiles.expr_replace(e[4],soln[3],soln[4])
+            
+                        for key in basecase_map:
+                            e = basecase_map[key]
+                            e[3] = fun_utiles.expr_replace(e[3],soln[3],soln[4])
+                        
+                        final_soln_list.append(soln)
+
+                
+                    return final_soln_list,additional_axoms
+
+
+            else:
+                
+                soln_cons_map={}
+                
+                soln_none_map={}
+                
+                soln_final_map={}
+                
+                isConstnat=None
+                
+                list_con_expression = []
+                
+                for x in condition_map:
+                    if x is None:
+                        for y in condition_map[x]:
+                            if y[-1]!='Constant':
+                                isConstnat=False
+                                
+                            soln_none_map[y[0]]=y
+                    
+                    else:
+                        
+                        list_con_expression.append(x)
+                                
+                none_cond=None
+                
+                if isConstnat is not None:
+                    cond=None
+                    cond_end=None
+                    for x in condition_map:
+                        if cond is None:
+                            temp_cond = condition_map[x][0][3][0]
+                            if temp_cond is not None:
+                                cond = str(temp_cond)
+                        else:
+                            temp_cond = condition_map[x][0][3][0]
+                            if temp_cond is not None:
+                                cond ="['or',"+str(temp_cond)+","+cond+"]"
+                                                        
+                    none_cond = eval("['!',"+cond+"]")
+                
+                if isConstnat is None:
+                
+                    local_count=1
+                                
+                    perm = permutations(list_con_expression,len(list_con_expression))
+                
+                    for x in list(perm):
+                                        
+                        local_count=local_count+1
+                    
+                        soln_cons_map={}
+                    
+                        list_seq =[]
+                    
+                        for i in range(0,len(x)):
+                        
+                            if x[i] in condition_map:
+                        
+                                y = condition_map[x[i]]
+                            
+                                for e in y:
+                                
+                                    list_seq.append(e[5])
+                                
+                                    if e[0] not in soln_cons_map:
+                                    
+                                        temp_list=[]
+                                    
+                                        temp_list.append(e)
+                                    
+                                        soln_cons_map[e[0]] = temp_list
+                                    
+                                    else:
+                                    
+                                        temp_list = soln_cons_map[e[0]]
+                                    
+                                        #if e not in temp_list:
+                                        
+                                        temp_list.append(e)
+                                    
+                                        soln_cons_map[e[0]] = temp_list
+                                    
+                    
+                    
+                        soln_main_final_map, add_axoms = constructSolution(soln_cons_map, soln_none_map, len(x))
+                    
+                        for index in soln_main_final_map:
+                        
+                            for seq in list_seq:
+                            
+                                soln_main_final_map[index][-1] = fun_utiles.expr_replace(soln_main_final_map[index][-1],eval("['_CE"+str(seq)+"']"),eval("['_CE"+str(seq)+"_"+str(local_count)+"']"))
+
+                        
+                            if index not in soln_final_map:
+                            
+                                temp_list=[]
+                            
+                                temp_list.append("['i2',0,'"+soln_main_final_map[index][2]+"',"+str(soln_main_final_map[index][3]))
+                            
+                                temp_list.append(str(soln_main_final_map[index][4]))
+                            
+                                temp_list.append("]")
+                            
+                                soln_final_map[index]=temp_list
+                            
+                            else:
+                            
+                                temp_list = soln_final_map[index]
+                            
+                                str_sol = temp_list[1]
+                            
+                                str_sol = "['or',"+str(str(soln_main_final_map[index][4]))+","+str_sol+"]"
+                            
+                                temp_list[1]=str_sol
+                            
+                                soln_final_map[index]=temp_list
+                            
+                        
+                        
+                        for axm in add_axoms:
+                    
+                            for seq in list_seq:
+                            
+                                axm[-1] = fun_utiles.expr_replace(axm[-1],eval("['_CE"+str(seq)+"']"),eval("['_CE"+str(seq)+"_"+str(local_count)+"']"))
+                            
+                            additional_axoms.append(axm)
+
+                        
+                    for index in soln_final_map:
+                    
+                        soln = eval(soln_final_map[index][0]+","+soln_final_map[index][1]+soln_final_map[index][2])
+                    
+                        equation_base = str(simplify(index).subs(simplify(soln[2]+"+1"),0))
+                                        
+                        if equations_map[index] in list_equations:
+                        
+                            list_equations.remove(equations_map[index])
+                        
+                        if basecase_map[equation_base] in list_equations:
+                        
+                            list_equations.remove(basecase_map[equation_base])
+                        
+                        del basecase_map[equation_base]
+                    
+                        del equations_map[index]
+                    
+                        for key in equations_map:
+                            e = equations_map[key]
+                            e[4] = fun_utiles.expr_replace(e[4],soln[3],soln[4])
+            
+                        for key in basecase_map:
+                            e = basecase_map[key]
+                            e[3] = fun_utiles.expr_replace(e[3],soln[3],soln[4])
+                        
+                        final_soln_list.append(soln)
+
+                
+                    return final_soln_list,additional_axoms
+                    
+                    
+                else:
+                    
+                        
+                        
+                    for y in  condition_map[None]:
+                        
+                        e_new2 = copy.deepcopy(none_cond)
+                
+                        e_new2 = fun_utiles.expr_complement(e_new2)
+                    
+                        equation1 = eval("['s1',['implies',"+"['and',"+"['<=',['_CS"+str(y[5])+"'],['"+y[7][2]+"']],"+"['<',['"+y[7][2]+"'],['_CE"+str(y[5])+"']]"+"],"+str(none_cond)+"]]")
+            
+                        e_new2 = fun_utiles.expr_replace(e_new2,eval("['"+y[7][2]+"']"),eval("['_CE"+str(y[5])+"']"))
+                        
+                        equation2 = eval("['s0',"+str(e_new2)+"]")
+                
+                        constraint1 = eval("['a',['<=',['0'],['_CE"+str(y[5])+"']]]")
+                
+                        constraint2 = eval("['a',['<=',['0'],['_CS"+str(y[5])+"']]]")
+                
+                        constraint3 = eval("['a',['<',['_CS"+str(y[5])+"'],['_CE"+str(y[5])+"']]]")
+                    
+                        list1 =[]
+                    
+                        list1.append(equation1)
+                    
+                        list1.append(equation2)
+                    
+                        list1.append(constraint1)
+                    
+                        list1.append(constraint2)
+                    
+                        list1.append(constraint3)
+                        
+                        y[3][0] = none_cond
+                        
+                        y[8] = list1
+                        
+                        y[3][2] = 'Counter'
+                        
+                    
+                    list_con_expression = condition_map.keys()
+                    
+                    local_count=1
+                                
+                    perm = permutations(list_con_expression,len(list_con_expression))
+                
+                    for x in list(perm):
+                                                                    
+                        local_count=local_count+1
+                    
+                        soln_cons_map={}
+                        
+                        soln_none_map={}
+                    
+                        list_seq =[]
+                    
+                        for i in range(0,len(x)):
+                        
+                            if i!=len(x)-1 and x[i] in condition_map:
+                        
+                                y = condition_map[x[i]]
+                            
+                                for e in y:
+                                
+                                    list_seq.append(e[5])
+                                
+                                    if e[0] not in soln_cons_map:
+                                    
+                                        temp_list=[]
+                                    
+                                        temp_list.append(e)
+                                    
+                                        soln_cons_map[e[0]] = temp_list
+                                    
+                                    else:
+                                    
+                                        temp_list = soln_cons_map[e[0]]
+                                        
+                                        temp_list.append(e)
+                                    
+                                        soln_cons_map[e[0]] = temp_list
+                                else:
+                                    
+                                    y = condition_map[x[i]]
+                                    
+                                    for e in y:
+                                    
+                                        soln_none_map[e[0]]=e
+
+
+                        soln_main_final_map, add_axoms = constructSolution(soln_cons_map, soln_none_map, len(x)-1)
+                    
+                        for index in soln_main_final_map:
+                        
+                            for seq in list_seq:
+                            
+                                soln_main_final_map[index][-1] = fun_utiles.expr_replace(soln_main_final_map[index][-1],eval("['_CE"+str(seq)+"']"),eval("['_CE"+str(seq)+"_"+str(local_count)+"']"))
+
+                        
+                            if index not in soln_final_map:
+                            
+                                temp_list=[]
+                            
+                                temp_list.append("['i2',0,'"+soln_main_final_map[index][2]+"',"+str(soln_main_final_map[index][3]))
+                            
+                                temp_list.append(str(soln_main_final_map[index][4]))
+                            
+                                temp_list.append("]")
+                            
+                                soln_final_map[index]=temp_list
+                            
+                            else:
+                            
+                                temp_list = soln_final_map[index]
+                            
+                                str_sol = temp_list[1]
+                            
+                                str_sol = "['or',"+str(str(soln_main_final_map[index][4]))+","+str_sol+"]"
+                            
+                                temp_list[1]=str_sol
+                            
+                                soln_final_map[index]=temp_list
+                            
+                        
+                        
+                        for axm in add_axoms:
+                    
+                            for seq in list_seq:
+                            
+                                axm[-1] = fun_utiles.expr_replace(axm[-1],eval("['_CE"+str(seq)+"']"),eval("['_CE"+str(seq)+"_"+str(local_count)+"']"))
+                            
+                            additional_axoms.append(axm)
+
+                        
+                    for index in soln_final_map:
+                    
+                        soln = eval(soln_final_map[index][0]+","+soln_final_map[index][1]+soln_final_map[index][2])
+                    
+                        equation_base = str(simplify(index).subs(simplify(soln[2]+"+1"),0))
+                                        
+                        if equations_map[index] in list_equations:
+                        
+                            list_equations.remove(equations_map[index])
+                        
+                        if basecase_map[equation_base] in list_equations:
+                        
+                            list_equations.remove(basecase_map[equation_base])
+                        
+                        del basecase_map[equation_base]
+                    
+                        del equations_map[index]
+                    
+                        for key in equations_map:
+                            e = equations_map[key]
+                            e[4] = fun_utiles.expr_replace(e[4],soln[3],soln[4])
+            
+                        for key in basecase_map:
+                            e = basecase_map[key]
+                            e[3] = fun_utiles.expr_replace(e[3],soln[3],soln[4])
+                        
+                        final_soln_list.append(soln)
+
+                
+                    return final_soln_list,additional_axoms       
+                            
+
+
+
+ 
+                           
+def solveGroupFunctionType(group_list, equations_map, basecase_map, list_equations):
+    
+    condition_map=None
+    
+    status = isGroupConditions(group_list)
+    
+    soln_cons_map={}
+    
+    soln_none_map={}
+    
+    soln_main_map={}
+    
+    soln_main_end_map={}
+    
+    soln_main_final_map={}
+    
+    main_soln_map={}
+    
+    soln_map={}
+    
+    additional_axoms = [] 
+    
+    final_soln_list= []
+    
+    if status is True:
+        
+        condition_map = constructInfoSystemGroupFunction(group_list, equations_map, basecase_map, list_equations)
+                
+        if condition_map is not None:
+        
+            type = isGroupMonotonic(condition_map)
+                    
+            if type is None:
+            
+                return None,None
+        else:
+            
+            return None,None
+        
+    
+    if condition_map is not None:
+        
+        constraint_list = []
+    
+        equation_list = []
+
+        for x in condition_map:
+            
+            e_list = condition_map[x][1][8]
+            
+            if e_list is not None:
+                for y in e_list:
+                
+                    constraint_list.append(FOL_translation.wff2z3_update(y))
+                
+                    equation_list.append(y)
+                
+                
+        var_map={}
+        
+        FOL_translation.getEqVariFunDetails(equation_list,var_map)
+        
+        vfacts=[]
+        
+        for vfact in var_map:
+            
+            vfacts.append(var_map[vfact])
+                            
+        status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
+        
+        if 'Counter Example' in status:
+        
+            map_counter_CE={}
+            
+            map_counter_CS={}
+            
+            map_counter_others={}
+            
+            values = status[status.index('[')+1:len(status)-1-status[::-1].index(']')].split(',')
+            
+            
+            for x in values:
+                if '_f =' not in x and '->' not in x and '[' not in x and ']' not in x:
+                    
+                    y = x.split('=')
+                    
+                    key = y[0].replace('\n','')
+                    
+                    key = key.strip()
+                    
+                    value = y[1].replace('\n','')
+                    value = value.strip()
+                    if '_CE' in key and fun_utiles.is_number(value):
+                        map_counter_CE[key]= value
+                    elif '_CS' in key and  fun_utiles.is_number(value):
+                        map_counter_CS[key] = value
+                    else:
+                        map_counter_others[key] = value
+                        
+            if len(map_counter_others)==0:
+                
+                list_values = map_counter_CE.values()
+            
+                list_values = sorted(list_values)
+        
+            
+                list_sort = []
+            
+                soln_start=None
+            
+                soln_end=None
+            
+                prv_value=None
+            
+                else_value=None
+            
+                constraints=None
+                                
+                if len(list_values)==len(condition_map)-1:
+                
+                    for x in list_values:
+                    
+                        for key,value in map_counter_CE.iteritems():
+                        
+                            if value==x:
+                            
+                                list_sort.append(key)
+                                
+                    
+                    for y in list_sort:
+                        
+                        for x in condition_map:
+                        
+                            for e in condition_map[x]:
+                                
+                                if '_CE'+str(e[5])==y:
+                                    
+                                    
+                                    if e[0] in soln_cons_map:
+                                        
+                                        list1 = soln_cons_map[e[0]]
+                                        
+                                        list1.append(e)
+                                        
+                                        soln_cons_map[e[0]]=list1
+
+                                        
+                                    else:
+                                        
+                                        list1=[]
+                                        
+                                        list1.append(e)
+                                        
+                                        soln_cons_map[e[0]]=list1
+                                        
+                                if e[3][0]==None:
+                                    
+                                    soln_none_map[e[0]] = e
+                                    
+                                    
+                    #soln_map
+                    
+                    soln_main_final_map,additional_axoms = constructSolution(soln_cons_map, soln_none_map, len(list_sort))
+                    
+                    for index in soln_main_final_map:
+                        
+                        equation_base = str(simplify(index).subs(simplify(soln[2]+"+1"),0))
+                                        
+                        if equations_map[index] in list_equations:
+                        
+                            list_equations.remove(equations_map[index])
+                        
+                        if basecase_map[equation_base] in list_equations:
+                        
+                            list_equations.remove(basecase_map[equation_base])
+                        
+                        del basecase_map[equation_base]
+                    
+                        del equations_map[index]
+                    
+                        for key in equations_map:
+                            e = equations_map[key]
+                            e[4] = fun_utiles.expr_replace(e[4],soln[3],soln[4])
+            
+                        for key in basecase_map:
+                            e = basecase_map[key]
+                            e[3] = fun_utiles.expr_replace(e[3],soln[3],soln[4])
+                        
+                        final_soln_list.append(soln)
+
+                
+                    return final_soln_list,additional_axoms
+
+
+            else:
+                
+                soln_cons_map={}
+                
+                soln_none_map={}
+                
+                soln_final_map={}
+                
+                isConstnat=None
+                
+                list_con_expression = []
+                
+                for x in condition_map:
+                    if x is None:
+                        for y in condition_map[x]:
+                            if y[-1]!='Constant':
+                                isConstnat=False
+                                
+                            soln_none_map[y[0]]=y
+                    
+                    else:
+                        
+                        list_con_expression.append(x)
+                                
+                none_cond=None
+                
+                if isConstnat is not None:
+                    cond=None
+                    cond_end=None
+                    for x in condition_map:
+                        if cond is None:
+                            temp_cond = condition_map[x][0][3][0]
+                            if temp_cond is not None:
+                                cond = str(temp_cond)
+                        else:
+                            temp_cond = condition_map[x][0][3][0]
+                            if temp_cond is not None:
+                                cond ="['or',"+str(temp_cond)+","+cond+"]"
+                                                        
+                    none_cond = eval("['!',"+cond+"]")
+                
+                if isConstnat is None:
+                
+                    local_count=1
+                                
+                    perm = permutations(list_con_expression,len(list_con_expression))
+                
+                    for x in list(perm):
+                                        
+                        local_count=local_count+1
+                    
+                        soln_cons_map={}
+                    
+                        list_seq =[]
+                    
+                        for i in range(0,len(x)):
+                        
+                            if x[i] in condition_map:
+                        
+                                y = condition_map[x[i]]
+                            
+                                for e in y:
+                                
+                                    list_seq.append(e[5])
+                                
+                                    if e[0] not in soln_cons_map:
+                                    
+                                        temp_list=[]
+                                    
+                                        temp_list.append(e)
+                                    
+                                        soln_cons_map[e[0]] = temp_list
+                                    
+                                    else:
+                                    
+                                        temp_list = soln_cons_map[e[0]]
+                                    
+                                        #if e not in temp_list:
+                                        
+                                        temp_list.append(e)
+                                    
+                                        soln_cons_map[e[0]] = temp_list
+                                    
+                    
+                    
+                        soln_main_final_map, add_axoms = constructSolution(soln_cons_map, soln_none_map, len(x))
+                    
+                        for index in soln_main_final_map:
+                        
+                            for seq in list_seq:
+                            
+                                soln_main_final_map[index][-1] = fun_utiles.expr_replace(soln_main_final_map[index][-1],eval("['_CE"+str(seq)+"']"),eval("['_CE"+str(seq)+"_"+str(local_count)+"']"))
+
+                        
+                            if index not in soln_final_map:
+                            
+                                temp_list=[]
+                            
+                                temp_list.append("['i2',0,'"+soln_main_final_map[index][2]+"',"+str(soln_main_final_map[index][3]))
+                            
+                                temp_list.append(str(soln_main_final_map[index][4]))
+                            
+                                temp_list.append("]")
+                            
+                                soln_final_map[index]=temp_list
+                            
+                            else:
+                            
+                                temp_list = soln_final_map[index]
+                            
+                                str_sol = temp_list[1]
+                            
+                                str_sol = "['or',"+str(str(soln_main_final_map[index][4]))+","+str_sol+"]"
+                            
+                                temp_list[1]=str_sol
+                            
+                                soln_final_map[index]=temp_list
+                            
+                        
+                        
+                        for axm in add_axoms:
+                    
+                            for seq in list_seq:
+                            
+                                axm[-1] = fun_utiles.expr_replace(axm[-1],eval("['_CE"+str(seq)+"']"),eval("['_CE"+str(seq)+"_"+str(local_count)+"']"))
+                            
+                            additional_axoms.append(axm)
+
+                        
+                    for index in soln_final_map:
+                    
+                        soln = eval(soln_final_map[index][0]+","+soln_final_map[index][1]+soln_final_map[index][2])
+                    
+                        equation_base = str(simplify(index).subs(simplify(soln[2]+"+1"),0))
+                                        
+                        if equations_map[index] in list_equations:
+                        
+                            list_equations.remove(equations_map[index])
+                        
+                        if basecase_map[equation_base] in list_equations:
+                        
+                            list_equations.remove(basecase_map[equation_base])
+                        
+                        del basecase_map[equation_base]
+                    
+                        del equations_map[index]
+                    
+                        for key in equations_map:
+                            e = equations_map[key]
+                            e[4] = fun_utiles.expr_replace(e[4],soln[3],soln[4])
+            
+                        for key in basecase_map:
+                            e = basecase_map[key]
+                            e[3] = fun_utiles.expr_replace(e[3],soln[3],soln[4])
+                        
+                        final_soln_list.append(soln)
+
+                
+                    return final_soln_list,additional_axoms
+                    
+                    
+                else:
+                    
+                        
+                        
+                    for y in  condition_map[None]:
+                        
+                        e_new2 = copy.deepcopy(none_cond)
+                
+                        e_new2 = fun_utiles.expr_complement(e_new2)
+                    
+                        equation1 = eval("['s1',['implies',"+"['and',"+"['<=',['_CS"+str(y[5])+"'],['"+y[7][2]+"']],"+"['<',['"+y[7][2]+"'],['_CE"+str(y[5])+"']]"+"],"+str(none_cond)+"]]")
+            
+                        e_new2 = fun_utiles.expr_replace(e_new2,eval("['"+y[7][2]+"']"),eval("['_CE"+str(y[5])+"']"))
+                        
+                        equation2 = eval("['s0',"+str(e_new2)+"]")
+                
+                        constraint1 = eval("['a',['<=',['0'],['_CE"+str(y[5])+"']]]")
+                
+                        constraint2 = eval("['a',['<=',['0'],['_CS"+str(y[5])+"']]]")
+                
+                        constraint3 = eval("['a',['<',['_CS"+str(y[5])+"'],['_CE"+str(y[5])+"']]]")
+                    
+                        list1 =[]
+                    
+                        list1.append(equation1)
+                    
+                        list1.append(equation2)
+                    
+                        list1.append(constraint1)
+                    
+                        list1.append(constraint2)
+                    
+                        list1.append(constraint3)
+                        
+                        y[3][0] = none_cond
+                        
+                        y[8] = list1
+                        
+                        y[3][2] = 'Counter'
+                        
+                    
+                    list_con_expression = condition_map.keys()
+                    
+                    local_count=1
+                                
+                    perm = permutations(list_con_expression,len(list_con_expression))
+                
+                    for x in list(perm):
+                                                                    
+                        local_count=local_count+1
+                    
+                        soln_cons_map={}
+                        
+                        soln_none_map={}
+                    
+                        list_seq =[]
+                    
+                        for i in range(0,len(x)):
+                        
+                            if i!=len(x)-1 and x[i] in condition_map:
+                        
+                                y = condition_map[x[i]]
+                            
+                                for e in y:
+                                
+                                    list_seq.append(e[5])
+                                
+                                    if e[0] not in soln_cons_map:
+                                    
+                                        temp_list=[]
+                                    
+                                        temp_list.append(e)
+                                    
+                                        soln_cons_map[e[0]] = temp_list
+                                    
+                                    else:
+                                    
+                                        temp_list = soln_cons_map[e[0]]
+                                        
+                                        temp_list.append(e)
+                                    
+                                        soln_cons_map[e[0]] = temp_list
+                                else:
+                                    
+                                    y = condition_map[x[i]]
+                                    
+                                    for e in y:
+                                    
+                                        soln_none_map[e[0]]=e
+
+
+                        soln_main_final_map, add_axoms = constructSolution(soln_cons_map, soln_none_map, len(x)-1)
+                    
+                        for index in soln_main_final_map:
+                        
+                            for seq in list_seq:
+                            
+                                soln_main_final_map[index][-1] = fun_utiles.expr_replace(soln_main_final_map[index][-1],eval("['_CE"+str(seq)+"']"),eval("['_CE"+str(seq)+"_"+str(local_count)+"']"))
+
+                        
+                            if index not in soln_final_map:
+                            
+                                temp_list=[]
+                            
+                                temp_list.append("['i2',0,'"+soln_main_final_map[index][2]+"',"+str(soln_main_final_map[index][3]))
+                            
+                                temp_list.append(str(soln_main_final_map[index][4]))
+                            
+                                temp_list.append("]")
+                            
+                                soln_final_map[index]=temp_list
+                            
+                            else:
+                            
+                                temp_list = soln_final_map[index]
+                            
+                                str_sol = temp_list[1]
+                            
+                                str_sol = "['or',"+str(str(soln_main_final_map[index][4]))+","+str_sol+"]"
+                            
+                                temp_list[1]=str_sol
+                            
+                                soln_final_map[index]=temp_list
+                            
+                        
+                        
+                        for axm in add_axoms:
+                    
+                            for seq in list_seq:
+                            
+                                axm[-1] = fun_utiles.expr_replace(axm[-1],eval("['_CE"+str(seq)+"']"),eval("['_CE"+str(seq)+"_"+str(local_count)+"']"))
+                            
+                            additional_axoms.append(axm)
+
+                        
+                    for index in soln_final_map:
+                    
+                        soln = eval(soln_final_map[index][0]+","+soln_final_map[index][1]+soln_final_map[index][2])
+                    
+                        equation_base = str(simplify(index).subs(simplify(soln[2]+"+1"),0))
+                                        
+                        if equations_map[index] in list_equations:
+                        
+                            list_equations.remove(equations_map[index])
+                        
+                        if basecase_map[equation_base] in list_equations:
+                        
+                            list_equations.remove(basecase_map[equation_base])
+                        
+                        del basecase_map[equation_base]
+                    
+                        del equations_map[index]
+                    
+                        for key in equations_map:
+                            e = equations_map[key]
+                            e[4] = fun_utiles.expr_replace(e[4],soln[3],soln[4])
+            
+                        for key in basecase_map:
+                            e = basecase_map[key]
+                            e[3] = fun_utiles.expr_replace(e[3],soln[3],soln[4])
+                        
+                        final_soln_list.append(soln)
+
+                
+                    return final_soln_list,additional_axoms       
+
+
+                        
+            
+def constructSolution(soln_cons_map, soln_none_map, size):
+
+    soln_main_map={}
+    
+    soln_main_end_map={}
+    
+    soln_main_final_map={}
+
+    prve_value_map={}
+                    
+    prve_seq_map={}
+    
+    additional_axoms = [] 
+    
+    pre_CE=None
+    
+    for i in range(0,size):
+                        
+        for x in soln_cons_map:
+            
+            y = soln_cons_map[x][i]
+            
+            if x not in soln_main_map:
+            
+                
+                list1=[]
+                                
+                list2=[]
+                                
+                cond=y[3][0]
+                                
+                                
+                cond = fun_utiles.expr_replace(cond,eval("['"+y[1]+"']"),eval("['-',['"+y[1]+"'],['1']]"))
+                                
+                                
+                value = copy.deepcopy(y[7][4])
+                                
+                                    
+                prve_value_map[y[4]]= y[6][-1]
+                                
+                                
+                value = fun_utiles.expr_replace(value,eval("['_CV"+str(y[4])+"']"),y[6][-1])
+                                
+                                                                                                
+                pre_value = copy.deepcopy(value)
+                                
+                                
+                pre_value = fun_utiles.expr_replace(pre_value,eval("['"+y[1]+"']"),eval("['-',['_CE"+str(y[5])+"'],['1']]"))
+                                
+                                
+                list1.append(cond)
+                
+                                
+                list1.append(value)
+                                
+                soln_main_map[x]=list1
+                                                
+                list2.append(pre_CE)
+                                
+                list2.append(pre_value)
+                                
+                prve_seq_map[x]=list2
+                
+                for e1 in y[8]:
+                    
+                    e=copy.deepcopy(e1)
+                                    
+                    if e[0]=='s1':
+                        
+                        e[1][2] = fun_utiles.expr_replace(e[1][2],eval("['"+y[1]+"']"),eval("['-',['"+y[1]+"'],['1']]"))
+                                        
+                    if e[0]=='s0':
+                                        
+                        e[1] = fun_utiles.expr_replace(e[1],eval("['-',['_CE"+str(y[5])+"'],['1']]"),eval("['_CE"+str(y[5])+"']"))
+                                    
+                                                                    
+                    e[-1] = fun_utiles.expr_replace(e[-1],eval("['_CS"+str(y[5])+"']"),eval("['0']"))
+                                    
+                    if e not in additional_axoms:
+                                        
+                        additional_axoms.append(e)
+                        
+                pre_CE = str(y[5])
+                
+            else:
+
+
+                cond=y[3][0]
+        
+                cond = fun_utiles.expr_replace(cond,eval("['"+y[1]+"']"),eval("['-',['"+y[1]+"'],['1']]"))
+                                
+                value = copy.deepcopy(y[7][4])
+                                
+                prve_value_map[y[4]] = prve_seq_map[x][1]
+                                
+                value = fun_utiles.expr_replace(value,eval("['_CV"+str(y[4])+"']"),prve_seq_map[x][1])
+                                
+                pre_value = copy.deepcopy(value)
+                                
+                pre_value = fun_utiles.expr_replace(pre_value,eval("['"+y[1]+"']"),eval("['-',['_CE"+str(y[5])+"'],['1']]"))
+                                
+                                                            
+                list1 = soln_main_map[x]
+                                
+                list1.append(cond)
+                                
+                list1.append(value)
+
+                soln_main_map[x] = list1
+                            
+                list2 = []
+                            
+                list2.append(pre_CE)
+                                
+                list2.append(pre_value)
+                                
+                prve_seq_map[x]=list2
+                            
+                                
+                for e1 in y[8]:
+                    
+                    e=copy.deepcopy(e1)
+                                    
+                    if e[0]=='s1':
+                                        
+                        e[1][2] = fun_utiles.expr_replace(e[1][2],eval("['"+y[1]+"']"),eval("['-',['"+y[1]+"'],['1']]"))
+                                        
+                    if e[0]=='s0':
+                                        
+                        e[1] = fun_utiles.expr_replace(e[1],eval("['-',['_CE"+str(y[5])+"'],['1']]"),eval("['_CE"+str(y[5])+"']"))
+                                    
+                                                                    
+                    if pre_CE is not None:
+                        
+                        if y[5]!=pre_CE:
+                                                    
+                            e[-1] = fun_utiles.expr_replace(e[-1],eval("['_CS"+str(y[5])+"']"),eval("['_CE"+str(pre_CE)+"']"))
+                                    
+                    if e not in additional_axoms:
+                                        
+                        additional_axoms.append(e)
+                        
+        pre_CE = str(y[5])
+
+
+    for x in soln_none_map:
+                            
+        y = soln_none_map[x]
+                        
+        init_soln=None
+                        
+        if init_soln is None:
+                                    
+            init_soln="['i2','0','"+y[7][2]+"',"+str(y[7][3])
+            soln_main_end_map[x] = init_soln
+                            
+                                                        
+        if x not in soln_main_map:
+                                                            
+            list1=[]
+                                
+            list2=[]
+                                                                
+                                
+            value = copy.deepcopy(y[7][4])
+                                
+                                
+            prve_value_map[y[4]]= y[6][-1]
+                                
+                                
+            value = fun_utiles.expr_replace(value,eval("['_CV"+str(y[4])+"']"),y[6][-1])
+                                
+                                                                                                
+            pre_value = copy.deepcopy(value)
+                                
+                                
+            pre_value = fun_utiles.expr_replace(pre_value,eval("['"+y[1]+"']"),eval("['-',['_CE"+str(y[5])+"'],['1']]"))
+                                
+                                
+            pre_CE = str(y[5])
+                
+                                
+            list1.append(cond)
+                                
+            list1.append(value)
+                                
+            soln_main_map[x]=list1
+                                
+            list2.append(pre_CE)
+                                
+            list2.append(pre_value)
+                                
+            prve_seq_map[x]=list2
+
+                                                                    
+        else:    
+                                
+                                                                
+            value = copy.deepcopy(y[7][4])
+                                
+            prve_value_map[y[4]] = prve_seq_map[x][1]
+                                
+            value = fun_utiles.expr_replace(value,eval("['_CV"+str(y[4])+"']"),prve_seq_map[x][1])
+                                
+            pre_value = copy.deepcopy(value)
+                                
+            pre_value = fun_utiles.expr_replace(pre_value,eval("['"+y[1]+"']"),eval("['-',['_CE"+str(y[5])+"'],['1']]"))
+                                
+            pre_CE = str(y[5])
+                            
+            list1 = soln_main_map[x]
+                                                            
+            list1.append(None)
+                                
+            list1.append(value)
+            
+            soln_main_map[x] = list1
+                            
+            list2 = []
+                            
+            list2.append(pre_CE)
+                                
+            list2.append(pre_value)
+                                
+            prve_seq_map[x]=list2
+
+    
+    for x in soln_main_map:
+        
+        list =[]
+        
+        for y in soln_main_map[x]:  
+                                
+            for z in prve_value_map:
+                                                                        
+                if y is not None:
+                                    
+                    y = fun_utiles.expr_replace(y,eval("['_CV"+str(z)+"']"),prve_value_map[z])
+                                    
+            list.append(y)
+                                
+            soln_main_map[x] = list
+                    
+                                
+    for x in prve_seq_map:
+                            
+        for z in prve_value_map:
+                                                                        
+            prve_seq_map[x][1] = fun_utiles.expr_replace(prve_seq_map[x][1],eval("['_CV"+str(z)+"']"),prve_value_map[z])
+    
+    for x in soln_main_map:
+                
+        soln_str=None
+                    
+        soln_str_end=None
+
+        for i in range(0,len(soln_main_map[x])):
+                    
+            if i%2==1: 
+                        
+                if soln_str is  None:
+                            
+                    if soln_main_map[x][i-1] is not None:
+                                
+                        soln_str="['ite',"+str(soln_main_map[x][i-1])+","+str(soln_main_map[x][i])
+                        soln_str_end="]"
+                                
+                    else:
+                                
+                        soln_str=str(soln_main_map[x][i])
+                                
+                else:
+                            
+                    if soln_main_map[x][i-1] is not None:
+                                
+                        soln_str+=",['ite',"+str(soln_main_map[x][i-1])+","+str(soln_main_map[x][i])
+                        soln_str_end+="]"
+                                
+                    else:
+                                
+                        soln_str+=","+str(soln_main_map[x][i])
+
+        soln_main_final_map[x] = eval(soln_main_end_map[x]+","+soln_str+soln_str_end+"]")
+
+    return soln_main_final_map,additional_axoms
+
+
+
+
+
+
+        
+        
+        
+                 
+
+
 
 
 
@@ -1719,7 +3656,117 @@ def constructNoneCondition(e):
         
         return None,None
         
+
+
+def findTheTypeOfEq(e):
+    
+    if len(e)==2:
         
+        type1=None
+        
+        type2=None
+        
+        for x in e:
+            
+            if e[x][3][3] is None:
+                
+                if type1 is None:
+            
+                    type1 = getTypeEquation(e[x][3][1])
+                    
+            else:
+                
+                if type2 is None:
+                    
+                    type2 = e[x][3][3]
+                    
+        return type1, type2
+    
+    else:
+        
+        type=None
+        
+        type2=None
+        
+        for x in e:
+            
+            if e[x][3][3] is None:
+                
+                temp_type=getTypeEquation(e[x][3][1])
+                
+
+                
+                if temp_type =='constant':
+            
+                    type2 = temp_type
+                    
+                    
+                if type is None and temp_type is not None:
+            
+                    type = temp_type
+                    
+                elif type=='increasing' and temp_type=='decreasing':
+                    
+                    return None
+                
+                elif type=='constant' and temp_type=='decreasing':
+                    
+                    type = temp_type
+                    
+                elif type=='constant' and temp_type=='increasing':
+                    
+                    type = temp_type
+                    
+                elif temp_type=='constant' and type=='decreasing':
+                    
+                    type = 'decreasing'
+                    
+                elif temp_type=='constant' and type=='increasing':
+                    
+                    type = 'increasing'
+                    
+                else:
+                    
+                    return None,None
+            else:
+                
+                temp_type = e[x][3][3]
+               
+                if type is None:
+            
+                    type = temp_type
+                    
+                elif type=='increasing' and temp_type=='decreasing':
+                    
+                    return None
+                
+                elif type=='constant' and temp_type=='decreasing':
+                    
+                    type = temp_type
+                    
+                elif type=='constant' and temp_type=='increasing':
+                    
+                    type = temp_type
+                    
+                elif temp_type=='constant' and type=='decreasing':
+                    
+                    type = 'decreasing'
+                    
+                elif temp_type=='constant' and type=='increasing':
+                    
+                    type = 'increasing'
+                    
+                else:
+                    
+                    return None,None
+
+                
+                
+        return type,type2
+                    
+
+        
+    
         
 def solveFunctionMontonic(new_e, e, equations_map, basecase_map, list_equations):
     
@@ -1741,157 +3788,72 @@ def solveFunctionMontonic(new_e, e, equations_map, basecase_map, list_equations)
         none_cond=None
                 
         soln=None
+        
+        list_seq=None
                 
         local_count=1
                 
         list_con_expression = new_e[6].keys()
         
-        for x in new_e[6]:
+        
+        type1,type2 = findTheTypeOfEq(new_e[6])
+        
+        #print type1
+        
+        #print type2
+        
+        if type1 is None:
             
-            #print new_e[6][x][2]
-            
-            #print new_e[6][x][3][1][4]
-            
-            #print new_e[6][x][3][3]
-            
-            #print '~~~~~~~~~~~~~~~~~~~~~~~'
-            #print new_e[6][x][3]
-            #print '-----------------------'
-            #print new_e[6][x][3][3]
-            #print '~~~~~~~~~~~~~~~~~~~~~~~'
-
+            return None
+        
+        elif type1=='constant' and (type2=='increasing' or type2=='decreasing'):
             
             
-            if type_in is None:
-                            
-                if new_e[6][x][3][3] is None:
+            soln,additional_axoims = getFunction2Constant(new_e, e, equations_map, basecase_map, list_equations)
                     
-                    type_in_in = getTypeEquation(new_e[6][x][3][1])
-                                                            
-                    if type_in_in is not None:
+            if soln is not None:
                         
-                        if type_in is None:
-                            
-                            type_in = type_in_in
-                        
-                        elif type_in_in == 'Constant':
-                            
-                            type_in = type_in
-                            
-                        elif type_in!='undefined' and  type_in != type_in_in:
-                            
-                            type_in='undefined'
-                
-                else:
-                    if type_in!='undefined':
-                        
-                        type_in = new_e[6][x][3][3]
+                return soln,additional_axoims
                     
-                
             else:
-                
-                if new_e[6][x][3][3] is None:
-                    
-                    type_in_in = getTypeEquation(new_e[6][x][3][1])
-                                                            
-                    if type_in_in is not None:
                         
-                        if type_in is None:
-                            
-                            type_in = type_in_in
-                        
-                        elif type_in_in == 'Constant':
-                            
-                            type_in = type_in
-                            
-                        elif type_in!='undefined' and  type_in != type_in_in:
-                            
-                            type_in='undefined'
-                else:
-                    if type_in!='undefined':
-                        
-                        type_in = new_e[6][x][3][3]
-
-            
-        list_seq=None
-        
-        #print '################3'
-        
-        #print type_in
-        
-        #print type_in_in
-        
-        #print '################3'
-        
-        if type_in =='undefined':
-            
-            if type_in=='undefined' and type_in_in=='constant':
-                
-                if len(new_e[6])==2:
-                    
-                    soln,additional_axoims = getFunction2Constant(new_e, e, equations_map, basecase_map, list_equations)
-                    
-                    if soln is not None:
-                        
-                        return soln,additional_axoims
-                    
-                    else:
-                        
-                        return None,None
-                    
-            elif type_in=='undefined' and (type_in_in=='increasing' or type_in_in=='decreasing') :
-                
-                if len(new_e[6])==2:
-                    #soln,additional_axoims = getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations)
-                    soln,additional_axoims = getFunction2ConstantRev(new_e, e, equations_map, basecase_map, list_equations)
-                    
-                    if soln is not None:
-                        
-                        return soln,additional_axoims
-                    
-                    
-                    return None,None
-            else:
-                
                 return None,None
-                
-        elif (type_in=='increasing' or type_in=='decreasing') and type_in_in=='constant':
+        
+        elif type2=='constant' and (type1=='increasing' or type1=='decreasing'):
             
             
-            if len(new_e[6])==2:
+            soln,additional_axoims = getFunction2ConstantRev(new_e, e, equations_map, basecase_map, list_equations)
                     
-                soln,additional_axoims = getFunction2Constant(new_e, e, equations_map, basecase_map, list_equations)
-                    
-                if soln is not None:
+            if soln is not None:
                         
-                    return soln,additional_axoims
+                return soln,additional_axoims
                     
-                else:
+            else:
                         
-                    return None,None
-
-        
-        
-        elif (type_in=='increasing' and type_in_in=='decreasing') or (type_in=='decreasing' and type_in_in=='increasing'):
+                return None,None
+            
+        elif (type1=='increasing' and type2=='decreasing') or (type1=='decreasing' and type2=='increasing'):
+            
                 
-            if len(new_e[6])==2:
-                
-                soln,additional_axoims = getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations)
+            soln,additional_axoims = getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations)
                                     
-                if soln is not None:
+            if soln is not None:
                         
-                    return soln,additional_axoims
-                    
-                return None,None
-
+               return soln,additional_axoims
+        
             else:
-                
-                return None,None
         
-        elif type_in_in!='Constant':
-        
-            none_cond,list_seq = constructNoneCondition(new_e)
+               return None,None
+           
+           
+        elif (type1=='increasing' or type1=='decreasing') and type2!='constant':
             
+            
+            none_cond,list_seq = constructNoneCondition(new_e)
+        
+        
+            
+        
         
         soln=None
                 
@@ -1903,11 +3865,7 @@ def solveFunctionMontonic(new_e, e, equations_map, basecase_map, list_equations)
             
             list_con_expression.remove(None)
                                 
-        
-        print none_cond
-        
-        print list_con_expression
-        
+                
         perm= permutations(list_con_expression,len(list_con_expression))
         
         for x in list(perm):
@@ -2478,16 +4436,12 @@ def getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations):
                                 
                 
                 if result2.is_positive==False:
-                    print "1"
-                    print result1
-                    print result2
+
                     soln = soln.replace('Black',"['ite',['==',['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['0']]"+",['"+str(factor+1)+"']],['0']],['-',"+str(elseValue)+",['"+str(result1)+"']],"+str(elseValue)+"]")
                     soln = eval(soln)
                     
                 else:
-                    print "2"
-                    print result1
-                    print result2
+
                     soln = soln.replace('Black',"['ite',['==',['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['0']]"+",['"+str(factor+1)+"']],['0']],['+',"+str(elseValue)+",['"+str(result2)+"']],"+str(elseValue)+"]")
                     soln = eval(soln)
 
@@ -2580,8 +4534,11 @@ def getFunction2Constant(new_e, e, equations_map, basecase_map, list_equations):
         
         if new_e[6][x][0] is not None:
             
-            
+                        
             cond = fun_utiles.expr_replace(new_e[6][x][0],eval("['"+'_CV'+str(new_e[6][x][3][4])+"']"),e_base[3])
+                        
+            
+            cond1 = copy.deepcopy(cond)
             
             cond = fun_utiles.expr_replace(cond,eval("['"+new_e[6][x][3][1][2]+"']"),eval("['-',['"+new_e[6][x][3][1][2]+"'],['1']]"))
             
@@ -2623,7 +4580,7 @@ def getFunction2Constant(new_e, e, equations_map, basecase_map, list_equations):
                     vfacts.append(var_map[vfact])
 
                 status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
-
+                
                 if 'Counter Example' in status:
                     
                     if equations_map[e[0]] in list_equations:
@@ -2655,37 +4612,93 @@ def getFunction2Constant(new_e, e, equations_map, basecase_map, list_equations):
                 
                 else:
                 
-                    soln=eval("['"+new_e[6][x][3][1][0]+"','"+new_e[6][x][3][1][1]+"','"+new_e[6][x][3][1][2]+"',"+str(new_e[6][x][3][1][3])+",['ite',"+str(cond)+","+str(new_e[6][x][3][1][-1])+","+str(elseValue)+"]]")
-                
-                    additional_axoms=[]
-                
-                    additional_axoms.append(new_e[6][x][3][5])
-                
-                    additional_axoms.append(new_e[6][x][3][6])
-                
-                    additional_axoms.append(new_e[6][x][3][7])
-                
-                    if equations_map[e[0]] in list_equations:
                     
-                        list_equations.remove(equations_map[e[0]])
-            
-                    if basecase_map[equation_base] in list_equations:
+                    equation_list = []
+                
+                    constraint_list =[]
                     
-                        list_equations.remove(basecase_map[equation_base])
+                                    
+                    cond1 = fun_utiles.expr_replace(cond1,eval("['"+e[1][2]+"']"),eval("['0']"))
+                
+                    temp_cond = eval("['a',"+str(cond1)+"]")
+                
+                    equation_list.append(temp_cond)
+                
+                    constraint_list.append(FOL_translation.wff2z3_update(temp_cond))
+                
+                    var_map={}
+                
+                    FOL_translation.getEqVariFunDetails(equation_list,var_map)
+                
+                    vfacts=[]
+                
+                    for vfact in var_map:
+                        vfacts.append(var_map[vfact])
 
-                    del basecase_map[equation_base]
+                    status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
+                    
+                    
+                    if 'Counter Example' in status and '[_f = [else -> Var(0)]]' in status:
+                    
+                        soln=eval("['"+new_e[6][x][3][1][0]+"','"+new_e[6][x][3][1][1]+"','"+new_e[6][x][3][1][2]+"',"+str(new_e[6][x][3][1][3])+","+str(e_base[3])+"]")
                 
-                    del equations_map[e[0]]
-        
-                    for x in equations_map:
-                        e = equations_map[x]
-                        e[4] = fun_utiles.expr_replace(e[4],e[6][x][-1][1][3],e[6][x][-1][1][4])
+                
+                        if equations_map[e[0]] in list_equations:
+                    
+                            list_equations.remove(equations_map[e[0]])
             
-                    for x in basecase_map:
-                        e = basecase_map[x]
-                        e[3] = fun_utiles.expr_replace(e[3],e[6][x][-1][1][3],e[6][x][-1][1][4])
+                        if basecase_map[equation_base] in list_equations:
+                    
+                            list_equations.remove(basecase_map[equation_base])
+
+                        del basecase_map[equation_base]
+                
+                        del equations_map[e[0]]
+        
+                        for x in equations_map:
+                            e = equations_map[x]
+                            e[4] = fun_utiles.expr_replace(e[4],e[6][x][-1][1][3],e[6][x][-1][1][4])
+            
+                        for x in basecase_map:
+                            e = basecase_map[x]
+                            e[3] = fun_utiles.expr_replace(e[3],e[6][x][-1][1][3],e[6][x][-1][1][4])
                                             
-                    return soln,additional_axoms
+                        return soln,additional_axoms
+
+                  
+                    else:
+                        
+                        soln=eval("['"+new_e[6][x][3][1][0]+"','"+new_e[6][x][3][1][1]+"','"+new_e[6][x][3][1][2]+"',"+str(new_e[6][x][3][1][3])+",['ite',"+str(cond)+","+str(new_e[6][x][3][1][-1])+","+str(elseValue)+"]]")
+                
+                        additional_axoms=[]
+                
+                        additional_axoms.append(new_e[6][x][3][5])
+                
+                        additional_axoms.append(new_e[6][x][3][6])
+                
+                        additional_axoms.append(new_e[6][x][3][7])
+                
+                        if equations_map[e[0]] in list_equations:
+                    
+                            list_equations.remove(equations_map[e[0]])
+            
+                        if basecase_map[equation_base] in list_equations:
+                    
+                            list_equations.remove(basecase_map[equation_base])
+
+                        del basecase_map[equation_base]
+                
+                        del equations_map[e[0]]
+        
+                        for x in equations_map:
+                            e = equations_map[x]
+                            e[4] = fun_utiles.expr_replace(e[4],e[6][x][-1][1][3],e[6][x][-1][1][4])
+            
+                        for x in basecase_map:
+                            e = basecase_map[x]
+                            e[3] = fun_utiles.expr_replace(e[3],e[6][x][-1][1][3],e[6][x][-1][1][4])
+                                            
+                        return soln,additional_axoms
             
     return soln,additional_axoms
                 
@@ -2724,12 +4737,20 @@ def getFunction2ConstantRev(new_e, e, equations_map, basecase_map, list_equation
             cond_else = copy.deepcopy(new_e[6][x][0])
             
             cond_else = fun_utiles.expr_complement(cond_else)
-            
+                        
             value_else = fun_utiles.expr_replace(value_else,eval("['"+'_CV'+str(counter_else)+"']"),e_base[3])
             
             cond_else = fun_utiles.expr_replace(cond_else,eval("['"+'_CV'+str(new_e[6][x][3][4])+"']"),value_else)
             
+            #base_update = "[''"
+            
+            #copy.deepcopy(e_base[3])
+            
+            #cond_else = fun_utiles.expr_replace(cond_else,eval("['"+'_CV'+str(new_e[6][x][3][4])+"']"),e_base[3])
+            
+            
             cond_else = fun_utiles.expr_replace(cond_else,eval("['"+'_CV'+str(counter_else)+"']"),e_base[3])
+            
             
             cond = fun_utiles.expr_replace(new_e[6][x][0],eval("['"+'_CV'+str(new_e[6][x][3][4])+"']"),e_base[3])
             
@@ -2792,8 +4813,11 @@ def getFunction2ConstantRev(new_e, e, equations_map, basecase_map, list_equation
                     
                     value = copy.deepcopy(value_else)
                     
+
+                    
                     value = fun_utiles.expr_replace(value,eval("['"+new_e[6][x][3][1][2]+"']"),eval("['"+'_CE'+str(new_e[6][x][3][4])+"']"))
                     
+                                        
                     
                     soln=eval("['"+new_e[6][x][3][1][0]+"','"+new_e[6][x][3][1][1]+"','"+new_e[6][x][3][1][2]+"',"+str(new_e[6][x][3][1][3])+",['ite',"+str(cond_else)+","+str(value_else)+","+str(value)+"]]")
                                        
@@ -2944,6 +4968,7 @@ def solveFunctionType(e, equations_map, basecase_map, list_equations):
         
         else:
             
+            print 'Ram Ram'
             soln,axioms = solveFunctionMontonic(new_e, e,equations_map, basecase_map, list_equations)
                         
             if soln is not None:
@@ -3151,31 +5176,31 @@ def solveGroupConstantType(group_list, equations_map, basecase_map, list_equatio
             
             if y in main_map.keys():
                 
-                list = main_map[y]
+                list1 = main_map[y]
                 
                 x[6][y].append(x[1])
                 
-                list.append(x[6][y])
+                list1.append(x[6][y])
                 
             else:
                 
-                list=[]
+                list1=[]
                 
                 x[6][y].append(x[1])
                 
-                list.append(x[6][y])
+                list1.append(x[6][y])
                 
-                main_map[y] = list
+                main_map[y] = list1
                  
     
     for x in main_map:
         
-        list = main_map[x]
+        list1 = main_map[x]
         
         a_list=[]
         
         
-        for y in list:
+        for y in list1:
             
             new_e=copy.deepcopy(y[-1])
             
@@ -3191,7 +5216,7 @@ def solveGroupConstantType(group_list, equations_map, basecase_map, list_equatio
     
         res_equ,soln = rec_solver_group(a_list)
                 
-        list.append(soln)
+        list1.append(soln)
         
         if len(res_equ)>0:
             
@@ -3201,37 +5226,37 @@ def solveGroupConstantType(group_list, equations_map, basecase_map, list_equatio
     
     for x in main_map:
         
-        list = main_map[x]
+        list1 = main_map[x]
         
-        for y in list[-1]:
+        for y in list1[-1]:
             
             if y in soln_map.keys():
                 
                 soln_list=soln_map[y]
                 
-                if list[0][0] is not None:
+                if list1[0][0] is not None:
             
-                    soln_list.append("['ite',"+str(list[0][0])+","+str(list[-1][y][-1]))
+                    soln_list.append("['ite',"+str(list1[0][0])+","+str(list1[-1][y][-1]))
 
                     
                 else:
                 
-                    soln_list.append(str(list[-1][y][-1]))
+                    soln_list.append(str(list1[-1][y][-1]))
 
             else:
                 soln_list=[]
                 
-                soln_list.append("['"+list[-1][y][0]+"',"+list[-1][y][1]+",'"+list[-1][y][2]+"',"+str(list[-1][y][3]))
+                soln_list.append("['"+list1[-1][y][0]+"',"+list1[-1][y][1]+",'"+list1[-1][y][2]+"',"+str(list1[-1][y][3]))
                 
-                var=list[-1][y][2]
+                var=list1[-1][y][2]
                 
-                if list[0][0] is not None:
+                if list1[0][0] is not None:
             
-                    soln_list.append("['ite',"+str(list[0][0])+","+str(list[-1][y][-1]))
+                    soln_list.append("['ite',"+str(list1[0][0])+","+str(list1[-1][y][-1]))
                     
                 else:
                 
-                    soln_list.append(str(list[-1][y][-1]))
+                    soln_list.append(str(list1[-1][y][-1]))
                     
                 soln_map[y]=soln_list
 
@@ -3315,11 +5340,11 @@ def solvePeriodicType(e, equations_map, basecase_map, list_equations):
     for x in e[6]:
         if e[6][x][2]=='Periodic':
             
-            list=[]
+            list1=[]
             
-            list.append(e[6][x][4])
+            list1.append(e[6][x][4])
             
-            list.append(e[6][x][3])
+            list1.append(e[6][x][3])
 
             coeff_expr = simplify(FOL_translation.expr2string1(e[6][x][1]))
     
@@ -3331,13 +5356,13 @@ def solvePeriodicType(e, equations_map, basecase_map, list_equations):
                 
                 result = coeff_expr - coeff_const*simplify(equation_left)
                 
-                list.append(result)
+                list1.append(result)
                 
-                term_list.append(list)
+                term_list.append(list1)
                 
         elif e[6][x][2]==None:
             
-            list=[]
+            list1=[]
             
             coeff_expr = simplify(FOL_translation.expr2string1(e[6][x][1]))
     
@@ -3349,14 +5374,16 @@ def solvePeriodicType(e, equations_map, basecase_map, list_equations):
                 
                 result = coeff_expr - coeff_const*simplify(equation_left)
                 
-                list.append(result)
+                list1.append(result)
                 
-                term_list.append(list)
+                term_list.append(list1)
 
     if len(term_list)==2:
         if term_list[0][0]=='==':
             
             utiles_translation.resetGlobal()
+            
+
             statement_temp = utiles_translation.createASTStmt(str(term_list[0][1]))
             initer_update = utiles_translation.expressionCreator_C(statement_temp)
             
@@ -3369,8 +5396,8 @@ def solvePeriodicType(e, equations_map, basecase_map, list_equations):
             statement_temp = utiles_translation.createASTStmt(str(term_list[1][0]))
             stmt_update2 = utiles_translation.expressionCreator_C(statement_temp)
             
-            stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update1)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
-            
+            #stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update1)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
+            stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update2)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update1)+"]]"
             
             soln = eval("['i2','"+e[1][1]+"','"+e[1][2]+"',"+str(new_expr)+","+stmt_update+']')
         
@@ -3398,19 +5425,23 @@ def solvePeriodicType(e, equations_map, basecase_map, list_equations):
         else:
             
             utiles_translation.resetGlobal()
-            statement_temp = utiles_translation.createASTStmt(str(term_list[0][1]))
+            
+
+            statement_temp = utiles_translation.createASTStmt(str(term_list[1][1]))
             initer_update = utiles_translation.expressionCreator_C(statement_temp)
             
             utiles_translation.resetGlobal()
-            statement_temp = utiles_translation.createASTStmt(str(term_list[0][2]))
+            statement_temp = utiles_translation.createASTStmt(str(term_list[1][2]))
             stmt_update1 = utiles_translation.expressionCreator_C(statement_temp)
             
             
             utiles_translation.resetGlobal()
-            statement_temp = utiles_translation.createASTStmt(str(term_list[1][0]))
+            statement_temp = utiles_translation.createASTStmt(str(term_list[0][0]))
             stmt_update2 = utiles_translation.expressionCreator_C(statement_temp)
             
-            stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update2)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update1)+"]]"
+            
+            stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update1)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
+            #stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update2)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update1)+"]]"
             
             soln = eval("['i2','"+e[1][1]+"','"+e[1][2]+"',"+str(new_expr)+","+stmt_update+']')
         
@@ -3565,7 +5596,11 @@ def solve_rec(e1,e2):
 			#Try to solve recurrences
 			try:
 				#result=recurreSolver_wolframalpha(righthandstmt,righthandstmt_base,variable_list)
-				result=recurreSolver_sympy(righthandstmt,righthandstmt_base)
+                                result = getWolframalphaCache(righthandstmt,righthandstmt_base)
+                                
+                                if result is None:
+                                    
+                                    result=recurreSolver_sympy(righthandstmt,righthandstmt_base)
 				#if result is None:
 					#result=recurreSolver_sympy(righthandstmt,righthandstmt_base)
 					#result=recurreSolver_wolframalpha(righthandstmt,righthandstmt_base,variable_list)
@@ -3588,14 +5623,34 @@ def solve_rec(e1,e2):
 			
 	#return None
 	return closed_form_soln
-    
+
+
+
+
+def getWolframalphaCache(expression,base_expression):
+	#cache_map={'(n + 1)**3 + T(n)':['0','(n**2*(n + 1)**2)/2'],'(i + n + 1)**3 + T(n)':['N_1','N_1 + (n*(n + (1 + 2*i) )*(- (2 - 2*i)  + n*(n + (1 + 2*i) )))/4']}
+	cache_map={'(n + 1)**3 + T(n)':['0','(n**2*(n + 1)**2)/4'],'T(n) - 1':['N_1','N_1 - n']}
+	for element in cache_map.keys():
+		if simplify(element)==simplify(expression):
+                        try:
+                                        
+                            return simplify(cache_map[element][1]).subs(simplify(cache_map[element][0]),simplify(base_expression))
+                            
+                        except ValueError:
+                            return None
+			
+	return None
+
+
+
+
 """
 Recurrences Solving Module by 
 #Add by Pritom Rajkhowa
 
 """
     
-def solve_rec_m(e1,list):
+def solve_rec_m(e1,list1):
         global fun_call_map
 	lefthandstmt=None
 	righthandstmt=None
@@ -3632,8 +5687,8 @@ def solve_rec_m(e1,list):
 				lefthandstmt=None
 				righthandstmt=None
 				variable=None
-	if list is not None:
-            for e2 in list: 
+	if list1 is not None:
+            for e2 in list1: 
                 bascase_map[simplify("T("+FOL_translation.expr2string1(e2[0])+")")]=simplify(FOL_translation.expr2string1(e2[1]))
                 
 	if variable is not None and lefthandstmt is not None and righthandstmt is not None and len(bascase_map)>0:
@@ -3847,4 +5902,4 @@ def rec_solver_group(a):
 
 
 
-#solve_recurrence(rec_equ,var)
+solve_recurrence(rec_equ,var)

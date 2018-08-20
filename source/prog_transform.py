@@ -5391,8 +5391,8 @@ def construct_main_program(program1, program2, parameters):
         
     for x in statements1:
         
-        if type(x) is c_ast.Assignment and x.lvalue.name!='p1_RET':
-            
+        if type(x) is c_ast.Assignment and x.lvalue.name=='p1_RET':
+    
             assert_left=x.rvalue
             
         else:
@@ -5401,7 +5401,7 @@ def construct_main_program(program1, program2, parameters):
             
     for x in statements2:
         
-        if type(x) is c_ast.Assignment and x.lvalue.name!='p2_RET':
+        if type(x) is c_ast.Assignment and x.lvalue.name=='p2_RET':
             
             assert_right=x.rvalue
             
@@ -5414,7 +5414,23 @@ def construct_main_program(program1, program2, parameters):
     new_expr.append(c_ast.BinaryOp(op='==',left=assert_left,right=assert_right))
         
     update_statements.append(c_ast.FuncCall(name=c_ast.ID(name='__VERIFIER_assert'),args=c_ast.ExprList(exprs=new_expr)))
+    
+    update_statements1=[]
+    
+    update_statements2=[]
+    
+    for x in update_statements:
         
+        if type(x) is c_ast.Decl:
+            
+            update_statements1.append(x)
+            
+        else:
+            
+            update_statements2.append(x)
+    
+    update_statements = update_statements1+update_statements2
+    
     return c_ast.Compound(block_items=update_statements)
 
     
