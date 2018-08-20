@@ -65,7 +65,7 @@ ConstraintCount=0
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1<50,X(_n1)+1,ite(_n1<70,X(_n1)+2,ite(_n1<90,X(_n1)+3,X(_n1))))"
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1<A,X(_n1)+1,ite(_n1<B,X(_n1)+2,ite(_n1<C,X(_n1)+3,X(_n1))))"
 
-rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,X(_n1)+2)"
+#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,X(_n1)+2)"
 
 #rec_equ="X(0)=1;X(_n1+1)=ite(_n1<A,X(_n1)+1,X(_n1)+2)"
 
@@ -97,7 +97,7 @@ rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,X(_n1)+2)"
 #rec_equ="X(0)=A;X(_n1+1)=X(_n1)+1"
 
 
-var = "_n1"
+#var = "_n1"
 
 def solve_recurrence(rec_equ,var):
     
@@ -206,7 +206,7 @@ def solve_recurrence(rec_equ,var):
         print 'No Solution'
     
     print ''
-    print 'ADDITIONAL AXOIMS'
+    print 'ADDITIONAL AXIOMS'
     if axoims is not None:
         if len(axoims)>0:    
             for axoim in axoims:
@@ -1821,6 +1821,8 @@ def solveGroupCounterType(group_list, equations_map, basecase_map, list_equation
                     soln_main_final_map,additional_axoms = constructSolution(soln_cons_map, soln_none_map, len(list_sort))
                     
                     for index in soln_main_final_map:
+                        
+                        soln = soln_main_final_map[index]
                         
                         equation_base = str(simplify(index).subs(simplify(soln[2]+"+1"),0))
                                         
@@ -5902,4 +5904,4 @@ def rec_solver_group(a):
 
 
 
-solve_recurrence(rec_equ,var)
+#solve_recurrence(rec_equ,var)

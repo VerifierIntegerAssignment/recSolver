@@ -69,8 +69,8 @@ CLOSED FORM SOLUTION
 X(_n1) = (A+_n1)
 Y(_n1) = ((((((2*A)*_n1)+(2*B))-_n1)+(_n1**2))/2)
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 ```
 
@@ -93,8 +93,8 @@ Z(_n1) = ((((power(3,_n1)*power(l,_n1))*(C+(A+B)))+((F+(D+H))+((l*(1-(power(3,_n
 X(_n1) = ((((power(3,_n1)*power(l,_n1))*(C+(A+B)))+((F+(D+H))+((l*(1-(power(3,_n1)*power(l,_n1))))/(1-(3*l)))))+D)
 Y(_n1) = ((((power(3,_n1)*power(l,_n1))*(C+(A+B)))+((F+(D+H))+((l*(1-(power(3,_n1)*power(l,_n1))))/(1-(3*l)))))+H)
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 ```
 
 #### Example 3 
@@ -114,8 +114,8 @@ Z(_n1) = ((((power(3,_n1)*power(l,_n1))*(C+(A+B)))+((F+(D+H))+((l*(1-(power(3,_n
 X(_n1) = ((((power(3,_n1)*power(l,_n1))*(C+(A+B)))+((F+(D+H))+((l*(1-(power(3,_n1)*power(l,_n1))))/(1-(3*l)))))+D)
 Y(_n1) = ((((power(3,_n1)*power(l,_n1))*(C+(A+B)))+((F+(D+H))+((l*(1-(power(3,_n1)*power(l,_n1))))/(1-(3*l)))))+H)
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 ```
 #### Example 4 
@@ -135,8 +135,8 @@ Z((_n1+1)) = ((((l*X(_n1))+(m*Y(_n1)))+(n*Z(_n1)))+F)
 CLOSED FORM SOLUTION
 No Solution
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 
 ```
@@ -158,8 +158,8 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite((C>0),(A+(2*_n1)),ite((B>0),(A+_n1),A))
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 
 
@@ -180,8 +180,8 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = factorial(_n1)
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 
 
@@ -203,8 +203,8 @@ CLOSED FORM SOLUTION
 X(_n1) = _n1
 Y(_n1) = factorial(_n1)
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 
 
@@ -226,8 +226,8 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ((1+(A*(_n1-(_n1/5))))+((_n1/5)*B))
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 
 
@@ -252,8 +252,8 @@ CLOSED FORM SOLUTION
 X(_n1) = ((1+(A*(_n1-(_n1/5))))+((_n1/5)*B))
 Y(_n1) = ite((C>0),((A*_n1)+1),((B*_n1)+1))
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 
 
@@ -276,7 +276,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite((((1+(5*_n1))%2)!=0),(1+(5*_n1)),(1+(5*_CE1)))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1)) -> (((1+(5*_n1))%2)!=0)
 (((1+(5*_CE1))%2)==0)
 (0<=_CE1)
@@ -303,7 +303,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite((((1+(5*_n1))%2)==0),(1+(5*_n1)),(1+(5*_CE1)))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1)) -> (((1+(5*_n1))%2)==0)
 (((1+(5*_CE1))%2)!=0)
 (0<=_CE1)
@@ -329,7 +329,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite((((1+(5*_n1))%2)==0),(1+(5*_n1)),(1+(5*_CE1)))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1)) -> (((1+(5*_n1))%2)==0)
 (((1+(5*_CE1))%2)!=0)
 (0<=_CE1)
@@ -354,8 +354,8 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = (1+(5*_n1))
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 
 
@@ -378,7 +378,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite(((1+(5*_n1))<A),(1+(5*_n1)),ite(((((_n1-_CE2)+0)%2)==0),((1+(5*_CE2))-5),(1+(5*_CE2))))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE2)) -> ((1+(5*(_n1-1)))<A)
 ((1+(5*(_CE2-1)))>=A)
 (0<=_CE2)
@@ -404,7 +404,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite((((10+(5*_n1))-(5*_n1))>A),(10+(5*_n1)),(10+(5*_CE1)))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1)) -> (((10+(5*_n1))-(5*_n1))>A)
 (((10+(5*_CE1))-(5*_CE1))<=A)
 (0<=_CE1)
@@ -431,7 +431,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite(((1+(5*_n1))<A),(1+(5*_n1)),ite(((((_n1-_CE2)+0)%4)==0),((1+(5*_CE2))-15),(((1+(5*_CE2))-15)+(((_n1-_CE2)%4)*5))))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE2)) -> ((1+(5*(_n1-1)))<A)
 ((1+(5*(_CE2-1)))>=A)
 (0<=_CE2)
@@ -461,7 +461,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite((((1+(15*_n1))-(5*_n1))>A),(1+(15*_n1)),(1+(15*_CE1)))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1)) -> (((1+(15*_n1))-(5*_n1))>A)
 (((1+(15*_CE1))-(5*_CE1))<=A)
 (0<=_CE1)
@@ -491,7 +491,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite(((1+(15*_n1))<A),(1+(15*_n1)),ite(((((_n1-_CE2)+1)%4)!=0),((1+(15*_CE2))-((((_n1-_CE2)+1)%4)*5)),(1+(15*_CE2))))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE2)) -> ((1+(15*(_n1-1)))<A)
 ((1+(15*(_CE2-1)))>=A)
 (0<=_CE2)
@@ -520,7 +520,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite((((1+(5*_n1))-(15*_n1))>A),(1+(5*_n1)),(1+(5*_CE1)))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1)) -> (((1+(5*_n1))-(15*_n1))>A)
 (((1+(5*_CE1))-(15*_CE1))<=A)
 (0<=_CE1)
@@ -548,8 +548,8 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = (1+(5*_n1))
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 
 
@@ -574,8 +574,8 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = ite(((_n1-1)<50),(1+_n1),ite(((_n1-1)<70),((1+(51-1))+(2*_n1)),ite(((_n1-1)<90),(((1+(51-1))+(2*(71-1)))+(3*_n1)),(((1+(51-1))+(2*(71-1)))+(3*(91-1))))))
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 ```
 
 
@@ -596,7 +596,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = (ite(!(((1+(_n1-1))<A)),(1+(2*_n1)),((1+(2*(_CE1_2-1)))+_n1)) or ite(((1+(_n1-1))<A),(1+_n1),((1+(_CE2_3-1))+(2*_n1))))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1_2)) -> !(((1+(_n1-1))<A))
 ((1+(_CE1_2-1))<A)
 (0<=_CE1_2)
@@ -630,7 +630,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = (ite(((_n1-1)<A),(1+_n1),((1+(_CE1_2-1))+(2*_n1))) or ite(!(((_n1-1)<A)),(1+(2*_n1)),((1+(2*(_CE2_3-1)))+_n1)))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1_2)) -> ((_n1-1)<A)
 ((_CE1_2-1)>=A)
 (0<=_CE1_2)
@@ -666,7 +666,7 @@ No Equations Left
 CLOSED FORM SOLUTION
 X(_n1) = (((((((((((((((((((((((ite(((_n1-1)<A),(1+_n1),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),(1+(_CE1_2-1)),ite(((_n1-1)<C),((1+(_CE1-1))+(3*_n1)),(((1+(_CE1-1))+(3*(_CE3_2-1)))+(2*_n1))))) or ite(((_n1-1)<A),(1+_n1),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),(1+(_CE1_3-1)),ite(((_n1-1)<B),((1+(_CE1-1))+(2*_n1)),(((1+(_CE1-1))+(2*(_CE4_3-1)))+(3*_n1)))))) or ite(((_n1-1)<A),(1+_n1),ite(((_n1-1)<C),((1+(_CE1_4-1))+(3*_n1)),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),((1+(_CE1-1))+(3*(_CE3_4-1))),(((1+(_CE1-1))+(3*(_CE3-1)))+(2*_n1)))))) or ite(((_n1-1)<A),(1+_n1),ite(((_n1-1)<C),((1+(_CE1_5-1))+(3*_n1)),ite(((_n1-1)<B),(((1+(_CE1-1))+(3*(_CE3_5-1)))+(2*_n1)),(((1+(_CE1-1))+(3*(_CE3-1)))+(2*(_CE4_5-1))))))) or ite(((_n1-1)<A),(1+_n1),ite(((_n1-1)<B),((1+(_CE1_6-1))+(2*_n1)),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),((1+(_CE1-1))+(2*(_CE4_6-1))),(((1+(_CE1-1))+(2*(_CE4-1)))+(3*_n1)))))) or ite(((_n1-1)<A),(1+_n1),ite(((_n1-1)<B),((1+(_CE1_7-1))+(2*_n1)),ite(((_n1-1)<C),(((1+(_CE1-1))+(2*(_CE4_7-1)))+(3*_n1)),(((1+(_CE1-1))+(2*(_CE4-1)))+(3*(_CE3_7-1))))))) or ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),1,ite(((_n1-1)<A),(1+_n1),ite(((_n1-1)<C),((1+(_CE1_8-1))+(3*_n1)),(((1+(_CE1-1))+(3*(_CE3_8-1)))+(2*_n1)))))) or ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),1,ite(((_n1-1)<A),(1+_n1),ite(((_n1-1)<B),((1+(_CE1_9-1))+(2*_n1)),(((1+(_CE1-1))+(2*(_CE4_9-1)))+(3*_n1)))))) or ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),1,ite(((_n1-1)<C),(1+(3*_n1)),ite(((_n1-1)<A),((1+(3*(_CE3_10-1)))+_n1),(((1+(3*(_CE3-1)))+(_CE1_10-1))+(2*_n1)))))) or ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),1,ite(((_n1-1)<C),(1+(3*_n1)),ite(((_n1-1)<B),((1+(3*(_CE3_11-1)))+(2*_n1)),(((1+(3*(_CE3-1)))+(2*(_CE4_11-1)))+_n1))))) or ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),1,ite(((_n1-1)<B),(1+(2*_n1)),ite(((_n1-1)<A),((1+(2*(_CE4_12-1)))+_n1),(((1+(2*(_CE4-1)))+(_CE1_12-1))+(3*_n1)))))) or ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),1,ite(((_n1-1)<B),(1+(2*_n1)),ite(((_n1-1)<C),((1+(2*(_CE4_13-1)))+(3*_n1)),(((1+(2*(_CE4-1)))+(3*(_CE3_13-1)))+_n1))))) or ite(((_n1-1)<C),(1+(3*_n1)),ite(((_n1-1)<A),((1+(3*(_CE3_14-1)))+_n1),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),((1+(3*(_CE3-1)))+(_CE1_14-1)),(((1+(3*(_CE3-1)))+(_CE1-1))+(2*_n1)))))) or ite(((_n1-1)<C),(1+(3*_n1)),ite(((_n1-1)<A),((1+(3*(_CE3_15-1)))+_n1),ite(((_n1-1)<B),(((1+(3*(_CE3-1)))+(_CE1_15-1))+(2*_n1)),(((1+(3*(_CE3-1)))+(_CE1-1))+(2*(_CE4_15-1))))))) or ite(((_n1-1)<C),(1+(3*_n1)),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),(1+(3*(_CE3_16-1))),ite(((_n1-1)<A),((1+(3*(_CE3-1)))+_n1),(((1+(3*(_CE3-1)))+(_CE1_16-1))+(2*_n1)))))) or ite(((_n1-1)<C),(1+(3*_n1)),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),(1+(3*(_CE3_17-1))),ite(((_n1-1)<B),((1+(3*(_CE3-1)))+(2*_n1)),(((1+(3*(_CE3-1)))+(2*(_CE4_17-1)))+_n1))))) or ite(((_n1-1)<C),(1+(3*_n1)),ite(((_n1-1)<B),((1+(3*(_CE3_18-1)))+(2*_n1)),ite(((_n1-1)<A),(((1+(3*(_CE3-1)))+(2*(_CE4_18-1)))+_n1),(((1+(3*(_CE3-1)))+(2*(_CE4-1)))+(_CE1_18-1)))))) or ite(((_n1-1)<C),(1+(3*_n1)),ite(((_n1-1)<B),((1+(3*(_CE3_19-1)))+(2*_n1)),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),((1+(3*(_CE3-1)))+(2*(_CE4_19-1))),(((1+(3*(_CE3-1)))+(2*(_CE4-1)))+_n1))))) or ite(((_n1-1)<B),(1+(2*_n1)),ite(((_n1-1)<A),((1+(2*(_CE4_20-1)))+_n1),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),((1+(2*(_CE4-1)))+(_CE1_20-1)),(((1+(2*(_CE4-1)))+(_CE1-1))+(3*_n1)))))) or ite(((_n1-1)<B),(1+(2*_n1)),ite(((_n1-1)<A),((1+(2*(_CE4_21-1)))+_n1),ite(((_n1-1)<C),(((1+(2*(_CE4-1)))+(_CE1_21-1))+(3*_n1)),(((1+(2*(_CE4-1)))+(_CE1-1))+(3*(_CE3_21-1))))))) or ite(((_n1-1)<B),(1+(2*_n1)),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),(1+(2*(_CE4_22-1))),ite(((_n1-1)<A),((1+(2*(_CE4-1)))+_n1),(((1+(2*(_CE4-1)))+(_CE1_22-1))+(3*_n1)))))) or ite(((_n1-1)<B),(1+(2*_n1)),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),(1+(2*(_CE4_23-1))),ite(((_n1-1)<C),((1+(2*(_CE4-1)))+(3*_n1)),(((1+(2*(_CE4-1)))+(3*(_CE3_23-1)))+_n1))))) or ite(((_n1-1)<B),(1+(2*_n1)),ite(((_n1-1)<C),((1+(2*(_CE4_24-1)))+(3*_n1)),ite(((_n1-1)<A),(((1+(2*(_CE4-1)))+(3*(_CE3_24-1)))+_n1),(((1+(2*(_CE4-1)))+(3*(_CE3-1)))+(_CE1_24-1)))))) or ite(((_n1-1)<B),(1+(2*_n1)),ite(((_n1-1)<C),((1+(2*(_CE4_25-1)))+(3*_n1)),ite(!(((((_n1-1)<A) and ((_n1-1)<C)) and ((_n1-1)<B))),((1+(2*(_CE4-1)))+(3*(_CE3_25-1))),(((1+(2*(_CE4-1)))+(3*(_CE3-1)))+_n1)))))
 
-ADDITIONAL AXOIMS
+ADDITIONAL AXIOMS
 ((0<=_n1) and (_n1<_CE1_2)) -> ((_n1-1)<A)
 ((_CE1_2-1)>=A)
 (0<=_CE1_2)
@@ -1068,8 +1068,108 @@ CLOSED FORM SOLUTION
 X(_n1) = ite((C>0),(A+(2*_n1)),ite((B>0),(((((2*A)+((2*B)*_n1))-_n1)+(_n1**2))/2),A))
 Y(_n1) = ite((C>0),((((A*_n1)+B)+(_n1**2))-_n1),ite((B>0),(B+_n1),B))
 
-ADDITIONAL AXOIMS
-No Additional Axoims
+ADDITIONAL AXIOMS
+No Additional AXIOMS
 
 ```
 
+
+#### Example 26
+
+```python
+$recSolver/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=ite(_n1<50,X(_n1)+Y(_n1),ite(_n1<70,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(_n1<50,Y(_n1)+1,ite(_n1<70,X(_n1)+Y(_n1),Y(_n1)))"
+  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = ite(((_n1-1)<50),(((((2*A)+((2*B)*_n1))-_n1)+(_n1**2))/2),ite(((_n1-1)<70),((((((2*A)+((2*B)*(_CE1-1)))-(_CE1-1))+((_CE1-1)**2))/2)+(2*_n1)),((((((2*A)+((2*B)*(_CE1-1)))-(_CE1-1))+((_CE1-1)**2))/2)+(2*(_CE2-1)))))
+Y(_n1) = ite(((_n1-1)<50),(B+_n1),ite(((_n1-1)<70),(((((((((2*A)+((2*B)*(_CE1-1)))-(_CE1-1))+((_CE1-1)**2))/2)*_n1)+(B+(_CE1-1)))+(_n1**2))-_n1),(((((((((2*A)+((2*B)*(_CE1-1)))-(_CE1-1))+((_CE1-1)**2))/2)*(_CE2-1))+(B+(_CE1-1)))+((_CE2-1)**2))-(_CE2-1))))
+
+ADDITIONAL AXIOMS
+((0<=_n1) and (_n1<_CE1)) -> ((_n1-1)<50)
+(_CE1>=50)
+(0<=_CE1)
+(0<_CE1)
+((_CE1<=_n1) and (_n1<_CE2)) -> ((_n1-1)<70)
+(_CE2>=70)
+(0<=_CE2)
+(_CE1<_CE2)
+
+```
+
+
+
+#### Example 27
+
+```python
+$recSolver/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=ite(_n1<C,X(_n1)+Y(_n1),ite(_n1<D,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(_n1<C,Y(_n1)+1,ite(_n1<D,X(_n1)+Y(_n1),Y(_n1)))"
+  "_n1"
+```
+
+#### Output 
+
+```python
+NOt ABLE TO SOLVE FOLLOWING
+No Equations Left
+
+CLOSED FORM SOLUTION
+X(_n1) = (ite(((_n1-1)<D),(A+(2*_n1)),ite(((_n1-1)<C),(((((2*(A+(2*(_CE3_3-1))))+((2*((((_CV3*(_CE3_3-1))+B)+((_CE3_3-1)**2))-(_CE3_3-1)))*_n1))-_n1)+(_n1**2))/2),(((((2*(A+(2*(_CE3_3-1))))+((2*((((_CV3*(_CE3_3-1))+B)+((_CE3_3-1)**2))-(_CE3_3-1)))*(_CE2_3-1)))-(_CE2_3-1))+((_CE2_3-1)**2))/2))) or ite(((_n1-1)<C),(((((2*A)+((2*B)*_n1))-_n1)+(_n1**2))/2),ite(((_n1-1)<D),((((((2*A)+((2*B)*(_CE2_2-1)))-(_CE2_2-1))+((_CE2_2-1)**2))/2)+(2*_n1)),((((((2*A)+((2*B)*(_CE2_2-1)))-(_CE2_2-1))+((_CE2_2-1)**2))/2)+(2*(_CE3_2-1))))))
+Y(_n1) = (ite(((_n1-1)<D),((((A*_n1)+B)+(_n1**2))-_n1),ite(((_n1-1)<C),(((((A*(_CE3_3-1))+B)+((_CE3_3-1)**2))-(_CE3_3-1))+_n1),(((((A*(_CE3_3-1))+B)+((_CE3_3-1)**2))-(_CE3_3-1))+(_CE2_3-1)))) or ite(((_n1-1)<C),(B+_n1),ite(((_n1-1)<D),(((((((((2*A)+((2*B)*(_CE2_2-1)))-(_CE2_2-1))+((_CE2_2-1)**2))/2)*_n1)+(B+(_CE2_2-1)))+(_n1**2))-_n1),(((((((((2*A)+((2*B)*(_CE2_2-1)))-(_CE2_2-1))+((_CE2_2-1)**2))/2)*(_CE3_2-1))+(B+(_CE2_2-1)))+((_CE3_2-1)**2))-(_CE3_2-1)))))
+
+ADDITIONAL AXOIMS
+((0<=_n1) and (_n1<_CE2_2)) -> ((_n1-1)<C)
+(_CE2_2>=C)
+(0<=_CE2_2)
+(0<=0)
+(0<_CE2_2)
+((_CE2_2<=_n1) and (_n1<_CE3_2)) -> ((_n1-1)<D)
+(_CE3_2>=D)
+(0<=_CE3_2)
+(_CE2_2<_CE3_2)
+((0<=_n1) and (_n1<_CE3_3)) -> ((_n1-1)<D)
+(_CE3_3>=D)
+(0<=_CE3_3)
+(0<=0)
+(0<_CE3_3)
+((_CE3_3<=_n1) and (_n1<_CE2_3)) -> ((_n1-1)<C)
+(_CE2_3>=C)
+(0<=_CE2_3)
+(_CE3_3<_CE2_3)
+
+```
+
+
+
+#### Example 28
+
+```python
+$recSolver/recSolver.py  "X(0)=A;Y(0)=B;X(_n1+1)=ite(X(_n1)+Y(_n1)<C,X(_n1)+Y(_n1),X(_n1)+2);Y(_n1+1)=ite(X(_n1)+Y(_n1)<C,Y(_n1)+1,X(_n1)+Y(_n1))"
+  "_n1"
+```
+
+#### Output 
+
+```python
+X(_n1) = (ite((((((((2*(((((2*A)+((2*(B+(_CE2_3-1)))*(_CE2_3-1)))-(_CE2_3-1))+((_CE2_3-1)**2))/2))+((2*(B+(_CE2_3-1)))*(_n1-1)))-(_n1-1))+((_n1-1)**2))/2)+((B+(_CE2_3-1))+(_n1-1)))<C),(((((2*A)+((2*(B+(_CE2_3-1)))*_n1))-_n1)+(_n1**2))/2),(((((2*(((((2*A)+((2*(B+(_CE2_3-1)))*(_CE2_3-1)))-(_CE2_3-1))+((_CE2_3-1)**2))/2))+((2*(B+(_CE2_3-1)))*_n1))-_n1)+(_n1**2))/2)) or ite(!((((((((2*_CV2)+((2*_CV4)*(_n1-1)))-(_n1-1))+((_n1-1)**2))/2)+(_CV4+(_n1-1)))<C)),(A+(2*_n1)),((A+(2*(_CE1_2-1)))+(2*_n1))))
+Y(_n1) = (ite((((((((2*(((((2*A)+((2*(B+(_CE2_3-1)))*(_CE2_3-1)))-(_CE2_3-1))+((_CE2_3-1)**2))/2))+((2*(B+(_CE2_3-1)))*(_n1-1)))-(_n1-1))+((_n1-1)**2))/2)+((B+(_CE2_3-1))+(_n1-1)))<C),(B+_n1),((B+(_CE2_3-1))+_n1)) or ite(!((((((((2*_CV2)+((2*_CV4)*(_n1-1)))-(_n1-1))+((_n1-1)**2))/2)+(_CV4+(_n1-1)))<C)),(((((A+(2*(_CE1_2-1)))*_n1)+B)+(_n1**2))-_n1),(((((A+(2*(_CE1_2-1)))*_n1)+(((((A+(2*(_CE1_2-1)))*(_CE1_2-1))+B)+((_CE1_2-1)**2))-(_CE1_2-1)))+(_n1**2))-_n1)))
+
+ADDITIONAL AXIOMS
+((0<=_n1) and (_n1<_CE1_2)) -> !((((((((2*_CV2)+((2*_CV4)*(_n1-1)))-(_n1-1))+((_n1-1)**2))/2)+(_CV4+(_n1-1)))<C))
+(((((((2*_CV2)+((2*_CV4)*_CE1_2))-_CE1_2)+(_CE1_2**2))/2)+(_CV4+_CE1_2))<C)
+(0<=_CE1_2)
+(0<=0)
+(0<_CE1_2)
+((0<=_n1) and (_n1<_CE2_3)) -> (((((((2*_CV2)+((2*_CV4)*(_n1-1)))-(_n1-1))+((_n1-1)**2))/2)+(_CV4+(_n1-1)))<C)
+(((((((2*_CV2)+((2*_CV4)*_CE2_3))-_CE2_3)+(_CE2_3**2))/2)+(_CV4+_CE2_3))>=C)
+(0<=_CE2_3)
+(0<=0)
+(0<_CE2_3)
+
+
+```
