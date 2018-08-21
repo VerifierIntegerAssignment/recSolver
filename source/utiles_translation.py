@@ -26,6 +26,8 @@ from sympy.core.relational import Relational
 from pycparser1 import parse_file,c_parser, c_ast, c_generator
 from pycparserext.ext_c_parser import GnuCParser
 from pycparserext.ext_c_generator import GnuCGenerator
+ParserElement.enablePackrat()
+
 
 
 

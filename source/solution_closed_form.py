@@ -71,6 +71,10 @@ ConstraintCount=0
 
 
 
+#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,ite(X(_n1)<B,X(_n1)-2,X(_n1)+2))"
+
+#rec_equ="X(0)=1;X(_n1+1)=ite(X(_n1)<A,X(_n1)+1,ite(X(_n1)<B,X(_n1)+2,X(_n1)+3))"
+
 
 
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(B>0,X(_n1)+Y(_n1),ite(C>0,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(B>0,X(_n1)+1,ite(C>0,X(_n1)+Y(_n1),X(_n1)))"
@@ -80,7 +84,6 @@ ConstraintCount=0
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(_n1<50,X(_n1)+Y(_n1),ite(_n1<70,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(_n1<50,Y(_n1)+1,ite(_n1<70,X(_n1)+Y(_n1),Y(_n1)))"
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(_n1<C,X(_n1)+Y(_n1),ite(_n1<D,X(_n1)+2,X(_n1)));Y(_n1+1)=ite(_n1<C,Y(_n1)+1,ite(_n1<D,X(_n1)+Y(_n1),Y(_n1)))"
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(_n1<C,X(_n1)+Y(_n1),X(_n1)+2);Y(_n1+1)=ite(_n1<C,Y(_n1)+1,X(_n1)+Y(_n1))"
-
 #rec_equ="X(0)=A;Y(0)=B;X(_n1+1)=ite(X(_n1)+Y(_n1)<C,X(_n1)+Y(_n1),X(_n1)+2);Y(_n1+1)=ite(X(_n1)+Y(_n1)<C,Y(_n1)+1,X(_n1)+Y(_n1))"
 
 
@@ -2934,7 +2937,9 @@ def constructSolution(soln_cons_map, soln_none_map, size):
                                 
             prve_seq_map[x]=list2
 
-    
+    #print '---------------------------'
+    #print prve_value_map
+    #print '---------------------------'
     for x in soln_main_map:
         
         list =[]
@@ -2944,8 +2949,14 @@ def constructSolution(soln_cons_map, soln_none_map, size):
             for z in prve_value_map:
                                                                         
                 if y is not None:
-                                    
+                    #print '~~~~~~~~~~~~~~~~~~~~~~~~~~1'
+                    #print y
+                    #print '~~~~~~~~~~~~~~~~~~~~~~~~~~1'
                     y = fun_utiles.expr_replace(y,eval("['_CV"+str(z)+"']"),prve_value_map[z])
+                    #print '~~~~~~~~~~~~~~~~~~~~~~~~~~2'
+                    #print y
+                    #print '~~~~~~~~~~~~~~~~~~~~~~~~~~2'
+
                                     
             list.append(y)
                                 
@@ -3695,9 +3706,7 @@ def findTheTypeOfEq(e):
             if e[x][3][3] is None:
                 
                 temp_type=getTypeEquation(e[x][3][1])
-                
-
-                
+                                
                 if temp_type =='constant':
             
                     type2 = temp_type
@@ -3727,20 +3736,29 @@ def findTheTypeOfEq(e):
                     
                     type = 'increasing'
                     
+                elif temp_type=='increasing' and type=='increasing':
+                    
+                    type = 'increasing'
+                    
+                elif temp_type=='decreasing' and type=='decreasing':
+                    
+                    type = 'decreasing'
+
+                    
                 else:
                     
                     return None,None
             else:
                 
                 temp_type = e[x][3][3]
-               
+                               
                 if type is None:
             
                     type = temp_type
                     
                 elif type=='increasing' and temp_type=='decreasing':
                     
-                    return None
+                    return None,None
                 
                 elif type=='constant' and temp_type=='decreasing':
                     
@@ -3758,6 +3776,15 @@ def findTheTypeOfEq(e):
                     
                     type = 'increasing'
                     
+                elif temp_type=='increasing' and type=='increasing':
+                    
+                    type = 'increasing'
+                    
+                elif temp_type=='decreasing' and type=='decreasing':
+                    
+                    type = 'decreasing'
+
+
                 else:
                     
                     return None,None
@@ -3806,7 +3833,8 @@ def solveFunctionMontonic(new_e, e, equations_map, basecase_map, list_equations)
         
         if type1 is None:
             
-            return None
+            
+            return None,None
         
         elif type1=='constant' and (type2=='increasing' or type2=='decreasing'):
             
@@ -4970,7 +4998,7 @@ def solveFunctionType(e, equations_map, basecase_map, list_equations):
         
         else:
             
-            print 'Ram Ram'
+        
             soln,axioms = solveFunctionMontonic(new_e, e,equations_map, basecase_map, list_equations)
                         
             if soln is not None:
@@ -5630,12 +5658,14 @@ def solve_rec(e1,e2):
 
 
 def getWolframalphaCache(expression,base_expression):
+    
 	#cache_map={'(n + 1)**3 + T(n)':['0','(n**2*(n + 1)**2)/2'],'(i + n + 1)**3 + T(n)':['N_1','N_1 + (n*(n + (1 + 2*i) )*(- (2 - 2*i)  + n*(n + (1 + 2*i) )))/4']}
-	cache_map={'(n + 1)**3 + T(n)':['0','(n**2*(n + 1)**2)/4'],'T(n) - 1':['N_1','N_1 - n']}
+	cache_map={'T(n) - 1':['N_1','N_1 - n'],'n**2 + T(n)':['N_1','N_1 + n*(n - 1)*(2*n - 1)/6'],'(n+1)**2 + T(n)':['N_1','N_1 + n*(n + 1)*(2*n + 1)/6'],'n**3 + T(n)':['N_1','N_1+(n**2*(n - 1)**2)/4'],'(n + 1)**3 + T(n)':['N_1','N_1+(n**2*(n + 1)**2)/4'],'n**4 + T(n)':['N_1','N_1+n*(n*n*(3*n*(2*n-5)+10)-1)/30'],'(n + 1)**4 + T(n)':['N_1','N_1+n*(n+1)*(2*n+1)*(3*n*(n+1)-1)/30'],'(n + 1)**5 + T(n)':['N_1','N_1+(n)**2*(2*n*(n+1)-1)*(n+1)**2/12'], 'n**5 + T(n)':['N_1','N_1+(n+1)**2*(2*(n-1)*n-1)*n**2/12'],'n**6 + T(n)':['N_1','N_1 + (6*n**7-21*n**6+21*n**5-7*n**3+n)/42'],'(n+1)**6 + T(n)':['N_1','N_1 + (6*n**7+21*n**6+21*n**5-7*n**3+n)/42'],'n**7 + T(n)':['N_1','N_1 + (3*n**8-12*n**7+14*n**6-7*n**4+2*n**2)/24'],'(n+1)**7 + T(n)':['N_1','N_1 + (3*n**8+12*n**7+14*n**6-7*n**4+2*n**2)/24'],'n**8 + T(n)':['N_1','N_1 + (10*n**9-45*n**8+60*n**7-42*n**5+20*n**3-3*n)/90'],'(n+1)**8 + T(n)':['N_1','N_1 + (10*n**9+45*n**8+60*n**7-42*n**5+20*n**3-3*n)/90'],'n**9 + T(n)':['N_1','N_1 + ((2*(n-5)*n+15)*n**6-14*n**6+10*n**2-3)/20'],'(n+1)**9 + T(n)':['N_1','N_1 + ((2*(n+5)*n+15)*n**6-14*n**6+10*n**2-3)/20'],'n**10 + T(n)':['N_1','N_1 + n*(6*n**10-33*n**9+55*n**8-66*n**6+66*n**4-33*n**2+5)/66'],'(n+1)**10 + T(n)':['N_1','N_1 + n*(6*n**10-33*n**9+55*n**8-66*n**6+66*n**4-33*n**2+5)/66']}
+    
 	for element in cache_map.keys():
 		if simplify(element)==simplify(expression):
                         try:
-                                        
+                            
                             return simplify(cache_map[element][1]).subs(simplify(cache_map[element][0]),simplify(base_expression))
                             
                         except ValueError:
