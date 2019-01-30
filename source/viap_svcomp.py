@@ -50356,10 +50356,19 @@ def constructInfoSystem(group_list, equations_map, basecase_map, equations_list,
 
 
 
+    
+    
+    result = isBaseCaseType(map_condition_equation, map_condition_else_equation, variable)
 
+    if result is not None:
+        
+        for x in result:
+            
+            del equations_map[str(simplify(x))]
+            
+            final_solution_list.append(result[x])
 
-
-    if isCondEquType(map_condition_equation, map_condition_else_equation)=='Constant':
+    elif isCondEquType(map_condition_equation, map_condition_else_equation)=='Constant':
             
             
             
@@ -50878,6 +50887,91 @@ def isCondEquType(map_condition_equation, map_condition_else_equation):
     else:
           
           return type_eq
+      
+      
+      
+"""
+
+Find the type of equation
+
+"""
+
+def isBaseCaseType(map_condition_equation, map_condition_else_equation,variable):
+    
+    type_eq=None
+    
+    base_list=[]
+    
+    solution_map={}
+    
+    if len(map_condition_equation)>0:
+            
+        for x in map_condition_equation:
+            
+            list_info_system=map_condition_equation[x]
+                
+            for y in list_info_system:
+                
+                if y[0][0]=='==' and (y[0][1][0]==variable) and (is_number(y[0][2][0])==True):
+                    
+                    if len(base_list)==0:
+                        list=[]
+                        list.append(eval("['0']"))
+                        list.append(y[8])
+                        base_list.append(list)
+                        list_new=[]
+                        list_new.append(eval("['"+y[0][2][0]+"']"))
+                        list_new.append(y[8])
+                        base_list.append(list_new)
+                    else:
+                        list_new=[]
+                        list_new.append(eval("['"+y[0][2][0]+"']"))
+                        list_new.append(y[8])
+                        base_list.append(list_new)
+                        
+                elif y[0][0]=='==' and (y[0][2][0]==variable) and (is_number(y[0][1][0])==True):
+                    
+                    if len(base_list)==0:
+                        list=[]
+                        list.append(eval("['0']"))
+                        list.append(y[8])
+                        base_list.append(list)
+                        list_new=[]
+                        list_new.append(eval("['"+y[0][1][0]+"']"))
+                        list_new.append(y[8])
+                        base_list.append(list_new)
+                    else:
+                        list_new=[]
+                        list_new.append(eval("['"+y[0][1][0]+"']"))
+                        list_new.append(y[8])
+                        base_list.append(list_new)
+                else:
+                    return None
+
+
+    if None in map_condition_else_equation:
+                
+        list_info_system=map_condition_else_equation[None]
+            
+        for y in list_info_system:
+            
+            if isFunctionPresent(y[1])==True:
+                
+                soln = solve_rec_m(y[3],base_list)
+                                
+                if soln is not None:
+                    
+                    solution_map[expr2string1(y[3][-2])]=soln
+                    
+                    return solution_map
+                
+                else:
+                    
+                    return None
+
+    #solve_rec_m()
+    return None   
+
               
                 
 """
@@ -52823,3 +52917,126 @@ def query2z3_rec_solve(constraint_list,conclusion,vfact,inputmap,witnessXml):
 	except OSError  as err:
 		print 'dharilo1'
 	return status
+
+
+"""
+Recurrences Solving Module by 
+#Add by Pritom Rajkhowa
+
+"""
+def solve_rec_m(e1,list1):
+        global fun_call_map
+	lefthandstmt=None
+	righthandstmt=None
+	righthandstmt_d=None
+	lefthandstmt_base=None
+	righthandstmt_base=None
+	righthandstmt_base_d=None
+	variable=None
+	closed_form_soln=None
+        bascase_map={}
+	if e1[0]=='i1':
+		lefthandstmt=expr2string1(e1[3])
+		righthandstmt=expr2string1(e1[4])
+		lefthandstmt=lefthandstmt.strip()
+		righthandstmt=righthandstmt.strip()
+		variable=e1[2]
+		if lefthandstmt.find('_PROVE')>0:
+			return None
+		elif lefthandstmt.find('_ASSUME')>0:
+        		return None
+		if 'ite' not in righthandstmt and '>' not in righthandstmt and '<' not in righthandstmt and '==' not in righthandstmt and '|' not in righthandstmt and '&' not in righthandstmt: 
+		    	lefthandstmt=simplify(lefthandstmt)
+		    	righthandstmt=simplify(righthandstmt)
+		    	variable=simplify(variable)
+		else:
+			if '|' not in righthandstmt and '&' not in righthandstmt and '<<' not in righthandstmt and '>>' not in righthandstmt:
+                            righthandstmt=expr2stringSimplify(e1[4])
+			righthandstmt=righthandstmt.strip()
+			if 'ite' not in righthandstmt and '>' not in righthandstmt and '<' not in righthandstmt and '==' not in righthandstmt and '<' not in righthandstmt and '==' not in righthandstmt and '|' not in righthandstmt and '&' not in righthandstmt: 
+				lefthandstmt=simplify(lefthandstmt)
+				righthandstmt=simplify(righthandstmt)
+		    		variable=simplify(variable)
+			else:
+				lefthandstmt=None
+				righthandstmt=None
+				variable=None
+	if list1 is not None:
+            for e2 in list1: 
+                bascase_map[simplify("T("+expr2string1(e2[0])+")")]=simplify(expr2string1(e2[1]))
+	if variable is not None and lefthandstmt is not None and righthandstmt is not None and len(bascase_map)>0:
+		righthandstmt_d=righthandstmt
+		#righthandstmt_base_d=righthandstmt_base
+		term1=lefthandstmt.subs(simplify(str(variable)+"+1"),0)
+		term2=lefthandstmt.subs(simplify(str(variable)+"+1"),simplify(variable))
+		if len(bascase_map)>0 and  str(term2) in str(righthandstmt):
+			righthandstmt=simplify(righthandstmt).subs({simplify(term2):simplify('T(n)'),simplify(variable):simplify('n')})
+			result=None
+			#Try to solve recurrences
+			try:
+				
+				result = getSympyCache(righthandstmt,righthandstmt_base)
+                                
+                                if result is None:
+                                    #result=recurreSolver_wolframalpha(righthandstmt,righthandstmt_base,variable_list)
+                                    #result=recurreSolver_sympy(righthandstmt,bascase_map)
+                                    #print righthandstmt
+                                    #print bascase_map
+                                    #print '------------------'
+                                    result=recurreSolver_sympy_m(righthandstmt,bascase_map)
+				#if result is None:
+					#result=recurreSolver_sympy(righthandstmt,righthandstmt_base)
+					#result=recurreSolver_wolframalpha(righthandstmt,righthandstmt_base,variable_list)
+			except ValueError:
+				result=None
+			if result is not None:
+				result=substituteValue(simplify_sympy(result),simplify('n'),simplify(variable))
+				writeLogFile( "j2llogs.logs" , "\nOriginal Axoims \n"+str(lefthandstmt)+"="+str(righthandstmt_d)+","+str(lefthandstmt_base)+"="+str(righthandstmt_base_d)+"\n Closed Form Solution\n"+str(result)+"\n" )
+				if "**" in str(result):
+					result=translatepowerToFun(str(result))
+                                        
+				expression=str(str(term2)+"="+str(result))
+				fun_call_map={}
+				parser = c_parser.CParser()
+                                ast = parser.parse("void test(){"+expression+";}")
+                                statement_temp=ast.ext[0].body.block_items[0]
+                                
+                                closed_form_soln = construct_expressionC(e1[1],e1[2],expr_replace_power(eval(expressionCreator_C(statement_temp.lvalue))),expr_replace_power(eval(expressionCreator_C(statement_temp.rvalue))))
+				#tree = p.parse_expression(expression)
+				#closed_form_soln=construct_expression(tree,e1[1],e1[2])
+                                
+			
+	#return None
+	return closed_form_soln
+
+    
+
+
+def recurreSolver_sympy_m(righthandstmt,base_map):
+	expression="T(n+1)-("+str(righthandstmt)+")"
+	#print expression
+	f=simplify(expression)
+	#Register n as Symbol
+	n=Symbol('n')
+	#Register T as Function
+	T=Function('T')
+	result=None
+	#Converting String to Sympy Expression
+	#terminationList={sympify("T(0)"):righthandstmt_base}
+	#Try to solve recurrences
+	try:
+		result=rsolve(f, T(n), base_map)
+		flag=False
+            	flag=isConstInResult( str(result) )
+		if flag==False and result is not None and 'RisingFactorial' not in str(result) and 'binomial' not in str(result) and 'gamma' not in str(result) and 'rgamma' not in str(result) and 'gammaprod' not in str(result) and 'loggamma' not in str(result) and 'beta' not in str(result) and 'superfac' not in str(result) and 'barnesg' not in str(result):
+			result=simplify(result)
+			#writeLogFile( "j2llogs.logs" ,"\nEquation Pass to sympy\n"+str(expression)+"=0"+"------"+"Base Case--T(0)="+str(righthandstmt_base)+"\n" )
+			#writeLogFile( "j2llogs.logs" ,"\nClosed form solution return by sympy \n"+str(result)+"\n" )
+		else:
+                    result=None
+                    #writeLogFile( "j2llogs.logs" , "\nFailed to find close form solution\n" )
+	except ValueError:
+		result=None
+		#writeLogFile( "j2llogs.logs" , "\nFailed to find close form solution\n" )
+
+	return result
