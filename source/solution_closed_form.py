@@ -99,6 +99,20 @@ ConstraintCount=0
 
 #rec_equ="X(0)=A;X(_n1+1)=X(_n1)+1"
 
+#rec_equ="x2(0)=0;x2(n+1)=x2(n)+1;y(0)=0;y(n+1)=ite(x(n)<A,y(n)+1,y(n)-1);u2(0)=1;v2(0)=1;w2(0)=1;u2(n+1)=u(n)+v(n)+w(n);v(n+1)=u(n)+v(n)+w(n);w(n+1)=u(n)+v(n)+w(n)"
+
+#rec_equ="x2(0)=0;x2(_n1+1)=x2(_n1)+1;y2(0)=0;y2(_n1+1)=ite(x2(_n1)<50,y2(_n1)+1,y2(_n1)-1);z2(0)=0;z2(_n1+1)=ite(z2(_n1)<60,z2(_n1)+4,z2(_n1)-2);u2(0)=1;v2(0)=1;w2(0)=1;u2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1);v2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1);w2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1)"
+
+#rec_equ="x2(0)=0;x2(_n1+1)=x2(_n1)+1;y2(0)=0;y2(_n1+1)=ite(x2(_n1)<50,y2(_n1)+1,y2(_n1)-1);u2(0)=1;v2(0)=1;w2(0)=1;u2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1);v2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1);w2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1)"
+
+
+
+#rec_equ="u2(0)=1;v2(0)=1;w2(0)=1;u2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1);v2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1);w2(_n1+1)=u2(_n1)+v2(_n1)+w2(_n1)"
+
+#rec_equ="z2(0)=0;z2(_n1+1)=ite(z2(_n1)<60,z2(_n1)+4,z2(_n1)-2)"
+
+#rec_equ="z2(0)=0;z2(_n1+1)=ite(z2(_n1)<60,z2(_n1)+4,z2(_n1)-4)"
+
 
 #var = "_n1"
 
@@ -425,9 +439,13 @@ def solve_mutual_rec(group_list, new_coeff_map, equation_map, base_map, var):
         count=count+1
         
     for list_of_value in list_of_values:
-                
-        express_main="['i2', '0', '"+var+"',"+str(list_of_value[3])+",['+',"+"['+',"+"['*',['*',['power',['"+str(len(list_of_values))+"'],['"+var+"']],"+"['power',"+const_value+",['"+var+"']]],"+const_expr+const_expr_end+"]"+","+"['+',"+const_coeff+const_coeff_end+",['/'"+",['*',"+const_value+",['-',['1'],['*',['power',['"+str(len(list_of_values))+"'],['"+var+"']],['power',"+const_value+",['"+var+"']]]]],"+"['-',['1'],['*',['"+str(len(list_of_values))+"'],"+const_value+"]]]]],"+str(list_of_value[1])+"]]"
-
+        
+        #res_expr ="['ite',['==',['"+var+"'],['0']],"+str(list_of_value[1])+","+"['+',"+"['+',"+"['*',['*',['power',['"+str(len(list_of_values))+"'],['"+var+"']],"+"['power',"+const_value+",['"+var+"']]],"+const_expr+const_expr_end+"]"+","+"['*',"+const_coeff+const_coeff_end+",['/'"+",['*',"+const_value+",['-',['1'],['*',['power',['"+str(len(list_of_values))+"'],['"+var+"']],['power',"+const_value+",['"+var+"']]]]],"+"['-',['1'],['*',['"+str(len(list_of_values))+"'],"+const_value+"]]]]],"+str(list_of_value[1])+"]"+"]"
+        
+        res_expr ="['ite',['==',['"+var+"'],['0']],"+str(list_of_value[2])+","+"['+',"+"['+',"+"['*',['*',['**',['"+str(len(list_of_values))+"'],['"+var+"']],"+"['**',"+const_value+",['"+var+"']]],"+const_expr+const_expr_end+"]"+","+"['*',"+const_coeff+const_coeff_end+",['/'"+",['*',"+const_value+",['-',['1'],['*',['**',['"+str(len(list_of_values))+"'],['"+var+"']],['**',"+const_value+",['"+var+"']]]]],"+"['-',['1'],['*',['"+str(len(list_of_values))+"'],"+const_value+"]]]]],"+str(list_of_value[1])+"]"+"]"
+        
+        express_main="['i2', '0', '"+var+"',"+str(list_of_value[3])+","+res_expr+"]"
+        
         solutions.append(eval(express_main))
         
     return solutions
@@ -597,6 +615,9 @@ def rec_solve_conditional(group_list, equations_map,basecase_map, list_equations
                                 
                 if z[0] is not None:
                     
+                    print '$$$$$$$$$$$$$$$$$$$$$$$$'
+                    print z[0]
+                    print '$$$$$$$$$$$$$$$$$$$$$$$$'
                     
                     if fun_utiles.isFunctionPresent(z[0])==True:
                         
@@ -614,6 +635,13 @@ def rec_solve_conditional(group_list, equations_map,basecase_map, list_equations
                         z.append(solution_type)
                         
                     elif fun_utiles.isVariablePresent(z[0])==True and fun_utiles.isFunctionPresent(z[0])!=True:
+                        
+                        print '%%%%%%%%Ram Ram%%%%%%%%%%%%%%%'
+                        print (z[0][0]=='==' or z[0][0]=='!=') 
+                        print z[0][1][0]=='%' 
+                        print z[0][1][1][0]==var 
+                        print fun_utiles.is_number(z[0][1][2][0])==True
+                        print '%%%%%%%%Ram Ram%%%%%%%%%%%%%%%'
                         
                         if solution_type==None:
                             
@@ -641,6 +669,9 @@ def rec_solve_conditional(group_list, equations_map,basecase_map, list_equations
                             z.append(z[0][1][2][0])
                             
                             z.append(z[0][0])
+                        print '+++++++++++++++++++++'
+                        print solution_type
+                        print '+++++++++++++++++++++'
                     else:
                         
                         if solution_type==None:
@@ -995,7 +1026,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                 #e_new1 = fun_utiles.expr_replace(e_new1,eval("['"+e[1][2]+"']"),eval("['-',['"+e[1][2]+"'],['_CS"+str(ConstraintCount)+"']]"))
                 
                 
-                e_new = fun_utiles.expr_replace(e_new,eval("['"+e[1][2]+"']"),eval("['-',['"+e[1][2]+"'],['1']]"))
+                #e_new = fun_utiles.expr_replace(e_new,eval("['"+e[1][2]+"']"),eval("['-',['"+e[1][2]+"'],['1']]"))
                                 
                 
                 e_new2 = copy.deepcopy(e_new)
@@ -1007,6 +1038,7 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                 
                 equation1 = eval("['s1',['implies',"+"['and',"+"['<=',['_CS"+str(ConstraintCount)+"'],['"+e[1][2]+"']],"+"['<',['"+e[1][2]+"'],['_CE"+str(ConstraintCount)+"']]"+"],"+str(e_new)+"]]")
             
+                
                 equation2 = eval("['s0',"+str(e_new2)+"]")
                 
                 constraint1 = eval("['a',['<=',['0'],['_CE"+str(ConstraintCount)+"']]]")
@@ -1073,6 +1105,9 @@ def constructInfoSystem(e, equations_map, basecase_map, list_equations):
                 
                     equation3 = eval("['s1',['implies',"+"['and',"+"['<=',['_CS"+str(ConstraintCount+1)+"'],['"+e[1][2]+"']],"+"['<',['"+e[1][2]+"'],['_CE"+str(ConstraintCount+1)+"']]"+"],"+str(e_new1)+"]]")
             
+                    
+
+                    
                     equation4 = eval("['s0',"+str(e_new4)+"]")
                 
                     constraint3 = eval("['a',['==',['_CE"+str(ConstraintCount)+"'],['_CS"+str(ConstraintCount+1)+"']]]")
@@ -1672,6 +1707,8 @@ def constructInfoSystemGroupFunction(group_list, equations_map, basecase_map, li
 
 def solveGroupCounterType(group_list, equations_map, basecase_map, list_equations):
     
+    
+    
     condition_map=None
     
     status = isGroupConditions(group_list)
@@ -1728,6 +1765,8 @@ def solveGroupCounterType(group_list, equations_map, basecase_map, list_equation
             vfacts.append(var_map[vfact])
                             
         status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
+        
+
         
         if 'Counter Example' in status:
         
@@ -3072,6 +3111,10 @@ def solveCounterType(e, equations_map, basecase_map, list_equations):
                             
         status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
         
+        print '--------------'
+        print status
+        print '--------------'
+        
         if 'Counter Example' in status:
             
             map_counter_CE={}
@@ -3160,7 +3203,7 @@ def solveCounterType(e, equations_map, basecase_map, list_equations):
                                         stmt = copy.deepcopy(e[6][x][-1][1][4])
                                     
                                         stmt = fun_utiles.expr_replace(stmt,eval("['"+'_CV'+str(e[6][x][-1][4])+"']"),e_base[3])
-                                    
+                                                                            
                                         prv_value = copy.deepcopy(stmt)
                                     
                                         prv_value = fun_utiles.expr_replace(prv_value,eval("['"+e[6][x][-1][1][2]+"']"),eval("['-',['"+'_CE'+str(e[6][x][-1][4])+"'],['1']]"))
@@ -3173,7 +3216,6 @@ def solveCounterType(e, equations_map, basecase_map, list_equations):
 
                                     
                                     
-                                    
                                     else:
                                     
                                         if prv_value is not None:
@@ -3184,8 +3226,19 @@ def solveCounterType(e, equations_map, basecase_map, list_equations):
                                         
                                             stmt = copy.deepcopy(e[6][x][-1][1][4])
                                         
+                                            print '~~~~~~~~~~~~~~~~~~1'
+                                            print stmt
+                                            print '~~~~~~~~~~~~~~~~~~1'
+
+                                        
                                         
                                             stmt = fun_utiles.expr_replace(stmt,eval("['"+'_CV'+str(e[6][x][-1][4])+"']"),prv_value)
+                                            
+                                            
+                                            print '~~~~~~~~~~~~~~~~~~2'
+                                            print stmt
+                                            print '~~~~~~~~~~~~~~~~~~2'
+
                                         
                                         
                                             prv_value = copy.deepcopy(stmt)
@@ -3208,7 +3261,15 @@ def solveCounterType(e, equations_map, basecase_map, list_equations):
                     if prv_value is not None:
                         else_value = fun_utiles.expr_replace(else_value,eval("['"+'_CV'+str(len(list_sort)+1)+"']"),prv_value)
                     
-                        #print str(soln_start)+","+str(else_value)+soln_end+"]"
+                        print '~~~~~~~~~~~~~~~~~~###############'
+                    
+                        print prv_value
+                        
+                        print '_CV'+str(len(list_sort)+1)
+                        
+                        print str(soln_start)+","+str(else_value)+soln_end+"]"
+                        
+                        print '~~~~~~~~~~~~~~~~~~###############'
                     
                         soln = eval(str(soln_start)+","+str(else_value)+soln_end+"]")
                     
@@ -3228,11 +3289,16 @@ def solveCounterType(e, equations_map, basecase_map, list_equations):
         
                             for x in equations_map:
                                 e = equations_map[x]
-                                e[4] = fun_utiles.expr_replace(e[4],e[6][x][-1][1][3],e[6][x][-1][1][4])
+                                                            
+                                #e[4] = fun_utiles.expr_replace(e[4],e[6][x][-1][1][3],e[6][x][-1][1][4])
+                                e[4] = fun_utiles.expr_replace(e[4],soln[-2],soln[-1])
+
             
                             for x in basecase_map:
                                 e = basecase_map[x]
-                                e[3] = fun_utiles.expr_replace(e[3],e[6][x][-1][1][3],e[6][x][-1][1][4])
+                                
+                                e[3] = fun_utiles.expr_replace(e[3],soln[-2],soln[-1])
+                                #e[3] = fun_utiles.expr_replace(e[3],e[6][x][-1][1][3],e[6][x][-1][1][4])
 
                         
                             status = fun_utiles.query2z3_update(constraint_list,None,vfacts,'')
@@ -3866,7 +3932,7 @@ def solveFunctionMontonic(new_e, e, equations_map, basecase_map, list_equations)
             
                 
             soln,additional_axoims = getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations)
-                                    
+                                                
             if soln is not None:
                         
                return soln,additional_axoims
@@ -4328,12 +4394,14 @@ def getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations):
     equation_left2 = None
     
     CE_count=None
+    
+    solution_map={}
 
     
     for x in new_e[6]:
         
         if new_e[6][x][0] is not None:
-            
+                        
             if equation1 is None:
                 
                 equation1 = new_e[6][x][1]
@@ -4341,6 +4409,7 @@ def getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations):
                 equation_left1 = new_e[6][x][3][1][-2]
                 
             CE_count='_CE'+str(new_e[6][x][3][4])
+            
                 
             new_e[6][x][3][1][-1] = fun_utiles.expr_replace(new_e[6][x][3][1][-1],eval("['"+'_CV'+str(new_e[6][x][3][4])+"']"),e_base[3])
                         
@@ -4356,6 +4425,10 @@ def getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations):
 
                 
             cond = fun_utiles.expr_replace(new_e[6][x][0],eval("['"+'_CV'+str(new_e[6][x][3][4])+"']"),e_base[3])
+            
+            cond = fun_utiles.expr_replace(cond,eval("['"+str(new_e[6][x][3][1][2])+"']"),eval("['-',['"+str(new_e[6][x][3][1][2])+"'],['1']]"))
+
+            
 
             if soln is None:
                 
@@ -4408,12 +4481,134 @@ def getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations):
                 else:
                     
                     additional_axoms=[]
+                    
+                    print 
                 
-                    additional_axoms.append(new_e[6][x][3][5])
+                    if new_e[6][x][3][5][1][2][0]=='<=' or new_e[6][x][3][5][1][2][0]=='>=' or new_e[6][x][3][5][1][2][0]=='==':
+                    
+                        equation_sol= copy.deepcopy(new_e[6][x][3][5][1][2])
+                        
+                        equation_sol[0]='-'
+                                                
+                        solution = solve(simplify(FOL_translation.expr2string1(equation_sol)), simplify("_X"))
+
+                        
+                        if solution is not None and len(solution)==1 :
+                            
+                            var_map={}
+                        
+                            equation_list=[]
+                            
+                            constraint_list=[]
+                        
+                            equation_list.append(new_e[6][x][3][5])
+                            
+                            constraint_list.append(FOL_translation.wff2z3_update(new_e[6][x][3][5]))
+                            
+                            constraint_list.append(FOL_translation.wff2z3_update(new_e[6][x][3][6]))
+
+                            constraint_list.append(FOL_translation.wff2z3_update(new_e[6][x][3][7]))
+
+                        
+                            FOL_translation.getEqVariFunDetails(equation_list,var_map)
+                        
+                            for vfact in var_map:
+                            
+                                vfacts.append(var_map[vfact])
+
+                            equation_sol = fun_utiles.expr_replace(equation_sol,eval("['"+new_e[6][x][3][1][2]+"']"),eval("['-',['_X'],['1']]"))
+                            
+                            status = fun_utiles.query2z3_update(constraint_list,FOL_translation.wff2z3_update(eval("['a',['==',"+str(new_e[6][x][3][5][1][1][2][2])+",['"+str(solution[0])+"']]]")),vfacts,'')
+                            
+                            if 'Successfully Proved' in status:
+                                
+                                solution_map[str(new_e[6][x][3][5][1][1][2][2])]="['"+str(solution[0])+"']"
+                                
+                            else:
+                                additional_axoms.append(new_e[6][x][3][5])
                 
-                    additional_axoms.append(new_e[6][x][3][6])
+                                additional_axoms.append(new_e[6][x][3][6])
                 
-                    additional_axoms.append(new_e[6][x][3][7])
+                                additional_axoms.append(new_e[6][x][3][7])
+                        else:
+                            additional_axoms.append(new_e[6][x][3][5])
+                
+                            additional_axoms.append(new_e[6][x][3][6])
+                
+                            additional_axoms.append(new_e[6][x][3][7])
+
+                            
+                            
+                        
+                        #print new_e[6][x][3][1][2]
+                        #print new_e[6][x][3][5][1][1][2][2]
+                        
+                        
+                    elif new_e[6][x][3][6][1][0]=='<=' or new_e[6][x][3][6][1][0]=='>=' or new_e[6][x][3][6][1][0]=='==':
+                    
+                        equation_sol= copy.deepcopy(new_e[6][x][3][6][1])
+                        
+                        equation_sol[0]='-'
+                        
+                        equation_sol = fun_utiles.expr_replace(equation_sol,new_e[6][x][3][5][1][1][2][2],eval("['_X']"))
+                        
+                        solution = solve(simplify(FOL_translation.expr2string1(equation_sol)), simplify("_X"))
+                        
+                        
+                        if solution is not None and len(solution)==1:
+                            
+                            var_map={}
+                        
+                            equation_list=[]
+                            
+                            constraint_list=[]
+                            
+                            constraint_list.append(FOL_translation.wff2z3_update(new_e[6][x][3][5]))
+                            
+                            constraint_list.append(FOL_translation.wff2z3_update(new_e[6][x][3][6]))
+
+                            constraint_list.append(FOL_translation.wff2z3_update(new_e[6][x][3][7]))
+
+                        
+                            equation_list.append(new_e[6][x][3][5])
+                        
+                            FOL_translation.getEqVariFunDetails(equation_list,var_map)
+                        
+                            for vfact in var_map:
+                            
+                                vfacts.append(var_map[vfact])
+
+                            equation_sol = fun_utiles.expr_replace(equation_sol,eval("['"+new_e[6][x][3][1][2]+"']"),eval("['-',['_X'],['1']]"))
+                            
+                            status = fun_utiles.query2z3_update(constraint_list,FOL_translation.wff2z3_update(eval("['a',['==',"+str(new_e[6][x][3][5][1][1][2][2])+",['"+str(solution[0])+"']]]")),vfacts,'')
+                            
+                            if 'Successfully Proved' in status:
+                                
+                                solution_map[str(new_e[6][x][3][5][1][1][2][2])]="['"+str(solution[0])+"']"
+                                
+                            else:
+                                additional_axoms.append(new_e[6][x][3][5])
+                
+                                additional_axoms.append(new_e[6][x][3][6])
+                
+                                additional_axoms.append(new_e[6][x][3][7])
+                        else:
+                            additional_axoms.append(new_e[6][x][3][5])
+                
+                            additional_axoms.append(new_e[6][x][3][6])
+                
+                            additional_axoms.append(new_e[6][x][3][7])
+                            
+                            
+                        
+                        #print new_e[6][x][3][5][1][1][2][2]
+                    else:
+                    
+                        additional_axoms.append(new_e[6][x][3][5])
+                
+                        additional_axoms.append(new_e[6][x][3][6])
+                
+                        additional_axoms.append(new_e[6][x][3][7])
 
             
                     soln="['"+new_e[6][x][3][1][0]+"','"+new_e[6][x][3][1][1]+"','"+new_e[6][x][3][1][2]+"',"+str(new_e[6][x][3][1][3])+",['ite',"+str(cond)+","+str(new_e[6][x][3][1][-1])+",Black]]"
@@ -4464,16 +4659,17 @@ def getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations):
             
             if factor==1:
                                 
-                
                 if result2.is_positive==False:
 
                     soln = soln.replace('Black',"['ite',['==',['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['0']]"+",['"+str(factor+1)+"']],['0']],['-',"+str(elseValue)+",['"+str(result1)+"']],"+str(elseValue)+"]")
                     soln = eval(soln)
                     
+                    
                 else:
 
                     soln = soln.replace('Black',"['ite',['==',['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['0']]"+",['"+str(factor+1)+"']],['0']],['+',"+str(elseValue)+",['"+str(result2)+"']],"+str(elseValue)+"]")
                     soln = eval(soln)
+                    
 
                 
                 
@@ -4499,18 +4695,47 @@ def getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations):
                 
             else:
                 
+            
+                
                 if result2.is_positive==False:
+                    
+                    if factor==2:
+                        
+                        soln = soln.replace('Black',"['ite',"+"['==',['%',"+"['-',['"+str(e[1][2])+"'],['"+CE_count+"']],"+"['"+str(factor+1)+"']],['1']]"+","+"['-',"+str(elseValue)+",['"+str(simplify(-1*result2))+"']]"+",['ite',"+"['==',['%',"+"['-',['"+str(e[1][2])+"'],['"+CE_count+"']],"+"['"+str(factor+1)+"']],['2']]"+","+"['+',"+"['-',"+str(elseValue)+",['"+str(simplify(-1*result2))+"']]"+",['"+str(result1)+"']]"+","+str(elseValue)+"]]")
+                        soln = eval(soln)
+                        
+                    elif factor>2:
+                                                
+                        part1 = "['+',"+"['+',"+"['-',"+str(elseValue)+",['"+str(simplify(-1*result2))+"']]"+",['"+str(result1)+"']]"+","+"['*',['-',['%',"+"['-',['"+str(e[1][2])+"'],['"+CE_count+"']],"+"['"+str(factor+1)+"']],['2']],"+"['"+str(factor)+"']"+"]"+"]"
+                        
+                        part2 = "['ite',"+"['>',['%',"+"['-',['"+str(e[1][2])+"'],['"+CE_count+"']],"+"['"+str(factor+1)+"']],['2']]"+","+part1+","+str(elseValue)+"]"
+                        
+                        soln = soln.replace('Black',"['ite',"+"['==',['%',"+"['-',['"+str(e[1][2])+"'],['"+CE_count+"']],"+"['"+str(factor+1)+"']],['1']]"+","+"['-',"+str(elseValue)+",['"+str(simplify(-1*result2))+"']]"+",['ite',"+"['==',['%',"+"['-',['"+str(e[1][2])+"'],['"+CE_count+"']],"+"['"+str(factor+1)+"']],['2']]"+","+"['+',"+"['-',"+str(elseValue)+",['"+str(simplify(-1*result2))+"']]"+",['"+str(result1)+"']]"+","+part2+"]]")
+                        soln = eval(soln)
 
-                    soln = soln.replace('Black',"['ite',['!=',['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['1']]"+",['"+str(factor+1)+"']],['0']],['-',"+str(elseValue)+","+"['*',"+"['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['1']]"+",['"+str(factor+1)+"']]"+",['"+str(-1*result2)+"']]"+"],"+str(elseValue)+"]")
-                    soln = eval(soln)
+                    
+                    else:
+                        
+                        soln = soln.replace('Black',"['ite',['!=',['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['1']]"+",['"+str(factor+1)+"']],['0']],['-',"+str(elseValue)+","+"['*',"+"['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['1']]"+",['"+str(factor+1)+"']]"+",['"+str(-1*result2)+"']]"+"],"+str(elseValue)+"]")
+                        soln = eval(soln)
+
+                    #print FOL_translation.expr2string1(soln[-1])
                     
                 else:
                     
                     soln = soln.replace('Black',"['ite',['!=',['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['1']]"+",['"+str(factor+1)+"']],['0']],['+',"+str(elseValue)+","+"['*',"+"['%',"+"['+',['-',['"+str(e[1][2])+"'],['"+CE_count+"']],['1']]"+",['"+str(factor+1)+"']]"+",['"+str(result2)+"']]"+"],"+str(elseValue)+"]")
                     soln = eval(soln)
+                    
             
             
             if soln is not None:
+                
+                
+                if len(solution_map)>0:
+                    
+                    for key in solution_map:
+                    
+                        soln[-1] = fun_utiles.expr_replace(soln[-1],eval(key),eval(solution_map[key]))
                 
 
                 
@@ -4529,11 +4754,13 @@ def getFunctionCycle(new_e, e, equations_map, basecase_map, list_equations):
         
                 for x in equations_map:
                     e = equations_map[x]
-                    e[4] = fun_utiles.expr_replace(e[4],e[6][x][-1][1][3],e[6][x][-1][1][4])
+                    e[4] = fun_utiles.expr_replace(e[4],soln[-2],soln[-1])         
+                    #e[4] = fun_utiles.expr_replace(e[4],e[6][x][-1][1][3],e[6][x][-1][1][4])
             
                 for x in basecase_map:
                     e = basecase_map[x]
-                    e[3] = fun_utiles.expr_replace(e[3],e[6][x][-1][1][3],e[6][x][-1][1][4])
+                    e[3] = fun_utiles.expr_replace(e[3],soln[-2],soln[-1])
+                    #e[3] = fun_utiles.expr_replace(e[3],e[6][x][-1][1][3],e[6][x][-1][1][4])
 
                 return soln,additional_axoms
             

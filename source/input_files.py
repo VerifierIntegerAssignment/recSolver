@@ -39,6 +39,7 @@ import graphclass
 import list_class
 import prog_transform
 import utiles_translation
+import viap_svcomp
 from pyparsing import *
 from sympy.core.relational import Relational
 from pycparser1 import parse_file,c_parser, c_ast, c_generator
@@ -51,12 +52,519 @@ from itertools import permutations
 
 
 
-
-
-
-
-
 def find_equiv(file_name1,file_name2):
+    
+
+
+	if not(os.path.exists(file_name1)): 
+        	print "File 1 not exits"
+		return
+	if not(os.path.exists(file_name2)): 
+        	print "File 2 not exits"
+		return
+
+
+	try:
+		fd = open(file_name1)
+		text = "".join(fd.readlines())
+                original_program1=text
+                
+                
+		fd = open(file_name2)
+		text = "".join(fd.readlines())
+                original_program2=text
+
+                
+	except SyntaxFilter.SLexerError as e:
+                print 'Error(Find Error in Input File)'
+		#print(e)
+		return
+            
+            
+	text1 = r""" """+original_program1
+        
+	text2 = r""" """+original_program2
+        
+	parser = GnuCParser()
+        
+        ast1 = parser.parse(text1)
+        
+        ast2 = parser.parse(text2)
+        
+        prog_transform.list_all_global_var()
+        
+        struct_map={}
+
+    	counter=0 
+        
+
+        
+    	externalvarmap1={}
+        externalvarmap2={}
+        
+        externalvarmap={}
+        
+        externalarraymap1={}
+        externalarraymap2={}
+        
+        externalarraymap={}
+    
+        functionvarmap_temp1={}
+        functionvarmap_temp2={}
+        
+	functionvarmap={}
+        
+        function_vfacts=[]
+        
+	memberfunctionmap={}
+	axiomeMap={}
+	addition_array_map={}
+	function_vfact_map={}
+	witnessXml_map={}
+	
+    	counter=0 
+       
+        
+
+        try:
+            
+            for e in ast1.ext:
+                    if type(e) is c_ast.Decl:
+                            if type(e.type) is c_ast.FuncDecl:
+                                    parametermap={}
+                                    structType=None
+                                    new_e,pointer_list,array_list=prog_transform.pointerHandlingParameter(e)
+                                    if new_e is None:
+                                            function_decl=e
+                                    else:
+                                            function_decl=new_e
+                                    if function_decl.type.args is not None:
+                                            for param_decl in function_decl.type.args.params:
+                                                    if param_decl.name is not None:
+                                                            structType=None
+                                                            if type(param_decl.type) is c_ast.ArrayDecl:
+                                                                    degree=0
+                                                                    dimensionmap={}
+                                                                    data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap)
+                                                                    variable=list_class.variableclass(param_decl.name, data_type,None,dimensionmap,None,structType)
+                                                            else:
+                                                                    try:
+                                                                        variable=list_class.variableclass(param_decl.name, param_decl.type.type.names[0],None,None,None,structType)
+                                                                    except Exception as e:
+                                                                        print 'Unknown'
+                                                                        return
+                                                            parametermap[param_decl.name]=variable
+
+                                    membermethod=list_class.membermethodclass(function_decl.name,function_decl.type.type.type.names[0],parametermap,None,None,0,0,None,None,None)
+                                    functionvarmap_temp1[membermethod.getMethodname()]=membermethod
+
+                            elif type(e.type) is c_ast.TypeDecl:
+                                    var_type=None
+                                    initial_value=None
+                                    structType=None
+                                    e=prog_transform.change_var_name_decl(e)
+                                    for child in e.children():
+                                            if type(child[1].type) is c_ast.IdentifierType:
+                                                    var_type=child[1].type.names[0]
+                                            else:
+                    				
+                                                    initial_value=child[1].value
+
+                                    variable=list_class.variableclass(e.name, var_type,None,None,initial_value,structType)
+                                    program_analysis_var_decl=program_analysis_var_decl+str(generator.visit(e))+';\n'
+                                    externalvarmap1[e.name]=variable
+                                    external_var_map1[e.name]=e.name
+                            elif type(e.type) is c_ast.ArrayDecl:
+                                program_analysis_var_decl=program_analysis_var_decl+str(generator.visit(e))+';\n'
+                                array_name=prog_transform.getArrayNameDecl(e.type)
+                                externalarraymap1[array_name]=prog_transform.change_var_name_decl(e)
+                                external_var_map1[array_name]=e.name
+                    else:
+                            if type(e) is c_ast.FuncDef:                          
+                                    parametermap={}
+                                    new_e,pointer_list,array_list=prog_transform.pointerHandlingParameter(e)
+                                    if new_e is None:
+                                            function_decl=e
+                                    else:
+                                            function_decl=new_e
+    				
+                                    function_decl=e.decl
+                                
+                                
+                                    function_body = e.body
+                                
+                                    if function_body.block_items is not None:
+                                        temp_statements=[]
+                                        if function_decl.type.args is not None:
+                                            for param_decl in function_decl.type.args.params:
+                                                temp_statements.append(param_decl)
+
+                                        statements=function_body.block_items
+                                        statements=temp_statements+statements
+                                        statements=prog_transform.change_var_name(statements)
+                                        function_body= c_ast.Compound(block_items=statements)
+                                        localvarmap=prog_transform.getVariables(function_body)
+                                        counter=counter+1
+                                        if function_decl.type.args is not None:
+                                                for param_decl in function_decl.type.args.params:
+                                                        new_param_decl=prog_transform.declarationModifying(param_decl)
+                                                        if new_param_decl is not None:
+                                                            param_decl=new_param_decl
+                                                        param_decl=prog_transform.change_var_name_decl(param_decl)
+                                                        if param_decl.name is not None:
+                                                                structType=None
+                                                                if type(param_decl.type) is c_ast.ArrayDecl:
+                                                                        #print param_decl.show()
+                                                                        degree=0
+                                                                        dimensionmap={}
+                                                                        data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap)
+                                                                        variable=list_class.variableclass(param_decl.name, data_type,None,dimensionmap,None,structType)
+                                                                elif type(param_decl.type) is c_ast.PtrDecl:
+                                                                        stmt=pointerToArray(param_decl)
+                                                                        #print stmt.show()
+                                                                        if stmt is not None and type(stmt.type) is c_ast.ArrayDecl:
+                                                                                degree=0
+                                                                                dimensionmap={}
+                                                                                data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap)
+                                                                                variable=list_class.variableclass(stmt.name, data_type,None,dimensionmap,None,structType)
+                                                                else:				
+                                                                        try:
+                                                                            variable=list_class.variableclass(param_decl.name, param_decl.type.type.names[0],None,None,None,structType)
+                                                                        except Exception as e:
+                                                                            print 'Error(Translation to Intermate Intermediate)'
+                                                                            print e
+                                                                            return
+                                                                parametermap[param_decl.name]=variable
+                                    if function_decl.name in functionvarmap_temp1.keys():
+                                            if function_decl.name!='__VERIFIER_assert':
+                                                membermethod=list_class.membermethodclass(function_decl.name,function_decl.type.type.type.names[0],parametermap,localvarmap,function_body,0,counter,None,None,function_decl)
+                                                functionvarmap_temp1[function_decl.name]=membermethod
+                                    else:
+                                            if function_decl.type.args is not None:
+                                                    for param_decl in function_decl.type.args.params:
+                                                            new_param_decl=prog_transform.declarationModifying(param_decl)
+                                                            if new_param_decl is not None:
+                                                                param_decl=new_param_decl
+                                                                param_decl=prog_transform.change_var_name_decl(param_decl)
+                                                            if param_decl.name is not None:
+                                                                    structType=None
+                                                                    if type(param_decl.type) is c_ast.ArrayDecl:
+                                                                            degree=0
+                                                                            dimensionmap={}
+                                                                            data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap)
+                                                                            variable=list_class.variableclass(param_decl.name, data_type,None,dimensionmap,None,structType)
+                                                                    elif type(param_decl.type) is c_ast.PtrDecl:
+                                                                            stmt=pointerToArray(param_decl)
+                                                                            if stmt is not None and type(stmt.type) is c_ast.ArrayDecl:
+                                                                                    degree=0
+                                                                                    dimensionmap={}
+                                                                                    data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap={})
+                                                                                    variable=list_class.variableclass(stmt.name, data_type,None,dimensionmap,None,structType)
+								
+                                                                    else:	
+                                                                            try:
+                                                                                variable=list_class.variableclass(param_decl.name, param_decl.type.type.names[0],None,None,None,structType)
+                                                                            except Exception as e:
+                                                                                print 'Error(Translation to Intermate Intermediate)'
+                                                                                print e
+                                                                                return
+                                                                    parametermap[param_decl.name]=variable
+                                            if function_decl.name!='__VERIFIER_assert' and function_decl.name!='exit':
+                                                membermethod=list_class.membermethodclass(function_decl.name,function_decl.type.type.type.names[0],parametermap,localvarmap,function_body,0,counter,None,copy.deepcopy(function_body),function_decl)
+                                                functionvarmap_temp1[membermethod.getMethodname()]=membermethod
+
+
+            for e in ast2.ext:
+                    if type(e) is c_ast.Decl:
+                            if type(e.type) is c_ast.FuncDecl:
+                                    parametermap={}
+                                    structType=None
+                                    new_e,pointer_list,array_list=prog_transform.pointerHandlingParameter(e)
+                                    if new_e is None:
+                                            function_decl=e
+                                    else:
+                                            function_decl=new_e
+                                    if function_decl.type.args is not None:
+                                            for param_decl in function_decl.type.args.params:
+                                                    if param_decl.name is not None:
+                                                            structType=None
+                                                            if type(param_decl.type) is c_ast.ArrayDecl:
+                                                                    degree=0
+                                                                    dimensionmap={}
+                                                                    data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap)
+                                                                    variable=list_class.variableclass(param_decl.name, data_type,None,dimensionmap,None,structType)
+                                                            else:
+                                                                    try:
+                                                                        variable=list_class.variableclass(param_decl.name, param_decl.type.type.names[0],None,None,None,structType)
+                                                                    except Exception as e:
+                                                                        print 'Unknown'
+                                                                        return
+                                                            parametermap[param_decl.name]=variable
+
+                                    membermethod=list_class.membermethodclass(function_decl.name,function_decl.type.type.type.names[0],parametermap,None,None,0,0,None,None,None)
+                                    functionvarmap_temp2[membermethod.getMethodname()]=membermethod
+
+                            elif type(e.type) is c_ast.TypeDecl:
+                                    var_type=None
+                                    initial_value=None
+                                    structType=None
+                                    e=prog_transform.change_var_name_decl(e)
+                                    for child in e.children():
+                                            if type(child[1].type) is c_ast.IdentifierType:
+                                                    var_type=child[1].type.names[0]
+                                            else:
+                    				
+                                                    initial_value=child[1].value
+                                    variable=list_class.variableclass(e.name, var_type,None,None,initial_value,structType)
+                                    program_analysis_var_decl=program_analysis_var_decl+str(generator.visit(e))+';\n'
+                                    externalvarmap2[e.name]=variable
+                                    external_var_map[e.name]=e.name
+                            elif type(e.type) is c_ast.ArrayDecl:
+                                program_analysis_var_decl=program_analysis_var_decl+str(generator.visit(e))+';\n'
+                                array_name=prog_transform.getArrayNameDecl(e.type)
+                                externalarraymap2[array_name]=prog_transform.change_var_name_decl(e)
+                                external_var_map2[array_name]=e.name
+                    else:
+                            if type(e) is c_ast.FuncDef:                          
+                                    parametermap={}
+                                    new_e,pointer_list,array_list=prog_transform.pointerHandlingParameter(e)
+                                    if new_e is None:
+                                            function_decl=e
+                                    else:
+                                            function_decl=new_e
+    				
+                                    function_decl=e.decl
+                                
+                                
+                                    function_body = e.body
+                                
+                                    if function_body.block_items is not None:
+                                        
+                                        temp_statements=[]
+                                        if function_decl.type.args is not None:
+                                            for param_decl in function_decl.type.args.params:
+                                                temp_statements.append(param_decl)
+                                        statements=function_body.block_items
+                                        statements=temp_statements+statements
+                                        statements=prog_transform.change_var_name(statements)
+                                        function_body= c_ast.Compound(block_items=statements)
+                                        localvarmap=prog_transform.getVariables(function_body)
+                                        counter=counter+1
+                                        if function_decl.type.args is not None:
+                                                for param_decl in function_decl.type.args.params:
+                                                        new_param_decl=prog_transform.declarationModifying(param_decl)
+                                                        if new_param_decl is not None:
+                                                            param_decl=new_param_decl
+                                                        param_decl=prog_transform.change_var_name_decl(param_decl)
+                                                        if param_decl.name is not None:
+                                                                structType=None
+                                                                if type(param_decl.type) is c_ast.ArrayDecl:
+                                                                        degree=0
+                                                                        dimensionmap={}
+                                                                        data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap)
+                                                                        variable=list_class.variableclass(param_decl.name, data_type,None,dimensionmap,None,structType)
+                                                                elif type(param_decl.type) is c_ast.PtrDecl:
+                                                                        stmt=pointerToArray(param_decl)
+                                                                        if stmt is not None and type(stmt.type) is c_ast.ArrayDecl:
+                                                                                degree=0
+                                                                                dimensionmap={}
+                                                                                data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap)
+                                                                                variable=list_class.variableclass(stmt.name, data_type,None,dimensionmap,None,structType)
+                                                                else:				
+                                                                        try:
+                                                                            variable=list_class.variableclass(param_decl.name, param_decl.type.type.names[0],None,None,None,structType)
+                                                                        except Exception as e:
+                                                                            print 'Error(Translation to Intermate Intermediate)'
+                                                                            print e
+                                                                            return
+                                                                parametermap[param_decl.name]=variable
+                                    if function_decl.name in functionvarmap_temp2.keys():
+                                            if function_decl.name!='__VERIFIER_assert':
+                                                membermethod=list_class.membermethodclass(function_decl.name,function_decl.type.type.type.names[0],parametermap,localvarmap,function_body,0,counter,None,None,function_decl)
+                                                functionvarmap_temp2[function_decl.name]=membermethod
+                                    else:
+                                            if function_decl.type.args is not None:
+                                                    for param_decl in function_decl.type.args.params:
+                                                            new_param_decl=prog_transform.declarationModifying(param_decl)
+                                                            if new_param_decl is not None:
+                                                                param_decl=new_param_decl
+                                                                param_decl=prog_transform.change_var_name_decl(param_decl)
+                                                            if param_decl.name is not None:
+                                                                    structType=None
+                                                                    if type(param_decl.type) is c_ast.ArrayDecl:
+                                                                            degree=0
+                                                                            dimensionmap={}
+                                                                            data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap)
+                                                                            variable=list_class.variableclass(param_decl.name, data_type,None,dimensionmap,None,structType)
+                                                                    elif type(param_decl.type) is c_ast.PtrDecl:
+                                                                            stmt=pointerToArray(param_decl)
+                                                                            if stmt is not None and type(stmt.type) is c_ast.ArrayDecl:
+                                                                                    degree=0
+                                                                                    dimensionmap={}
+                                                                                    data_type,degree,structType=prog_transform.getArrayDetails(param_decl,degree,dimensionmap={})
+                                                                                    variable=list_class.variableclass(stmt.name, data_type,None,dimensionmap,None,structType)
+								
+                                                                    else:	
+                                                                            try:
+                                                                                variable=list_class.variableclass(param_decl.name, param_decl.type.type.names[0],None,None,None,structType)
+                                                                            except Exception as e:
+                                                                                print 'Error(Translation to Intermate Intermediate)'
+                                                                                print str(e)
+                                                                                return
+                                                                    parametermap[param_decl.name]=variable
+                                            if function_decl.name!='__VERIFIER_assert' and function_decl.name!='exit':
+                                                membermethod=list_class.membermethodclass(function_decl.name,function_decl.type.type.type.names[0],parametermap,localvarmap,function_body,0,counter,None,copy.deepcopy(function_body),function_decl)
+                                                functionvarmap_temp2[membermethod.getMethodname()]=membermethod
+
+
+
+
+
+        except Exception as e:
+            print 'Syntax Error'
+            print e
+            return
+                
+        
+        
+        for index in range(0,len(functionvarmap_temp1.keys())):
+            
+            parameters=None
+            
+            
+            medthod1 = functionvarmap_temp1.keys()[index]
+            membermethod1=functionvarmap_temp1[medthod1]
+            parameters1 = membermethod1.getInputvar()
+            
+            medthod2 = functionvarmap_temp2.keys()[index]
+            membermethod2=functionvarmap_temp2[medthod2]
+            parameters2 = membermethod2.getInputvar()
+            
+            
+            for index1 in range(0,len(parameters1)):
+                
+                parameter1 = parameters1.keys()
+                
+                parameter2 = parameters2.keys()
+                
+                if parameters is None:
+                    parameters = c_ast.BinaryOp(op='==', left=c_ast.ID(name='p1_'+parameter1[index1]), right=c_ast.ID(name='p2_'+parameter2[index1]))
+                else:
+                    parameters = c_ast.BinaryOp(op='&&', left=parameters, right=c_ast.BinaryOp(op='==', left=c_ast.ID(name='p1_'+parameter1[index1]), right=c_ast.ID(name='p2_'+parameter2[index1])))
+                    
+            body1=membermethod1.getBody()
+            
+            if body1 is not None:
+                
+                if body1.block_items is not None:
+                    
+                    try:
+
+                        statements1 = prog_transform.programTransformation(body1,functionvarmap_temp1,medthod1)
+                        
+                        statements1 = prog_transform.updatePointerStruct(statements1,struct_map)
+                            
+                        statements1 = prog_transform.update_var_name(statements1,'p1')
+                        
+
+                    except Exception as e:
+                        #print 'Error(Translation to Intermate Intermediate)'
+                        print 'Syntax Translation'
+                        print str(e)
+                        return
+                       
+                    for temp_method in externalarraymap1.keys():
+                        if isVarPresnt(statements1,temp_method)==True:
+                            new_statements=[]
+                            new_statements.append(externalarraymap1[temp_method])
+                            statements1=prog_transform.construct_program(new_statements+statements1)
+                    body_comp1 = c_ast.Compound(block_items=statements1)
+                    localvarmap1=prog_transform.getVariables(body_comp1)
+                    statements1,localvarmap1=prog_transform.addAllExtVariables(statements1,externalvarmap1,localvarmap1)
+                    statements1 = prog_transform.translateStruct(statements1,localvarmap1,struct_map)
+                    #statements=pointerHandling(statements,pointer_list,array_list)
+                    body_comp1 = c_ast.Compound(block_items=statements1)
+                    membermethod1.setBody(body_comp1)
+                    membermethod1.setLocalvar(localvarmap1)
+                    
+                else:
+                    membermethod1.setBody(None)
+                    membermethod1.setLocalvar(None)
+            else:
+                membermethod1.setBody(None)
+                membermethod1.setLocalvar(None)
+
+            body2=membermethod2.getBody()
+                        
+            if body2 is not None:
+               
+                if body2.block_items is not None:
+                   
+                    try:
+
+                        statements2 = prog_transform.programTransformation(body2,functionvarmap_temp2,medthod2)
+                        
+                        statements2 = prog_transform.updatePointerStruct(statements2,struct_map)
+                            
+                        statements2 = prog_transform.update_var_name(statements2,'p2')
+                        
+
+                    except Exception as e:
+                        #print 'Error(Translation to Intermate Intermediate)'
+                        print 'Syntax Translation'
+                        print str(e)
+                        return
+                       
+                    for temp_method in externalarraymap2.keys():
+                        if isVarPresnt(statements2,temp_method)==True:
+                            new_statements=[]
+                            new_statements.append(externalarraymap2[temp_method])
+                            statements2=prog_transform.construct_program(new_statements+statements2)
+                    body_comp2 = c_ast.Compound(block_items=statements2)
+                    localvarmap2=prog_transform.getVariables(body_comp2)
+                    statements2,localvarmap2=prog_transform.addAllExtVariables(statements2,externalvarmap2,localvarmap2)
+                    statements2 = prog_transform.translateStruct(statements2,localvarmap2,struct_map)
+                    #statements=pointerHandling(statements,pointer_list,array_list)
+                    body_comp2 = c_ast.Compound(block_items=statements2)
+                    membermethod2.setBody(body_comp2)
+                    membermethod2.setLocalvar(localvarmap2)
+                    
+                else:
+                    membermethod2.setBody(None)
+                    membermethod2.setLocalvar(None)
+            else:
+                membermethod2.setBody(None)
+                membermethod2.setLocalvar(None)
+            
+            if membermethod1.getreturnType()==membermethod1.getreturnType():
+                
+                local_var_map={}
+                
+                for x in membermethod1.getLocalvar():
+                    
+                    local_var_map[x]=membermethod1.getLocalvar()[x]
+
+                for x in membermethod2.getLocalvar():
+                    
+                    local_var_map[x]=membermethod2.getLocalvar()[x]
+                    
+
+
+                body = prog_transform.construct_main_program(membermethod1.getBody(), membermethod2.getBody(), parameters)
+                
+                fun_utiles.writtingFile( '_eqv.i' , '' )
+                generator = c_generator.CGenerator()
+                fun_utiles.writtingFile( '_eqv.i' , "void main()\n"+generator.visit(body) )
+                viap_svcomp.prove_auto('_eqv.i',property=None)
+                #print(generator.visit(body))
+
+
+
+
+
+
+
+def find_equiv1(file_name1,file_name2):
     
 
 
@@ -540,15 +1048,20 @@ def find_equiv(file_name1,file_name2):
 
                 body = prog_transform.construct_main_program(membermethod1.getBody(), membermethod2.getBody(), parameters)
                 
+                body
+                generator = c_generator.CGenerator()
+                print(generator.visit(body))
+
+                
             
-                membermethod=list_class.membermethodclass('main', membermethod1.getreturnType(),{},local_var_map,body,0,membermethod1.getSerialNo(),None,None,function_decl)
+                #membermethod=list_class.membermethodclass('main', membermethod1.getreturnType(),{},local_var_map,body,0,membermethod1.getSerialNo(),None,None,function_decl)
                 
-                functionvarmap['main']=membermethod
+                #functionvarmap['main']=membermethod
                 
-                statements = prog_transform.programTransformation(body,functionvarmap,'main')
+                #statements = prog_transform.programTransformation(body,functionvarmap,'main')
                 
-                body_comp = c_ast.Compound(block_items=statements)
-                membermethod.setBody(body_comp)
+                #body_comp = c_ast.Compound(block_items=statements)
+                #membermethod.setBody(body_comp)
 
                 
                 generator = c_generator.CGenerator()
@@ -696,7 +1209,7 @@ def find_equiv(file_name1,file_name2):
 			for x in membermethod.getLocalvar():
         			allvariable[x]=membermethod.getLocalvar()[x]
     			if prog_transform.validationOfInput(allvariable)==True:
-				print 'Unkown'
+				print 'Unknown'
 				#print "Please Rename variable Name {S,Q,N,in,is} to other Name"
           			return
     			
