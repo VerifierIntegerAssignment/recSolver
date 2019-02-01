@@ -49945,6 +49945,20 @@ def solve_conditional_rec(equations_map, basecase_map, list_equations, var):
         tuple_lists,results,soln_map = simplificationOfConditions_rec(equations_map, basecase_map, list_equations, var)
         
         
+        if soln_map is not None and len(soln_map)>0:
+        
+            for x in soln_map:
+            
+                #del equations_map[str(simplify(x))]
+                            
+                if solution_list is None:
+                    
+                    solution_list=[]
+            
+                solution_list.append(soln_map[x])
+
+                
+        
         
         temp_tuple_lists=copy.deepcopy(tuple_lists)
         
@@ -50028,6 +50042,7 @@ COUNTER_INIT_VAL_INDEX=0
 
 
 def constructInfoSystem(group_list, equations_map, basecase_map, equations_list, variable):
+    
     
     global COUNTER_START_INDEX
 
@@ -50493,131 +50508,329 @@ def constructInfoSystem(group_list, equations_map, basecase_map, equations_list,
     elif isCondEquType(map_condition_equation, map_condition_else_equation)=='Counter' :  
             
         if isPeriodicCounter(map_condition_equation, map_condition_else_equation,variable)==True:   
+            
+            
                 
             list_info_system=map_condition_equation[map_condition_equation.keys()[0]]
-                
-            equation_base = str(simplify(expr2string1(list_info_system[0][3][3])).subs(simplify(str(variable)+"+1"),0))
+            
+            Big_F=str(simplify(expr2string1(list_info_system[0][0][1])).subs(simplify(str(variable)),0))
+            
+            Big_D=str(expr2string1(list_info_system[0][0][2]))
+            
+            Big_C=str(simplify(Big_D+"-"+Big_F))
+            
+            
+            if is_number(Big_C)==True and simplify(Big_C)==0:
+                    
+            
+                equation_base = str(simplify(expr2string1(list_info_system[0][3][3])).subs(simplify(str(variable)+"+1"),0))
     
-            equation_left = str(simplify(expr2string1(list_info_system[0][3][3])).subs(simplify(str(variable)+"+1"),simplify(str(variable))))
-                
-            term_list=[]
-                
-                
-            list1=[]
-            
-            list1.append(list_info_system[0][0][0])
+                equation_left = str(simplify(expr2string1(list_info_system[0][3][3])).subs(simplify(str(variable)+"+1"),simplify(str(variable))))
             
             
-            list1.append(list_info_system[0][0][1][2][0])
+            
+                
+                term_list=[]
+                
+                
+                list1=[]
+            
+                list1.append(list_info_system[0][0][0])
+            
+            
+                list1.append(list_info_system[0][0][1][2][0])
             
 
-            coeff_expr = simplify(expr2string1(list_info_system[0][1]))
+                coeff_expr = simplify(expr2string1(list_info_system[0][1]))
             
-            term = simplify(equation_left)
+                term = simplify(equation_left)
             
             
-            coeff_const = coeff_expr.coeff(term)
+                coeff_const = coeff_expr.coeff(term)
             
-            if str(coeff_const)=='1':
+                if str(coeff_const)=='1':
                 
-                result = coeff_expr - coeff_const*simplify(equation_left)
+                    result = coeff_expr - coeff_const*simplify(equation_left)
                 
-                list1.append(result)
+                    list1.append(result)
                 
-                term_list.append(list1)
+                    term_list.append(list1)
 
                 
-            list_info_system=map_condition_else_equation[map_condition_else_equation.keys()[0]]
+                list_info_system=map_condition_else_equation[map_condition_else_equation.keys()[0]]
                 
                 
                 
-            list1=[]
+                list1=[]
             
-            coeff_expr = simplify(expr2string1(list_info_system[0][1]))
+                coeff_expr = simplify(expr2string1(list_info_system[0][1]))
     
-            term = simplify(equation_left)
+                term = simplify(equation_left)
             
-            coeff_const = coeff_expr.coeff(term)
+                coeff_const = coeff_expr.coeff(term)
             
-            if str(coeff_const)=='1':
+                if str(coeff_const)=='1':
                 
-                result = coeff_expr - coeff_const*simplify(equation_left)
+                    result = coeff_expr - coeff_const*simplify(equation_left)
                 
-                list1.append(result)
+                    list1.append(result)
                                 
-                term_list.append(list1)
+                    term_list.append(list1)
 
 
 
-            if len(term_list)==2:
+                if len(term_list)==2:
         
-                if term_list[0][0]=='==':
+                    if term_list[0][0]=='==':
             
-                    fun_call_map={}
-                    current_fun_call=None
+                        fun_call_map={}
+                        current_fun_call=None
 
-                    statement_temp = createASTStmt(str(term_list[0][1]))
-                    initer_update = expressionCreator_C(statement_temp)
+                        statement_temp = createASTStmt(str(term_list[0][1]))
+                        initer_update = expressionCreator_C(statement_temp)
             
-                    fun_call_map={}
-                    current_fun_call=None
+                        fun_call_map={}
+                        current_fun_call=None
 
-                    statement_temp = createASTStmt(str(term_list[0][2]))
-                    stmt_update1 = expressionCreator_C(statement_temp)
+                        statement_temp = createASTStmt(str(term_list[0][2]))
+                        stmt_update1 = expressionCreator_C(statement_temp)
             
             
-                    fun_call_map={}
-                    current_fun_call=None
-
-                    statement_temp = createASTStmt(str(term_list[1][0]))
-                    stmt_update2 = expressionCreator_C(statement_temp)
+                        fun_call_map={}
+                        current_fun_call=None
+                        #print str(term_list[0][1])
+                        #print str(term_list[0][2])
+                        #print str(term_list[1][0])
+                        #print '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
+                        statement_temp = createASTStmt(str(term_list[1][0]))
+                        stmt_update2 = expressionCreator_C(statement_temp)
                     
                     
 
             
-                    #stmt_update="['+   ',['+',"+str(e_base[3])+",['*',"+str(stmt_update1)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
-                    stmt_update="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update2)+",['-',['"+variable+"'],['/',['"+variable+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+variable+"'],"+str(initer_update)+"],"+str(stmt_update1)+"]]"
+                        #stmt_update="['+   ',['+',"+str(e_base[3])+",['*',"+str(stmt_update1)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
+                        stmt_update="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update2)+",['-',['"+variable+"'],['/',['"+variable+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+variable+"'],"+str(initer_update)+"],"+str(stmt_update1)+"]]"
             
-                    key_value = expr2string1(list_info_system[0][3][-2])
-                    solution_list=[]
-                    solution_list.append(stmt_update)
-                    solution_list.append('')
-                    solution_map[key_value]=solution_list
-                    solution_else_map[None]=''
+                        key_value = expr2string1(list_info_system[0][3][-2])
+                        solution_list=[]
+                        solution_list.append(stmt_update)
+                        solution_list.append('')
+                        solution_map[key_value]=solution_list
+                        solution_else_map[None]=''
 
             
-                else:
+                    else:
             
-                    fun_call_map={}
-                    current_fun_call=None
+                        fun_call_map={}
+                        current_fun_call=None
 
             
-
-                    statement_temp = createASTStmt(str(term_list[1][1]))
-                    initer_update = expressionCreator_C(statement_temp)
+                        statement_temp = createASTStmt(str(term_list[0][1]))
+                        initer_update = expressionCreator_C(statement_temp)
             
-                    fun_call_map={}
-                    current_fun_call=None
+                        fun_call_map={}
+                        current_fun_call=None
 
-                    statement_temp = createASTStmt(str(term_list[1][2]))
-                    stmt_update1 = expressionCreator_C(statement_temp)
+                        statement_temp = createASTStmt(str(term_list[0][2]))
+                        stmt_update1 = expressionCreator_C(statement_temp)
             
             
-                    fun_call_map={}
-                    current_fun_call=None
-
-                    statement_temp = createASTStmt(str(term_list[0][0]))
-                    stmt_update2 = expressionCreator_C(statement_temp)
+                        fun_call_map={}
+                        current_fun_call=None
+                        #print str(term_list[0][1])
+                        #print str(term_list[0][2])
+                        #print str(term_list[1][0])
+                        #print '------------------'
+                        statement_temp = createASTStmt(str(term_list[1][0]))
+                        stmt_update2 = expressionCreator_C(statement_temp)
                     
                                             
-                    stmt_update="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update1)+",['-',['"+variable+"'],['/',['"+variable+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+variable+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
-                    #stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update2)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update1)+"]]"
-                    key_value = expr2string1(list_info_system[0][3][-2])
-                    solution_list=[]
-                    solution_list.append(stmt_update)
-                    solution_list.append('')
-                    solution_map[key_value]=solution_list
-                    solution_else_map[None]=''
+                        stmt_update="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update1)+",['-',['"+variable+"'],['/',['"+variable+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+variable+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
+                        #stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update2)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update1)+"]]"
+                        key_value = expr2string1(list_info_system[0][3][-2])
+                        solution_list=[]
+                        solution_list.append(stmt_update)
+                        solution_list.append('')
+                        solution_map[key_value]=solution_list
+                        solution_else_map[None]=''
+            else:
+                
+            
+                equation_base = str(simplify(expr2string1(list_info_system[0][3][3])).subs(simplify(str(variable)+"+1"),0))
+    
+                equation_left = str(simplify(expr2string1(list_info_system[0][3][3])).subs(simplify(str(variable)+"+1"),simplify(str(variable))))
+            
+            
+            
+                
+                term_list=[]
+                
+                
+                list1=[]
+            
+                list1.append(list_info_system[0][0][0])
+            
+            
+                list1.append(list_info_system[0][0][1][2][0])
+            
+
+                coeff_expr = simplify(expr2string1(list_info_system[0][1]))
+            
+                term = simplify(equation_left)
+            
+            
+                coeff_const = coeff_expr.coeff(term)
+            
+                if str(coeff_const)=='1':
+                
+                    result = coeff_expr - coeff_const*simplify(equation_left)
+                
+                    list1.append(result)
+                
+                    term_list.append(list1)
+
+                
+                list_info_system=map_condition_else_equation[map_condition_else_equation.keys()[0]]
+                
+                
+                
+                list1=[]
+            
+                coeff_expr = simplify(expr2string1(list_info_system[0][1]))
+    
+                term = simplify(equation_left)
+            
+                coeff_const = coeff_expr.coeff(term)
+            
+                if str(coeff_const)=='1':
+                
+                    result = coeff_expr - coeff_const*simplify(equation_left)
+                
+                    list1.append(result)
+                                
+                    term_list.append(list1)
+
+
+
+                if len(term_list)==2:
+        
+                    if term_list[0][0]=='==':
+            
+                        fun_call_map={}
+                        current_fun_call=None
+
+                        statement_temp = createASTStmt(str(term_list[0][1]))
+                        initer_update = expressionCreator_C(statement_temp)
+            
+                        fun_call_map={}
+                        current_fun_call=None
+
+                        statement_temp = createASTStmt(str(term_list[0][2]))
+                        stmt_update1 = expressionCreator_C(statement_temp)
+            
+            
+                        fun_call_map={}
+                        current_fun_call=None
+
+                        statement_temp = createASTStmt(str(term_list[1][0]))
+                        stmt_update2 = expressionCreator_C(statement_temp)
+                        
+                        
+                        Big_C_L=str(simplify(Big_C+'-1'))
+                        Big_C_R=str(simplify(Big_C+'+1'))
+
+                                            
+                        
+                        fist_cond="['and',"+"['<=',['0'],['"+variable+"']]"+","+"['<=',['"+variable+"'],['"+str(Big_C)+"']]"+"]"
+                        
+                        first_expr="['+',"+str(list_info_system[0][8])+",['*',['"+variable+"'],"+str(stmt_update2)+"]]"
+                        
+                        
+                        second_cond="['==',['"+variable+"'],['"+Big_C_R+"']]"
+                        
+                        second_expr="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update1)+",['"+str(Big_C)+"']]],"+str(stmt_update1)+"]"
+                        
+                        new_variable="['-',['"+variable+"'],['"+Big_C_L+"']]"
+                        
+                        #stmt_update="['+   ',['+',"+str(e_base[3])+",['*',"+str(stmt_update1)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
+                        #stmt_update="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update2)+",['-',"+new_variable+",['/',"+new_variable+","+str(initer_update)+"]]]],"+"['*',['/',"+new_variable+","+str(initer_update)+"],"+str(stmt_update1)+"]]"
+
+                        
+                        three_expr="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update2)+",['-',"+new_variable+",['/',"+new_variable+","+str(initer_update)+"]]]],"+"['*',['/',"+new_variable+","+str(initer_update)+"],"+str(stmt_update1)+"]]"
+
+
+                        stmt_update="['ite',"+fist_cond+","+first_expr+",['ite',"+second_cond+","+second_expr+","+three_expr+"]]"
+            
+            
+                        key_value = expr2string1(list_info_system[0][3][-2])
+                        solution_list=[]
+                        solution_list.append(stmt_update)
+                        solution_list.append('')
+                        solution_map[key_value]=solution_list
+                        solution_else_map[None]=''
+
+            
+                    else:
+            
+                        fun_call_map={}
+                        current_fun_call=None
+
+            
+
+                        statement_temp = createASTStmt(str(term_list[0][1]))
+                        initer_update = expressionCreator_C(statement_temp)
+            
+                        fun_call_map={}
+                        current_fun_call=None
+                        
+                        
+
+                        statement_temp = createASTStmt(str(term_list[0][2]))
+                        stmt_update1 = expressionCreator_C(statement_temp)
+            
+            
+                        fun_call_map={}
+                        current_fun_call=None
+
+                        statement_temp = createASTStmt(str(term_list[1][0]))
+                        stmt_update2 = expressionCreator_C(statement_temp)
+                        
+                        
+                        Big_C_L=str(simplify(Big_C+'-1'))
+                        Big_C_R=str(simplify(Big_C+'+1'))
+
+                                            
+                        
+                        fist_cond="['and',"+"['<=',['0'],['"+variable+"']]"+","+"['<=',['"+variable+"'],['"+str(Big_C)+"']]"+"]"
+                        
+                        first_expr="['+',"+str(list_info_system[0][8])+",['*',['"+variable+"'],"+str(stmt_update1)+"]]"
+                        
+                        
+                        second_cond="['==',['"+variable+"'],['"+Big_C_R+"']]"
+                        
+                        second_expr="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update1)+",['"+str(Big_C)+"']]],"+str(stmt_update2)+"]"
+                        
+                        new_variable="['-',['"+variable+"'],['"+Big_C_L+"']]"
+                        
+                        #stmt_update="['+   ',['+',"+str(e_base[3])+",['*',"+str(stmt_update1)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
+                        #stmt_update="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update2)+",['-',"+new_variable+",['/',"+new_variable+","+str(initer_update)+"]]]],"+"['*',['/',"+new_variable+","+str(initer_update)+"],"+str(stmt_update1)+"]]"
+
+                        
+                        three_expr="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update1)+",['-',"+new_variable+",['/',"+new_variable+","+str(initer_update)+"]]]],"+"['*',['/',"+new_variable+","+str(initer_update)+"],"+str(stmt_update1)+"]]"
+
+
+                        stmt_update="['ite',"+fist_cond+","+first_expr+",['ite',"+second_cond+","+second_expr+","+three_expr+"]]"
+
+                    
+                                            
+                        #stmt_update="['+',['+',"+str(list_info_system[0][8])+",['*',"+str(stmt_update1)+",['-',['"+variable+"'],['/',['"+variable+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+variable+"'],"+str(initer_update)+"],"+str(stmt_update2)+"]]"
+                        #stmt_update="['+',['+',"+str(e_base[3])+",['*',"+str(stmt_update2)+",['-',['"+var+"'],['/',['"+var+"'],"+str(initer_update)+"]]]],"+"['*',['/',['"+var+"'],"+str(initer_update)+"],"+str(stmt_update1)+"]]"
+                        key_value = expr2string1(list_info_system[0][3][-2])
+                        solution_list=[]
+                        solution_list.append(stmt_update)
+                        solution_list.append('')
+                        solution_map[key_value]=solution_list
+                        solution_else_map[None]=''
                     
                     
                 
@@ -50799,8 +51012,10 @@ def constructInfoSystem(group_list, equations_map, basecase_map, equations_list,
         solution_list = solution_map[x]
         
         final_soln = solution_list[0]
+        
+        if x in solution_else_map:
             
-        final_soln += solution_else_map[x]
+            final_soln += solution_else_map[x]
             
         final_soln += solution_list[1]
                                 
